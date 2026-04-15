@@ -16,7 +16,7 @@ dev.off()
 ```{r Import libraries, echo = FALSE}
 
 ##### LIBRARIES #####
-
+library(plyr)
 library(car)
 library(lubridate)
 library(readxl)
@@ -60,8 +60,11 @@ View(data_monitor_dry)
 
 ##### ROUND FID and D_FR_SHERLTER FOR DRY SEASON #####
 
+#round to 1 to be coherent with rainy season analyses 
 data_monitor_dry$FIDi = round(data_monitor_dry$FIDi) # 0.5 is rounded down 
-data_monitor_dry$d_fr_refug = round(data_monitor_dry$d_fr_refug) # 0.5 is rounded down 
+
+#round to 0.5 to be coherent with rainy season analyses 
+data_monitor_dry$d_fr_refug = round_any(data_monitor_dry$d_fr_refug, 0.5) 
 
 
 View(data_monitor_dry)
@@ -188,14 +191,14 @@ p = ggplot(data = data_monitor_dry)+
 p = p + geom_abline(mapping = NULL,
               data = NULL,
               stat = "identity",
-              slope = 0.157,
-              intercept = 1.542,
+              slope = 0.16,
+              intercept = 1.57,
               na.rm = FALSE,
               show.legend = NA,
               inherit.aes = FALSE) +
         xlab("Distance from closest shelter (m)") +
         ylab("FID (m)") +
-        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor (c = 0.157, p = 0.13)") 
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor (c = 0.16, p = 0.12)") 
 p
 ```
 
@@ -285,7 +288,7 @@ p = p + geom_abline(mapping = NULL,
               data = NULL,
               stat = "identity",
               slope = 0.3,
-              intercept = 2.17,
+              intercept = 2.2,
               na.rm = FALSE,
               show.legend = NA,
               inherit.aes = FALSE) +
@@ -307,13 +310,13 @@ p = ggplot(data = data_dry_phuttha)+
 p = p + geom_abline(mapping = NULL,
               data = NULL,
               stat = "identity",
-              slope = 0.12,
-              intercept = 0.8,
+              slope = 0.11,
+              intercept = 0.7,
               na.rm = FALSE,
               show.legend = NA,
               inherit.aes = FALSE) +
         xlab("Distance from closest shelter (m)") +
         ylab("FID (m)") +
-        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.12, p = 0.42)") 
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.11, p = 0.48)") 
 p
 ```
