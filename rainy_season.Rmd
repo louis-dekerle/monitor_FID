@@ -9,3 +9,307 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r Suppress graph, echo = FALSE}
+dev.off() 
+```
+
+```{r Import libraries, echo = FALSE}
+
+##### LIBRARIES #####
+
+library(car)
+library(lubridate)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(MASS) 
+library(lmtest)
+library(scales)
+library(tidyverse)
+library(broom)
+library(lme4)
+library (DHARMa)
+library(graphics)
+
+```
+
+```{r setup the data}
+
+# setting working directory 
+setwd("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID")
+
+# charging dataset 
+data_monitor_rain <- read.csv("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID/DATA/pro/fid_monitor_rainyss_process.csv", header= T, sep = ";")
+View(data_monitor_rain)
+
+###### EXCLUDE OBS OTHER THAN V_SALVA ######
+data_monitor_rain = data_monitor_rain[(data_monitor_rain$sp=="V_salva" ) ,]
+View(data_monitor_rain)
+
+###### EXCLUDE OBS WITHOUT FID  ###### 
+data_monitor_rain = data_monitor_rain[!is.na(data_monitor_rain$FIDi),]
+View(data_monitor_rain)
+
+###### EXCLUDE OBS WITHOUT SIZE  ###### 
+data_monitor_rain = data_monitor_rain[!is.na(data_monitor_rain$size),]
+View(data_monitor_rain)
+
+###### EXCLUDE OBS WITHOUT DISTANCE TO SHELTER  ###### 
+data_monitor_rain = data_monitor_rain[!is.na(data_monitor_rain$d_fr_refug),]
+View(data_monitor_rain)
+
+
+##### STANDARDIZE THE DATES ##### 
+
+dates = data_monitor_rain$date
+
+# lubridate automatically detects format
+standardized_dates = parse_date_time(dates, orders = "dmy")
+
+# Convert to date class 
+standardized_dates = as.Date(standardized_dates)
+
+standardized_dates
+
+data_monitor_rain$date = standardized_dates
+
+# Create datasets for the sites separately 
+
+data_rain_salaya =  data_monitor_rain[(data_monitor_rain$site=="salaya" ) ,]
+data_rain_phuttha =  data_monitor_rain[(data_monitor_rain$site=="phutthamonthon" ) ,]
+
+
+```
+
+```{r FID vs SITE}
+
+
+
+##### mean and median FID for salaya and phutthamonthon ##### 
+summary(data_monitor_rain[(data_monitor_rain$site== "salaya" ) ,]) #mean FID 2.625  15/04
+summary(data_monitor_rain[(data_monitor_rain$site== "phutthamonthon" ) ,]) #mean FID 3.375 15/04
+
+#### n° of obs per site #######
+
+table(data_monitor_rain$site) # almost balanced 
+
+ggplot(data_monitor_rain, aes(x=site)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_monitor_rain$FIDi~as.factor(data_monitor_rain$site), data=data_monitor_rain)
+
+boxplot(data_monitor_rain$FIDi~data_monitor_rain$site, xlab = "Sites", ylab = "FID (m)")
+
+```
+
+
+```{r FID vs SIZE : both sites}
+
+##### mean and median FID for salaya and phutthamonthon ##### 
+summary(data_monitor_rain[(data_monitor_rain$size== "S" ) ,]) #mean FID 3.818
+summary(data_monitor_rain[(data_monitor_rain$size== "M" ) ,]) #mean FID 2.872
+summary(data_monitor_rain[(data_monitor_rain$size== "L" ) ,]) #mean FID 2.25
+
+#### n° of obs per size #######
+
+table(data_monitor_rain$size) # not balanced 
+
+ggplot(data_monitor_rain, aes(x=size)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_monitor_rain$FIDi~as.factor(data_monitor_rain$size), data=data_monitor_rain) # yup
+
+boxplot(data_monitor_rain$FIDi~data_monitor_rain$size, xlab = "Size", ylab = "FID (m)") 
+
+
+```
+
+
+```{r FID vs SIZE : SALAYA }
+
+##### mean FID for salaya ##### 
+summary(data_rain_salaya[(data_rain_salaya$size== "S" ) ,]) #mean FID 3.533
+summary(data_rain_salaya[(data_rain_salaya$size== "M" ) ,]) #mean FID 2.478
+summary(data_rain_salaya[(data_rain_salaya$size== "L" ) ,]) #mean FID 1.60
+
+#### n° of obs per size #######
+
+table(data_rain_salaya$size) # not balanced 
+
+ggplot(data_rain_salaya, aes(x=size)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_rain_salaya$FIDi~as.factor(data_rain_salaya$size), data=data_rain_salaya) # yup
+
+boxplot(data_rain_salaya$FIDi~data_rain_salaya$size, xlab = "Size", ylab = "FID (m)") 
+```
+```{r FID vs SIZE : PHUTTHAMONTHON }
+
+##### mean  FID for phutthamonthon ##### 
+summary(data_rain_phuttha[(data_rain_phuttha$size== "S" ) ,]) #mean FID 4.056
+summary(data_rain_phuttha[(data_rain_phuttha$size== "M" ) ,]) #mean FID 3.25
+summary(data_rain_phuttha[(data_rain_phuttha$size== "L" ) ,]) #mean FID 2.714
+
+#### n° of obs per size #######
+
+table(data_rain_phuttha$size) # not balanced 
+
+ggplot(data_rain_phuttha, aes(x=size)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_rain_phuttha$FIDi~as.factor(data_rain_phuttha$size), data=data_rain_phuttha) # nope
+
+boxplot(data_rain_phuttha$FIDi~data_rain_phuttha$size, xlab = "Size", ylab = "FID (m)") # nope 
+
+```
+
+```{r  FID vs D_FR_SHELTER : preliminary correlation }
+
+######## PRELIMINARY CORRELATION ANALYSES #############
+
+# Pearson's correlation test 
+cor.test(data_monitor_rain$FIDi, data_monitor_rain$d_fr_refug) 
+
+#Plot the data and correlation slope 
+p = ggplot(data = data_monitor_rain)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.051,
+              intercept = 0.52,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor during the RAINY SEASON (c = 0.05, p = 0.6)") 
+p
+```
+
+
+
+```{r FID vs D_FR_SHELTER : linear model with site }
+
+####a) Model ####
+
+model_dfs_site <- lm(FIDi ~ d_fr_refug + site, data=data_monitor_rain)
+
+
+####b) Conditions of validity ###### 
+model_dfs_site.res <- residuals(model_dfs_site)
+
+# independance of residuals 
+dwtest(model_dfs_site) # OK 
+
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(model_dfs_site) # strong outliers that may need removable 
+
+# normality of the residuals 
+p = ggplot()
+p = p+ylab ("Frequency")
+p = p + xlab ("Pearson residuals")
+p = p + theme (panel.background = element_blank())
+p = p + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p = p + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p = p + theme(text = element_text(size = 15))
+p = p+ geom_histogram(colour = "black", fill = "white", data = data_monitor_rain, aes(model_dfs_site.res), bins = 12)
+p # OK 
+
+shapiro.test(model_dfs_site.res) # not OK
+
+# homoskedasticity
+bptest(model_dfs_site) #OK 
+
+# DHARMA test for autocorrelation  
+
+# SPATIAL AUTOCORRELATION TEST ON THE RESIDUALS 
+
+res_dharmareg_inter = simulateResiduals(model_dfs_site)
+
+testSpatialAutocorrelation(res_dharmareg_inter, x =  data_monitor_rain$long, y = data_monitor_rain$lat) # okay 
+
+# TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
+
+### on the scale of field days ###
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = data_monitor_rain$date)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_day, time = unique(data_monitor_rain$date)) # okay
+
+### on an hour scale ###
+
+# CHECK IF THE FORMAT PARAMETER IS THE SAME AS IN THE COLUMNS  
+
+data_monitor_rain$hour <- as.POSIXct(paste(data_monitor_rain$date, data_monitor_rain$time), format="%Y-%m-%d %H") #if doesn't work try data_monitor_rain$hour <- as.POSIXct(paste(data_monitor_rain$date, data_monitor_rain$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
+
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = data_monitor_rain$hour)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_monitor_rain$hour)) # okay 
+
+#### c) Results ####
+summary(model_dfs_site) # nope 
+
+```
+
+```{r  FID vs D_FR_SHELTER : preliminary correlation : SALAYA }
+
+######## PRELIMINARY CORRELATION ANALYSES #############
+
+# Pearson's correlation test 
+cor.test(data_rain_salaya$FIDi, data_rain_salaya$d_fr_refug) 
+
+#Plot the data and correlation slope 
+p = ggplot(data = data_rain_salaya)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = -0.02,
+              intercept = -0.12,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN SALAYA (c = 0.02, p = 0.9)") 
+p
+```
+
+```{r  FID vs D_FR_SHELTER : preliminary correlation : PHUTTHAMONTHON }
+
+######## PRELIMINARY CORRELATION ANALYSES #############
+
+# Pearson's correlation test 
+cor.test(data_rain_phuttha$FIDi, data_rain_phuttha$d_fr_refug) 
+
+#Plot the data and correlation slope 
+p = ggplot(data = data_rain_phuttha)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.17,
+              intercept = 1.24,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.17, p = 0.21)") 
+p
+```

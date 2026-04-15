@@ -127,7 +127,7 @@ ggplot(data_monitor_dry, aes(x=size)) +
 ###### preliminary kruskal test and plot######
 kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$size), data=data_monitor_dry) # nope
 
-boxplot(data_monitor_dry$FIDi~data_monitor_dry$size, xlab = "Size", ylab = "Square root of FID (m)") # nope 
+boxplot(data_monitor_dry$FIDi~data_monitor_dry$size, xlab = "Size", ylab = "FID (m)") # nope 
 
 
 ```
@@ -148,7 +148,7 @@ ggplot(data_dry_salaya, aes(x=size)) +
 ###### preliminary kruskal test and plot######
 kruskal.test(data_dry_salaya$FIDi~as.factor(data_dry_salaya$size), data=data_dry_salaya) # nope
 
-boxplot(data_dry_salaya$FIDi~data_dry_salaya$size, xlab = "Size", ylab = "Square root of FID (m)") # nope 
+boxplot(data_dry_salaya$FIDi~data_dry_salaya$size, xlab = "Size", ylab = "FID (m)") # nope 
 
 ```
 ```{r FID vs SIZE : PHUTTHAMONTHON }
@@ -168,7 +168,7 @@ ggplot(data_dry_phuttha, aes(x=size)) +
 ###### preliminary kruskal test and plot######
 kruskal.test(data_dry_phuttha$FIDi~as.factor(data_dry_phuttha$size), data=data_dry_phuttha) # nope
 
-boxplot(data_dry_phuttha$FIDi~data_dry_phuttha$size, xlab = "Size", ylab = "Square root of FID (m)") # nope 
+boxplot(data_dry_phuttha$FIDi~data_dry_phuttha$size, xlab = "Size", ylab = "FID (m)") # nope 
 
 ```
 
