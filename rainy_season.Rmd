@@ -1,0 +1,11 @@
+---
+title: "rainy_season"
+author: "DEKERLE_Louis"
+date: "2026-04-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+

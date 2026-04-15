@@ -1,0 +1,319 @@
+---
+title: "dry_season"
+author: "DEKERLE_Louis"
+date: "2026-04-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Suppress graph, echo = FALSE}
+dev.off() 
+```
+
+```{r Import libraries, echo = FALSE}
+
+##### LIBRARIES #####
+
+library(car)
+library(lubridate)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(MASS) 
+library(lmtest)
+library(scales)
+library(tidyverse)
+library(broom)
+library(lme4)
+library (DHARMa)
+library(graphics)
+
+```
+
+```{r setup the data}
+
+# setting working directory 
+setwd("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID")
+
+# charging dataset 
+data_monitor_dry <- read.csv("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID/DATA/pro/data_obs8.csv", header= T, sep = ";")
+View(data_monitor_dry)
+
+###### EXCLUDE OBS OTHER THAN V_SALVA ######
+data_monitor_dry = data_monitor_dry[(data_monitor_dry$sp=="V_salva" ) ,]
+View(data_monitor_dry)
+
+###### EXCLUDE OBS WITHOUT FID  ###### 
+data_monitor_dry = data_monitor_dry[!is.na(data_monitor_dry$FIDi),]
+View(data_monitor_dry)
+
+###### EXCLUDE OBS WITHOUT SIZE  ###### 
+data_monitor_dry = data_monitor_dry[!is.na(data_monitor_dry$size),]
+View(data_monitor_dry)
+
+###### EXCLUDE OBS WITHOUT DISTANCE TO SHELTER  ###### 
+data_monitor_dry = data_monitor_dry[!is.na(data_monitor_dry$d_fr_refug),]
+View(data_monitor_dry)
+
+##### ROUND FID and D_FR_SHERLTER FOR DRY SEASON #####
+
+data_monitor_dry$FIDi = round(data_monitor_dry$FIDi) # 0.5 is rounded down 
+data_monitor_dry$d_fr_refug = round(data_monitor_dry$d_fr_refug) # 0.5 is rounded down 
+
+
+View(data_monitor_dry)
+
+##### STANDARDIZE THE DATES ##### 
+
+dates = data_monitor_dry$date
+
+# lubridate automatically detects format
+standardized_dates = parse_date_time(dates, orders = "dmy")
+
+# Convert to date class 
+standardized_dates = as.Date(standardized_dates)
+
+standardized_dates
+
+data_monitor_dry$date = standardized_dates
+
+# Create a dataset for the sites separately 
+
+data_dry_salaya =  data_monitor_dry[(data_monitor_dry$site=="salaya" ) ,]
+data_dry_phuttha =  data_monitor_dry[(data_monitor_dry$site=="phutthamonthon" ) ,]
+
+
+```
+
+```{r FID vs SITE}
+
+
+
+##### mean and median FID for salaya and phutthamonthon ##### 
+summary(data_monitor_dry[(data_monitor_dry$site== "salaya" ) ,]) #mean FID 3.667  15/04
+summary(data_monitor_dry[(data_monitor_dry$site== "phutthamonthon" ) ,]) #mean FID 7.622 15/04
+
+#### n° of obs per site #######
+
+table(data_monitor_dry$site) # almost balanced 
+
+ggplot(data_monitor_dry, aes(x=site)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$site), data=data_monitor_dry)
+
+boxplot(data_monitor_dry$FIDi~data_monitor_dry$site, xlab = "Sites", ylab = "FID (m)")
+
+```
+
+```{r FID vs SIZE : both sites}
+
+##### mean and median FID for salaya and phutthamonthon ##### 
+summary(data_monitor_dry[(data_monitor_dry$size== "S" ) ,]) #mean FID 6.091
+summary(data_monitor_dry[(data_monitor_dry$size== "M" ) ,]) #mean FID 5.143
+summary(data_monitor_dry[(data_monitor_dry$size== "L" ) ,]) #mean FID 5.76
+
+#### n° of obs per size #######
+
+table(data_monitor_dry$size) # not balanced 
+
+ggplot(data_monitor_dry, aes(x=size)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$size), data=data_monitor_dry) # nope
+
+boxplot(data_monitor_dry$FIDi~data_monitor_dry$size, xlab = "Size", ylab = "Square root of FID (m)") # nope 
+
+
+```
+```{r FID vs SIZE : SALAYA }
+
+##### mean FID for salaya ##### 
+summary(data_dry_salaya[(data_dry_salaya$size== "S" ) ,]) #mean FID 4
+summary(data_dry_salaya[(data_dry_salaya$size== "M" ) ,]) #mean FID 3.45
+summary(data_dry_salaya[(data_dry_salaya$size== "L" ) ,]) #mean FID 3.93
+
+#### n° of obs per size #######
+
+table(data_dry_salaya$size) # not balanced 
+
+ggplot(data_dry_salaya, aes(x=size)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_dry_salaya$FIDi~as.factor(data_dry_salaya$size), data=data_dry_salaya) # nope
+
+boxplot(data_dry_salaya$FIDi~data_dry_salaya$size, xlab = "Size", ylab = "Square root of FID (m)") # nope 
+
+```
+```{r FID vs SIZE : PHUTTHAMONTHON }
+
+##### mean  FID for phutthamonthon ##### 
+summary(data_dry_phuttha[(data_dry_phuttha$size== "S" ) ,]) #mean FID 7.23
+summary(data_dry_phuttha[(data_dry_phuttha$size== "M" ) ,]) #mean FID 7.6
+summary(data_dry_phuttha[(data_dry_phuttha$size== "L" ) ,]) #mean FID 8.1
+
+#### n° of obs per size #######
+
+table(data_dry_phuttha$size) # not balanced 
+
+ggplot(data_dry_phuttha, aes(x=size)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_dry_phuttha$FIDi~as.factor(data_dry_phuttha$size), data=data_dry_phuttha) # nope
+
+boxplot(data_dry_phuttha$FIDi~data_dry_phuttha$size, xlab = "Size", ylab = "Square root of FID (m)") # nope 
+
+```
+
+
+
+
+```{r  FID vs D_FR_SHELTER : preliminary correlation }
+
+######## PRELIMINARY CORRELATION ANALYSES #############
+
+# Pearson's correlation test 
+cor.test(data_monitor_dry$FIDi, data_monitor_dry$d_fr_refug) 
+
+#Plot the data and correlation slope 
+p = ggplot(data = data_monitor_dry)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.157,
+              intercept = 1.542,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor (c = 0.157, p = 0.13)") 
+p
+```
+
+```{r FID vs D_FR_SHELTER : linear model with site }
+
+####a) Model ####
+
+model_dfs_site <- lm(FIDi ~ d_fr_refug + site, data=data_monitor_dry)
+
+
+####b) Conditions of validity ###### 
+model_dfs_site.res <- residuals(model_dfs_site)
+
+# independance of residuals 
+dwtest(model_dfs_site) # OK 
+
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(model_dfs_site) # strong outliers that may need removable 
+
+# normality of the residuals 
+p = ggplot()
+p = p+ylab ("Frequency")
+p = p + xlab ("Pearson residuals")
+p = p + theme (panel.background = element_blank())
+p = p + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p = p + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p = p + theme(text = element_text(size = 15))
+p = p+ geom_histogram(colour = "black", fill = "white", data = data_monitor_dry, aes(model_dfs_site.res), bins = 12)
+p # OK 
+
+shapiro.test(model_dfs_site.res) # not OK
+
+# homoskedasticity
+bptest(model_dfs_site) #OK 
+
+# DHARMA test for autocorrelation  
+
+# SPATIAL AUTOCORRELATION TEST ON THE RESIDUALS 
+
+res_dharmareg_inter = simulateResiduals(model_dfs_site)
+
+testSpatialAutocorrelation(res_dharmareg_inter, x =  data_monitor_dry$long, y = data_monitor_dry$lat) # okay 
+
+# TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
+
+### on the scale of field days ###
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = data_monitor_dry$date)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_day, time = unique(data_monitor_dry$date)) # okay
+
+### on an hour scale ###
+
+# CHECK IF THE FORMAT PARAMETER IS THE SAME AS IN THE COLUMNS  
+
+data_monitor_dry$hour <- as.POSIXct(paste(data_monitor_dry$date, data_monitor_dry$time), format="%Y-%m-%d %H") #if doesn't work try data_monitor_dry$hour <- as.POSIXct(paste(data_monitor_dry$date, data_monitor_dry$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
+
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = data_monitor_dry$hour)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_monitor_dry$hour)) # okay 
+
+#### c) Results ####
+summary(model_dfs_site) # seems quite okay I just don't know how to graph that. 
+
+
+```
+```{r  FID vs D_FR_SHELTER : preliminary correlation : SALAYA }
+
+######## PRELIMINARY CORRELATION ANALYSES #############
+
+# Pearson's correlation test 
+cor.test(data_dry_salaya$FIDi, data_dry_salaya$d_fr_refug) 
+
+#Plot the data and correlation slope 
+p = ggplot(data = data_dry_salaya)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.3,
+              intercept = 2.17,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN SALAYA (c = 0.3, p = 0.03)") 
+p
+```
+```{r  FID vs D_FR_SHELTER : preliminary correlation : PHUTTHAMONTHON }
+
+######## PRELIMINARY CORRELATION ANALYSES #############
+
+# Pearson's correlation test 
+cor.test(data_dry_phuttha$FIDi, data_dry_phuttha$d_fr_refug) 
+
+#Plot the data and correlation slope 
+p = ggplot(data = data_dry_phuttha)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.12,
+              intercept = 0.8,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.12, p = 0.42)") 
+p
+```
