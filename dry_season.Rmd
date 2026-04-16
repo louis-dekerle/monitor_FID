@@ -40,23 +40,23 @@ setwd("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID")
 
 # charging dataset 
 data_monitor_dry <- read.csv("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID/DATA/pro/data_obs8.csv", header= T, sep = ";")
-View(data_monitor_dry)
+#View(data_monitor_dry)
 
 ###### EXCLUDE OBS OTHER THAN V_SALVA ######
 data_monitor_dry = data_monitor_dry[(data_monitor_dry$sp=="V_salva" ) ,]
-View(data_monitor_dry)
+#View(data_monitor_dry)
 
 ###### EXCLUDE OBS WITHOUT FID  ###### 
 data_monitor_dry = data_monitor_dry[!is.na(data_monitor_dry$FIDi),]
-View(data_monitor_dry)
+#View(data_monitor_dry)
 
 ###### EXCLUDE OBS WITHOUT SIZE  ###### 
 data_monitor_dry = data_monitor_dry[!is.na(data_monitor_dry$size),]
-View(data_monitor_dry)
+#View(data_monitor_dry)
 
 ###### EXCLUDE OBS WITHOUT DISTANCE TO SHELTER  ###### 
 data_monitor_dry = data_monitor_dry[!is.na(data_monitor_dry$d_fr_refug),]
-View(data_monitor_dry)
+#View(data_monitor_dry)
 
 ##### ROUND FID and D_FR_SHERLTER FOR DRY SEASON #####
 
@@ -335,7 +335,7 @@ bptest(model_dfs_site_s) #OK
 
 res_dharmareg_inter = simulateResiduals(model_dfs_site_s)
 
-testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_salaya$long, y = data_dry_salaya$lat) # okay 
+testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_salaya$long, y = data_dry_salaya$lat) # barely okay 
 
 # TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
 
