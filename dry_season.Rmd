@@ -134,6 +134,7 @@ boxplot(data_monitor_dry$FIDi~data_monitor_dry$size, xlab = "Size", ylab = "FID 
 
 
 ```
+
 ```{r FID vs SIZE : SALAYA }
 
 ##### mean FID for salaya ##### 
@@ -154,6 +155,7 @@ kruskal.test(data_dry_salaya$FIDi~as.factor(data_dry_salaya$size), data=data_dry
 boxplot(data_dry_salaya$FIDi~data_dry_salaya$size, xlab = "Size", ylab = "FID (m)") # nope 
 
 ```
+
 ```{r FID vs SIZE : PHUTTHAMONTHON }
 
 ##### mean  FID for phutthamonthon ##### 
@@ -174,9 +176,6 @@ kruskal.test(data_dry_phuttha$FIDi~as.factor(data_dry_phuttha$size), data=data_d
 boxplot(data_dry_phuttha$FIDi~data_dry_phuttha$size, xlab = "Size", ylab = "FID (m)") # nope 
 
 ```
-
-
-
 
 ```{r  FID vs D_FR_SHELTER : preliminary correlation }
 
@@ -289,7 +288,6 @@ p = p + geom_abline(mapping = NULL,
 p
 ```
 
-
 ```{r  FID vs D_FR_SHELTER : preliminary correlation : SALAYA }
 
 ######## PRELIMINARY CORRELATION ANALYSES #############
@@ -313,6 +311,7 @@ p = p + geom_abline(mapping = NULL,
         ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN SALAYA (c = 0.3, p = 0.03)") 
 p
 ```
+
 ```{r FID vs D_FR_SHELTER : linear model : SALAYA}
 
 ####a) Model ####
@@ -424,6 +423,7 @@ p = p + geom_abline(mapping = NULL,
         ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.11, p = 0.48)") 
 p
 ```
+
 ```{r FID vs D_FR_SHELTER : linear model : phuttha}
 
 ####a) Model ####
