@@ -18,19 +18,11 @@ dev.off()
 
 ##### LIBRARIES #####
 
-library(car)
-library(lubridate)
-library(readxl)
-library(dplyr)
-library(ggplot2)
-library(MASS) 
-library(lmtest)
-library(scales)
-library(tidyverse)
-library(broom)
-library(lme4)
-library (DHARMa)
-library(graphics)
+library(plyr) # round by 0.5
+library(lubridate) # dates 
+library(ggplot2)# graphs 
+library(lmtest)# dwtest
+library (DHARMa)# test autocorrelation
 
 ```
 
