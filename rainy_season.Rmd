@@ -263,6 +263,22 @@ testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_monitor_rai
 #### c) Results ####
 summary(model_dfs_site) # nope 
 
+
+p = ggplot(data = data_monitor_rain)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.06,
+              intercept = 3.2,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor during the RAINY SEASON (c = 0.06, p = 0.13)") 
+p
+
 ```
 
 ```{r  FID vs D_FR_SHELTER : preliminary correlation : SALAYA }
