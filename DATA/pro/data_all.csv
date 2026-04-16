@@ -1,0 +1,377 @@
+fid;id;sp;site;date;time;lat;long;b_b_a;microhab;size;d_fr_refug;ind;FIDi;comment;Temp;people;people_1min;flight_type;approach;side_approach;closest_ref_type;gone_ref_type;people_1min_vehic2;season
+1;1;V_salva;phutthamonthon;20-01-2025;10:49:51;13.78453667;100.320305;dead;;;;;;DEAD;;;;;;;;;;dry
+2;2;V_salva;phutthamonthon;20-01-2025;10:54:06;13.78451167;100.3208067;flee diving;water;;;;;in the water out of reach;;;;;;;;;;dry
+3;3;V_salva;phutthamonthon;20-01-2025;10:58:43;13.78439333;100.3207267;basking;berge;L;2;;12.2;;;;;;;;;;;dry
+4;4;V_salva;phutthamonthon;20-01-2025;11:12:19;13.78381333;100.3201617;resting;bank;M;;almost dea;;didn't flee, probably almost dead;;;;;;;;;;dry
+5;5;V_salva;phutthamonthon;20-01-2025;11:24:35;13.78363833;100.319785;resting;berge;L;2.2;;13.16;;;;;;;;;;;dry
+6;6;V_salva;phutthamonthon;20-01-2025;11:48:07;13.78061167;100.3154;fuit avant;voir;S;;;;;;;;;;;;;;dry
+7;7;other;phutthamonthon;20-01-2025;12:02:54;13.78099667;100.3155667;;;;;;;Ptyas korros;;;;;;;;;;dry
+8;8;other;phutthamonthon;20-01-2025;12:06:26;13.78101333;100.3156117;;;;;;;Malayemis macrocephala;;;;;;;;;;dry
+9;9;other;phutthamonthon;20-01-2025;12:08:58;13.78196167;100.3159817;;;;;;;Malayemis macrocephala;;;;;;;;;;dry
+10;10;V_salva;phutthamonthon;20-01-2025;12:14:59;13.78200333;100.3150833;walkingalongthebank;concrete bank;S;;;;tiny babyyyy (30cm max);;;;;;;;;;dry
+11;11;V_salva;phutthamonthon;20-01-2025;12:23:55;13.78219833;100.3140233;basking;berge;L;0.5;;6;really big;;;;;;;;;;dry
+12;12;V_salva;phutthamonthon;20-01-2025;12:41:11;13.78388833;100.3151333;basking;berge beton;M;0.1;;6.5;;;;;;;;;;;dry
+13;13;V_salva;phutthamonthon;20-01-2025;12:53:10;13.78425;100.3157483;;pelouse feuile arbre;M;11.6;;8;;;;;;;;;;;dry
+14;14;V_salva;phutthamonthon;20-01-2025;12:58:18;13.78437833;100.3162633;dans l'eau;;L;;;;;;;;;;;;;;dry
+15;15;V_salva;phutthamonthon;20-01-2025;14:22:35;13.77777833;100.327825;;;;;;;Trachemis scripta;;;;;;;;;;dry
+16;16;V_salva;phutthamonthon;20-01-2025;14:22:57;13.77777833;100.327825;;;;;;;Trachemis scripta;;;;;;;;;;dry
+17;17;V_salva;phutthamonthon;20-01-2025;14:23:02;13.77777833;100.327825;;;;;;;Trachemis scripta;;;;;;;;;;dry
+18;18;V_salva;salaya;21-01-2025;09:23:15;13.79201;100.3236983;basking;terre nue beton;M;1.44;;2.57;S if 2 classes;;;;;;;;;;dry
+19;19;V_salva;salaya;21-01-2025;09:59:08;13.79489667;100.3217383;basking;pelouse;M;19.26;;4.5;S if 2 classes;;;;;;;;;;dry
+20;20;V_salva;salaya;21-01-2025;10:08:58;13.79425333;100.3217783;sleeping;berge;M;1.3;;3;attacked by ID 21 because ID20 fled on ID 21;;;;;;;water;water;;dry
+21;21;V_salva;salaya;21-01-2025;10:10:56;13.79425333;100.3217783;floating;canal;M;;;;attacked ID 20 because ID20 fled on ID 21;;;;;;;;;;dry
+22;22;V_salva;salaya;21-01-2025;10:14:22;13.79417155;100.3218949;;berge;L;1.5;;;;;;;;;;;;;dry
+23;23;V_salva;salaya;21-01-2025;10:18:12;13.79412333;100.3217683;basking;berge;M;1.1;;2.5;;;;;;;;;;;dry
+24;24;V_salva;salaya;21-01-2025;10:26:59;13.79362333;100.32178;basking;berge nue;M;1.2;;2.2;S if 2 classes;;;;;;;;;;dry
+25;25;V_salva;salaya;21-01-2025;10:31:51;13.79346667;100.3216917;basking;berge nue;L;1.2;;0;didn't flee, leg mouvement (prepare to react) and tail whip when 1m distance;;;;;;;;;;dry
+26;26;V_salva;salaya;21-01-2025;10:38:47;13.79334667;100.3217417;resting;berge herbe;M;1.1;;1.57;begrudge to flee before 80cm + tail whip;;;;slow;;;water;water;;dry
+27;27;V_salva;salaya;21-01-2025;10:41:48;13.793245;100.3217283;swiming;canal;M;;;;L if 2 classes;;;;;;;;;;dry
+28;28;V_salva;salaya;21-01-2025;10:45:22;13.79236167;100.3217367;;;M;0.7;;4.3;S if 2 classes;;;;;;;;;;dry
+29;29;V_salva;salaya;21-01-2025;11:03:35;13.791595;100.3212583;walking towardwater;;M;;;;;;;;;;;;;;dry
+30;30;V_salva;salaya;21-01-2025;11:19:15;13.78790833;100.3224117;basking;berge pelouse;L;3.5;;2.25;fled even if barrier (hedge) between us;;;;;;;water;water;;dry
+31;31;V_salva;salaya;21-01-2025;11:24:16;13.78788333;100.3227;basking;berge nue;L;3.6;;2;fled even if barrier (hedge) between us;;;;;;;water;water;;dry
+32;32;V_salva;salaya;21-01-2025;11:29:40;13.78791;100.3235067;walking toward water;berge feuille;;;M=>S;;;;;;;;;;;;dry
+33;33;V_salva;salaya;21-01-2025;11:40:47;13.790525;100.324655;basking;chemin beton;M;4.7;M;3.1;didn't flee toward refuge, slow flight (seemed more annoyed than scared);;;;slow;;;water;distance;;dry
+34;34;V_salva;salaya;23-01-2025;13:00:17;13.793525;100.3251483;roaming;concrete;M;;;;medium to large;;;;;;;;;;dry
+35;35;V_salva;salaya;23-01-2025;13:04:11;13.79357326;100.3247785;roaming;grass;S;;;;;;;;;;;;;;dry
+36;36;other;phutthamonthon;23-01-2025;14:28:12;13.77928167;100.3264083;;;;;;;dog;;;;;;;;;;dry
+37;37;V_salva;phutthamonthon;23-01-2025;14:55:48;13.78294667;100.326635;roaming along water;bank leaf no grass;S;0.5;;6.1;roaming stopped to look when approqch too close then roam again towardvegetation to hide (considered fleeing) roam again when appraoch but don't go in water despite being on the edge;32;0;;slow;;;water;distance;;dry
+38;38;V_salva;phutthamonthon;23-01-2025;15:04:53;13.78438667;100.3265317;resting;concrete bank;M;0.4;;4.2;m to l only saw tail flee quickly;32;0;;quick;;;;;;dry
+39;39;V_salva;phutthamonthon;23-01-2025;15:09:39;13.78456167;100.3265483;resting;concrete bank grass;M;0.5;38?;4.5;maybe 38 since really close and really reactive. flee quickly from far swim few meters back on land run then stop to look and walk away while still looking;32;0;;quick;;;;water;;dry
+40;40;other;phutthamonthon;23-01-2025;15:17:14;13.78467833;100.3265017;;;;;;;small temple turtle ?;;;;;;;;;;dry
+41;41;other;phutthamonthon;23-01-2025;15:29:42;13.7846;100.3246433;;;;;;;baby snail eating ttl;;;;;;;;;;dry
+42;42;other;phutthamonthon;23-01-2025;15:37:44;13.78417333;100.3231333;;;;;;;turtle skeleton;;;;;;;;;;dry
+43;43;V_salva;phutthamonthon;23-01-2025;15:42:26;13.78465833;100.3217867;;;M;;;;in water already m to l;32;8;;;;;;;;dry
+44;44;other;phutthamonthon;23-01-2025;15:45:22;13.78449167;100.3216383;;;;;;;dead snail eating ttl;;;;;;;;;;dry
+45;45;V_salva;phutthamonthon;23-01-2025;15:53:23;13.78447167;100.321165;resting;Bush grass;L;4.3;;6.28;fly rapidly;32;0;;quick;;;;;;dry
+46;46;other;phutthamonthon;23-01-2025;16:01:28;13.78370667;100.3206133;;;;;;;temple turtle ? see photo;;;;;;;;;;dry
+47;47;other;phutthamonthon;23-01-2025;16:02:28;13.78377833;100.3204867;;;;;;;box ttl;;;;;;;;;;dry
+48;48;V_salva;phutthamonthon;23-01-2025;16:07:58;13.78330833;100.3209433;resting;bank Bush grass;M;0.5;;;flee before see too bushy for measure m to s;32;1;;;;;;;;dry
+49;49;V_salva;phutthamonthon;23-01-2025;16:14:26;13.78312167;100.3210533;resting;bank;M;0.1;;0;repos observe gonfle souffle montrer sa queue sans fouetter se rapproche du bord mais fuit pas même a 50cm arrête de soufffler et bouger quand je Reculver mais toujours position tonique et observe m to l se remet en repos après que je sois parti;31;8;;;;;;;;dry
+50;50;V_salva;salaya;27-01-2025;16:53:17;13.79928167;100.3240233;resting;polluted path dead g;L;6.5;;19.7;M to L repos de face observe puis de tourne pour aller mentement dans l'eau observe un peu puis s'en va en nageant;28;6;;slow;;front;water;water;;dry
+51;51;V_salva;salaya;27-01-2025;17:23:45;13.796455;100.31848;foraging trash;concrete bank trash;M;0.5;;2.64;M to S 3 indivuduals foraging trash;28;8;;;;;water;water;;dry
+52;52;V_salva;salaya;28-01-2025;12:59:51;13.79341;100.3217933;basking;bank;M;3.14;;4.7;m to s fuite lente puis bsking quelques mettez plus loin;29;17;;slow;;;water;distance;;dry
+53;53;V_salva;salaya;28-01-2025;13:27:46;13.78803333;100.31921;resting;bush;L;;;0;surement deja rencontré bcp cicatrices fuit pas mais se recul a 2m pour garder distance montre queue se retourne sur le metre (attaque);29;0;;;;;;;;dry
+54;54;V_salva;salaya;28-01-2025;13:50:23;13.78849833;100.31772;resting;grass ombre bâtiment;S;7.72;;8.8;burst de fuite sur 3-4m puis arrêt pour observer puis marche lente vers l'eau arrêt pour observer puis go dans l'eau;30;0;;;;;water;water;;dry
+55;55;V_salva;salaya;28-01-2025;14:04:51;13.78792;100.3177083;basking;berge herbe;L;2.5;;0;fuit pas a 1.5m se gonfle et souffle et se recouche si je bouge pas en cintinuant de surveiller;30;2;;;;;;;;dry
+56;56;V_salva;salaya;28-01-2025;14:08:03;13.787895;100.31763;resting;grass bank bush;M;1.3;;4.9;m to l fuite brusque avant que je le voit;30;1;;quick;;;;;;dry
+57;57;V_salva;salaya;28-01-2025;14:27:09;13.79073167;100.31716;;;M;;;;DEAD;;;;;;;;;;dry
+58;58;V_salva;phutthamonthon;29-01-2025;08:54:16;13.78190344;100.3192939;;;M;;;;m to s swimming in water;23;;;;;;;;;dry
+59;59;V_salva;phutthamonthon;29-01-2025;08:59:54;13.78235412;100.3194814;;;M;;;;in water not moving;23;2;;;;;;;;dry
+60;60;other;phutthamonthon;29-01-2025;09:03:07;13.7818734;100.3196177;;;;;;;T. scripta;;;;;;;;;;dry
+61;61;other;phutthamonthon;29-01-2025;09:07:23;13.78160833;100.3199767;;;;;;;snail eating;;;;;;;;;;dry
+62;62;other;phutthamonthon;29-01-2025;09:10:34;13.78163167;100.3191533;;;;;;;turtle;;;;;;;;;;dry
+63;63;other;phutthamonthon;29-01-2025;09:10:48;13.78163167;100.3191533;;;;;;;turtle;;;;;;;;;;dry
+64;64;;phutthamonthon;29-01-2025;09:12:43;13.7851724;100.3215491;;;;;;;snail eating turtle;;;;;;;;;;dry
+65;65;other;phutthamonthon;29-01-2025;09:13:49;13.781275;100.31909;;;;;;;snail eating turtle;;;;;;;;;;dry
+66;66;other;phutthamonthon;29-01-2025;09:27:45;13.78195554;100.3177476;;;;;;;dog;;;;;;;;;;dry
+67;67;;phutthamonthon;29-01-2025;09:28:06;13.78187289;100.3176874;;;;;;;dog;;;;;;;;;;dry
+68;68;;phutthamonthon;29-01-2025;09:28:18;13.78181857;100.3177252;;;;;;;dog;;;;;;;;;;dry
+69;69;;phutthamonthon;29-01-2025;09:51:08;13.779695;100.3172567;;;;;;;turtle;;;;;;;;;;dry
+70;70;other;phutthamonthon;29-01-2025;10:14:09;13.77939789;100.3159693;;;;;;;snail eating turtle;;;;;;;;;;dry
+71;71;V_salva;phutthamonthon;29-01-2025;10:24:51;13.77732375;100.3157268;walking;concrete bank;S;;;;walking along concrete bank across the water increased speed after noticing me;26;;;;;;;;;dry
+72;72;V_salva;phutthamonthon;29-01-2025;10:47:49;13.776025;100.3166033;;bank dead leaves;S;3.3;;14.6;burst flee stop to observe then walk away (doesn't go in water);27;2;;quick;;;water;distance;;dry
+73;73;V_salva;phutthamonthon;29-01-2025;11:06:13;13.77454833;100.3193983;;roots concrete bank;S;1.7;;15.25;observing from roots then flee behind don't know where (maybe water);27;1;;;;;;;;dry
+74;74;V_salva;phutthamonthon;30-01-2025;07:43:05;13.77189776;100.3130265;basking;grass bank;M;1.7;;10.3;spot, U turn, flee slowly in water dog outside and lots of barking, 2indvd proche de même taille;21;3;;slow;;;water;water;;dry
+75;75;V_salva;phutthamonthon;30-01-2025;07:48:07;13.77190273;100.3129598;basking;grass bank water;M;0.6;;7.5;hidden behind tree leve la tete quand l'autre fuit et fui a son tour en me voyant dogs barking and outside (dog island);21;3;;;;;water;water;;dry
+76;76;V_salva;phutthamonthon;30-01-2025;07:55:53;13.77306333;100.3122567;;;S;;;;ptn de chien qui me suit il aboie je peux rien mesure ça biaise tout;;;;;;;;;;dry
+77;77;V_salva;phutthamonthon;30-01-2025;07:56:57;13.77314167;100.31221;;;M;;;;ptn de chien qui me suit il aboie je peux rien mesure ça biaise tout;;;;;;;;;;dry
+78;78;V_salva;phutthamonthon;30-01-2025;08:59:39;13.78436671;100.3143999;;;M;;;;in water m to l;;;;;;;;;;dry
+79;79;V_salva;phutthamonthon;30-01-2025;09:15:48;13.78238667;100.3127017;resting;bank under tree;M;2.3;;14;vu pdt fuite m to l, reptile musk smell;24;1;;;;;;;;dry
+80;80;V_salva;phutthamonthon;30-01-2025;09:34:50;13.781905;100.3146567;;grass bank;M;1.4;;5.6;detecter pdt fuite m to s 1m30 environ;26;0;;;;;;;;dry
+81;81;V_salva;salaya;03-02-2025;14:20:51;13.79645333;100.3213583;resting;grass bush;M;1.1;;5.7;m to s look tense tong flick go slowly into bush;33;8;;slow;;;;;;dry
+82;82;V_salva;salaya;03-02-2025;14:37:20;13.79532667;100.3180267;resting;cut grass bank;M;1.9;;5.9;quickly flee in water before I see;34;5;;quick;;;water;water;;dry
+83;83;V_salva;salaya;03-02-2025;15:25:20;13.79450667;100.3172767;resting in water;partially in water a;M;0;;5.9;m to s;34;7;;;;;;;;dry
+84;84;V_salva;salaya;03-02-2025;15:56:03;13.79049333;100.319885;resting;cut grass;L;6.87;;11.1;regarde et fuitbpdt que je prend les photos;34;2;;slow;;;bush;bush;;dry
+85;85;V_salva;salaya;03-02-2025;16:14:26;13.78953333;100.3175317;;bush;S;4;;2.7;real small juvenil flight in 2 times quick look quick;34;0;;quick;;;;;;dry
+86;86;V_salva;salaya;11-02-2025;06:17:10;13.79877;100.3239283;swimming;canal;L;;;;on voit pas grand chose la nuit mdr il nageait il s'est arrêté quand j'ai mis la lampe dessus et a plongé 30s plus tard 7 personne 1 min 3 voiture et une moto;20;;7;;;;;;11;dry
+87;87;V_salva;salaya;11-02-2025;06:20:55;13.79769;100.3239267;swimming;canal;M;;;;3 voitire 1 moto;20;;7;;;;;;11;dry
+88;88;V_salva;salaya;11-02-2025;06:32:24;13.79708437;100.3229666;resting;solar panel on pond;L;;;;6 voitures 8 moto;20;;19;;;;;;33;dry
+89;89;V_salva;salaya;11-02-2025;06:44:02;13.79590667;100.3217867;swimming;canal;L;;;;7 moto 6 voitures nage puis sort qlq minutes puis retourne nager;20;;20;;;;;;33;dry
+90;90;V_salva;salaya;11-02-2025;06:45:32;13.79590833;100.321805;nage;canal;M;;;;nage à 1m de 89 s'arrete quand je prends des photo (que tete qui depasse) et repars qlq minutes apres 7 moto 6 voitures;20;;20;;;;;;33;dry
+91;91;V_salva;salaya;11-02-2025;07:08:53;13.79046833;100.3238183;resting in water;shallow canal;M;;;;under the small bridge look a me from bellow but doesn't move;19;;0;;;;;;0;dry
+92;92;V_salva;salaya;11-02-2025;07:14:54;13.790265;100.323745;resting in shallow c;;M;;;;looking at me from below not moving fini 0ar partir quand j'ai bougé bcp pour compter les gens;19;;1;;;;;;1;dry
+93;93;V_salva;salaya;11-02-2025;07:18:48;13.79019;100.3237783;swimming in canal;canal;L;;;;peut etre le plis gros que j'ai vu jusqu'ici il était massif sa race mais il été surpris par ma présence et les photo donc il a fait demi tour vite;19;;1;;;;;;1;dry
+94;94;V_salva;salaya;11-02-2025;07:22:57;13.78971155;100.3235353;swimming in canal;canal;L;;;;nage vers moi s'arrete quand je prends des photos et continue sa route en se detournant quand meme yn peu;20;;4;;;;;;4;dry
+95;95;V_salva;salaya;11-02-2025;07:32:31;13.78952667;100.32363;walking on wood brid;wood bridge;S;;;2.7;walk along pas perturbé par les gens se stop avant de me remarquer me regarder approche 15m en avance sans bouger fuite lente sans rejoindre refuge reprend soncomportement tres vite (boire);21;;1;slow;;;;;1;dry
+96;96;V_salva;salaya;11-02-2025;07:41:31;13.789665;100.3249217;swimming in canal;canal;M;;;;go away when photo;21;;2;;;;;;2;dry
+97;97;V_salva;phutthamonthon;13-02-2025;14:20:03;13.77961667;100.3214617;resting;grass;S;;;;eclaire qui fuit dans l'eau 1 moto;36;;6;quick;;;;;7;dry
+98;98;V_salva;phutthamonthon;13-02-2025;14:55:54;13.77962667;100.3195;resting;concrete bank;S;0.3;;7.9;entre 50cm et 1m verifier avec tao plonge trkl dans l'eau et va se poser sur la berge dweb face 1 moto(2 passagers comptés);36;;10;slow;;;water;water;11;dry
+99;99;other;phutthamonthon;13-02-2025;15:05:02;13.77896667;100.3189567;;;;;;;t scripta;;;;;;;;;;dry
+100;100;V_salva;phutthamonthon;13-02-2025;15:19:35;13.77633667;100.319515;basking;concrete bank;S;0.15;;4.57;tout riquiqui (meme pas 30cm) a pas fuit dans l'eau mais le long de la berge pour aller basker qlq metres plus loin, chill guyil y a que quand je me suis approché de sa nvl position qu'il a plongée 1moto;35;;5;slow;;;water;distance;6;dry
+101;101;V_salva;phutthamonthon;13-02-2025;15:31:21;13.77604667;100.3193483;baskin;concrete bakn;S;0.2;;5.2;start 10m away from bank walk rapidly toward bank then bak on bank flow smowly sans plonger et bask un peu plus loin;34;1;1;slow;;;water;distance;1;dry
+102;102;V_salva;phutthamonthon;13-02-2025;15:45:15;13.77479167;100.31919;basking;grass bank;L;1.2;;7.3;1moto;36;;2;quick;;;;;3;dry
+103;103;V_salva;phutthamonthon;13-02-2025;16:07:07;13.77273167;100.3215983;basking;grass bank;L;1.9;;6.27;saw me and flee before I saw it;36;;2;quick;;;;;2;dry
+104;104;V_salva;phutthamonthon;14-02-2025;09:22:32;13.76926333;100.3242883;basking;concrete bank;M;0.3;;9.55;flee before I see so no slow approach 1moto;29;;1;quick;;;;;2;dry
+105;105;V_salva;phutthamonthon;14-02-2025;09:40:46;13.76938167;100.3218617;resting;bush bank;M;0;;13.75;fuit avant que je le vois m to s 1 moto(deu  personnes) 1 voiture;30;;4;quick;;;;;6;dry
+106;106;V_salva;phutthamonthon;14-02-2025;09:57:57;13.77084333;100.321035;;leaf bank;M;2.4;;10.5;m to s;30;;0;slow;;;;;0;dry
+107;107;V_salva;phutthamonthon;14-02-2025;10:27:10;13.77470667;100.3215967;;grass;S;4.1;;9.5;didn't flee toward water or bush but straght in opposite directiob 1 moto 1 voiture;30;;3;quick;;;;distance;5;dry
+108;108;other;phutthamonthon;14-02-2025;10:35:53;13.77403;100.321175;;;;;;;T scripta;;;;;;;;;;dry
+109;109;other;phutthamonthon;14-02-2025;10:36:10;13.774065;100.3211867;;;;;;;T scripta;;;;;;;;;;dry
+110;110;other;phutthamonthon;14-02-2025;10:52:49;13.77448333;100.3197317;;;;;;;snail eating turtle retournée coincée j'ai dû la remettre à l'endroit mais elle est vivante elle souffle et elle observe donc ça doit aller;;;;;;;;;;dry
+111;111;V_salva;phutthamonthon;14-02-2025;10:54:00;13.774445;100.3197683;basking;concrete bank;S;0.3;;5.4;don't flee in water mais long du bank traverse le pont tout tiny est ce qu'ils restent hors de l'eau poir eviter posson predateurs ?;32;;0;quick;;;water;distance;0;dry
+112;112;other;phutthamonthon;14-02-2025;11:04:51;13.77534167;100.3192617;;;;;;;t scripta;;;;;;;;;;dry
+113;113;V_salva;phutthamonthon;14-02-2025;11:09:25;13.77503667;100.3190417;basking;bare soil tree bank;L;2.8;;4.25;je suis arrivé de derrière un arbre on s'est pas vu venir mdr on a eu aussi peur l'un que l'autre;33;;0;quick;;;water;water;0;dry
+114;115;V_salva;salaya;19-02-2025;11:35:37;13.79724333;100.32034;;in water in canal;M;;;;;;;;;;;;;;dry
+115;116;V_salva;salaya;19-02-2025;11:41:01;13.79775333;100.3201267;;in water;;;;;;;;;;;;;;;dry
+116;114;V_salva;salaya;19-02-2025;11:04:50;13.79174167;100.3229633;foraging;bare soil;M;9.6;;7.6;seems to eat something before eating look a lot flee trally slowly didn't go in water  journee pluvieuse forte fréquentation bcp voiture et moto;30;;70;slow;;;water;water;70;dry
+117;117;V_salva;phutthamonthon;27-02-2025;12:10:12;13.78115833;100.317165;basking;concrete bank;L;;;;;;;;;;;;;;dry
+118;118;V_salva;phutthamonthon;27-02-2025;12:20:01;13.78140167;100.316;basking;concret bank;S;;;;IL A PLONGÉ DANS L'EAU;;;;;;;water;water;;dry
+119;119;V_salva;phutthamonthon;27-02-2025;12:31:04;13.78069833;100.3155;resting;shadow bush trees;L;4.4;;11.2;fuit avant vu fuite rapide direction opposé coure longtemps m, resting in shadow dans un bosquet d'arbustes;33;;0;quick;regular(quick);;water;bush;0;dry
+120;120;other;phutthamonthon;27-02-2025;12:40:12;13.78114667;100.31588;;;;;;;dead temple turtle;;;;;;;;;;dry
+121;121;V_salva;phutthamonthon;27-02-2025;13:21:24;13.78192833;100.3138817;foraging;;M;;;;go into water;;;;;;;;;;dry
+122;122;V_salva;phutthamonthon;27-02-2025;13:34:26;13.78236167;100.312505;resting;leaf mond;S;1.6;;3.3;j'arrice normal je le vois je m'arrete le temps que je capte quoi faire il fuit. fuit pas dans l'eau cours le long du concrete bank quitte a courir le long de la verticale derriere lais jamais dans l'eau. ratissage en cours terre mise a nue perturbations de la litere. rotofilage en cours;34;;2;quick;regular(quick);;water;distance;2;dry
+123;123;other;phutthamonthon;27-02-2025;13:43:45;13.783235;100.311765;;;;;;;snail eating dead ammené avec la première temple pour recup plus tard;;;;;;;;;;dry
+124;124;V_salva;phutthamonthon;27-02-2025;13:51:37;13.78239333;100.3114283;rzsting;leaf mond;S;2.6;;8.6;fuit pas dans l'eau mais direction opposé à moi quand même dabs un tat debranches. refuge plus proche c'est eau 1 60m mais j'ai plutôt compté un buisson de bambou un peu plus loin comme ils vont pas dans l'eau. 1moto;34;;2;quick;regular(quick);;water;bush;3;dry
+125;125;other;phutthamonthon;27-02-2025;14:05:16;13.78367333;100.31261;;;;;;;dead temple turle (only shell);;;;;;;;;;dry
+126;126;V_salva;salaya;28-02-2025;15:26:41;13.79042167;100.3174133;go back bank;water;L;0;;5.7;in process s.to go back on bank see each other he stop few seconds then flee in water along bank;34;;0;quick;regular(quick);;water;water;0;dry
+127;127;V_salva;salaya;03-03-2025;09:20:33;13.799605;100.3202217;grimpe berge;pond;M;;;;essaie de grimpet sur la berge et plonge quand j'approche;;;;;;;;;;dry
+128;128;V_salva;salaya;03-03-2025;09:36:19;13.79542167;100.31657;;;S;;;;déjà fuit sur plsrs metres av que je le vois;;;;;;;;;;dry
+129;129;V_salva;salaya;03-03-2025;09:44:37;13.792945;100.316795;;water bush reeds;M;0;;2.7;fuit sans que je le vois (confirmation après que c'estait varan) déjà dans l'eau camouflé dans un buisson de plantes feuillues aquatiques 8 voitires 5 motos moteur de pompe arrosage fait bcp de bruit;;;15;quick;regular(quick);;water;water;28;dry
+130;130;V_salva;salaya;03-03-2025;10:09:25;13.78912333;100.3205283;;bank smal canal;S;0.3;;6.26;vu pdt fuite fuite rapide traverse canal poir aller de l'autre côté des buissons de l'autre côté du canal (petit canal prédateur peu probable) bruit route tres proche;32;;4;quick;regular(quick);;water;bush;4;dry
+131;131;other;salaya;03-03-2025;10:17:14;13.78797;100.3201267;;;;;;;C diversicolor;;;;;;;;;;dry
+132;132;other;salaya;03-03-2025;10:17:34;13.7899766;100.3204916;;;;;;;rainbow skink;;;;;;;;;;dry
+133;133;V_salva;salaya;03-03-2025;10:33:31;13.788285;100.3177017;;bank dead leaf;M;2.2;;16.5;sors vite comme poir voir ce qui se passe puis par en direction opposée lentement, fuit pas dans refuge (eau);32;;0;quick;regular(quick);;water;bush;0;dry
+134;134;V_salva;salaya;03-03-2025;10:41:51;13.78816833;100.3184167;;dead leaf bank;S;1;;2.18;fuit en 3 temps 2 premiers burst sur qlq cm puis observation puis vraie fuite quand voit que j'approche plus fuit en nageant au bord de l'eau autoroute de m'autre cote du canal donc ppl ++++;;;150;quick;regular(quick);;water;water;;dry
+135;135;other;phutthamonthon;03-03-2025;15:12:10;13.772545;100.31687;;;;;;;DEAD retic;;;;;;;;;;dry
+136;136;V_salva;phutthamonthon;03-03-2025;15:20:44;13.772765;100.3166467;;bush water;;;;;m to l pas compté car taille pas sure et déjà dand l'eau;;;;;;;;;;dry
+137;137;V_salva;phutthamonthon;03-03-2025;15:22:16;13.77288;100.31648;;;L;;;;gros are tête qui depasse de l'eau vu par surprises pas conptè;;;;;;;;;;dry
+138;138;V_salva;phutthamonthon;03-03-2025;15:39:22;13.76991667;100.31624;;;L;;;;pas sur de ce que c'était mais ça ressemblait a un gros varan fuit a plus de 20m quand j'ai fait un gros bruit;;;;;;;;;;dry
+139;139;V_salva;phutthamonthon;03-03-2025;15:44:28;13.76971667;100.3163217;;;;;;;idem mais plutot m to s. dans les 2 cas fuite sur looongir distanxe;;;;;;;;;;dry
+140;140;V_salva;phutthamonthon;03-03-2025;16:25:22;13.77048833;100.3116517;;;M;;;;dans l'eau entre earth et concrete bank panik et peut quand j'arrice et à du mal a se dépatouiller entre la terre et le béton;;;;;;;;;;dry
+141;141;V_salva;phutthamonthon;04-03-2025;07:20:17;13.77231167;100.3188367;moving;grass;M;4.2;;1.05;marche tranquille vers un arbre (prevoir de grimper ?) j'ai pu m'approcher près en arrivant visible par le côté il avait pas l'air d'être dérangé jusqu'à ce qu'il freak out de detale super vite dans l'eau. 1 voiture;28;;9;quick;modified (slow);;water;water;10;dry
+142;142;V_salva;phutthamonthon;04-03-2025;07:39:39;13.77077694;100.3208379;;;S;;;;sur concrete banc reagis a mon arriver (ou fuit 2 plus gros) saute dans mweau quand je m'approche a 1m20 environ.;;;;;;;;;;dry
+143;143;;phutthamonthon;04-03-2025;07:40:40;13.77074917;100.3208549;;;M;;;;individu moyen dans l'eau entre concrete banck et earth bank. fuit/affrontements (jsp c'était le bordel) de maniere anarchique avec un aitre de meme taile;;;;;;;;;;dry
+144;144;V_salva;phutthamonthon;04-03-2025;07:42:20;13.77073824;100.32087;;;M;;;;idem que 143;;;;;;;;;;dry
+145;145;V_salva;phutthamonthon;04-03-2025;07:43:04;13.77193524;100.3218216;;;L;;;;nage;;;;;;;;;;dry
+146;146;V_salva;phutthamonthon;04-03-2025;08:03:05;13.77020833;100.3235367;;gras concrete bank;S;0.8;;9.8;arbre avec grosse crevoce le plus proche 1m50 mais fuit ni dans l'eau ni dans l'arbre mais le long du concrete bank en direction opposée a moi recroisé qlq metre plus loin => fuit dans l'eauxdirect;29;;2;quick;regular(quick);;crevice;distance;2;dry
+147;147;V_salva;phutthamonthon;04-03-2025;08:28:42;13.772115;100.3214133;foraging;dead leaf presqu'île;M;3.6;;5.9;premier burst a mon approche mais retrouve comportements rapidement alors j'ai fait 1 deuxième pour la mesure burst puis marche lentement vers l'eau m'observe qlq seconde avant de plonger et nager doucement abris plus proche est gros arbre avec racines crvasse. 1 moto. recroisé 10m plus loin sur concrete bank en train de basker;30;;9;quick;regular(quick);;crevice;water;10;dry
+148;148;other;phutthamonthon;04-03-2025;08:43:39;13.77322833;100.31851;;;;;;;t scripta;;;;;;;;;;dry
+149;149;other;phutthamonthon;04-03-2025;08:55:34;13.77140667;100.3169967;;;;;;;BRONZEBACK !!;;;;;;;;;;dry
+150;150;V_salva;salaya;05-03-2025;12:07:51;13.78973;100.324995;;dead leaf mound;S;3.3;;6.15;vu pdt fuite deux burst avec observation entre. refuge plus proche est eau et arbre plus proche 6.20;35;;30;quick;regular(quick);;water;distance;30;dry
+151;151;other;salaya;05-03-2025;12:24:56;13.7894684;100.3253199;;;;;;;c diversicolor;;;;;;;;;;dry
+152;152;V_salva;salaya;05-03-2025;12:31:04;13.78993833;100.3243417;resting;bush;M;0.3;;0.6;reaction et turn back et s'eloigne un peu a 0.6 mais fuit vraiment quand je m'approcher plus (1.8 comme il s'etait un peu eloignè) refuge le plus proche est bush mais est allé dans l'eau (3.1);35;;10;slow;modified (slow);;bush;water;10;dry
+153;153;V_salva;salaya;05-03-2025;12:59:02;13.78924667;100.3235267;resting in shadow;bush;L;1;Carl?;0;contrabass Ponton, approche à 20cm de la queue et bouge pas d'un pouce;35;;18;;modified (slow);;;;18;dry
+154;154;V_salva;salaya;05-03-2025;13:05:31;13.78978432;100.3237421;roaming sorti de l'e;earth bank;M;2.8;;2;sorti de l'eau 30s plus tot reluctant to fuir j'ai du m'approcher plus apres la premiere reaxtiob;35;;4;slow;modified (slow);;water;water;4;dry
+155;155;V_salva;salaya;05-03-2025;13:13:25;13.78958333;100.323815;basking;earth bank;M;1.8;;0.3;fuite vraiment lente, s'arrête plusieurs secondes entre chaque pas ppur m'observer et semble vraiment reflechir a si ça vaut le coup d'aller dans l'eau;35;;9;slow;modified (slow);;water;water;9;dry
+156;156;V_salva;salaya;05-03-2025;13:22:17;13.79007333;100.3238033;resting;earth bank;M;1;;1.3;s'eloigne de qlq cm puis regarde je m'approche plus donc s'emoigne un peu en whippant et regarde je m'approche encore fuit dans l'eau;35;;3;slow;modified (slow);;water;water;3;dry
+157;157;V_salva;salaya;05-03-2025;13:33:03;13.79048667;100.3238767;roaming;earth bank;S;1;;1.5;teeny tiny trop Kiki hihihi. avait déjà réagi un peu en amont mais a vraiment fuit qu'à 1m50. fuit dans l'eau poir rejoindre petit buisson d'herbe 40cm plus loin pour se cacher;35;;1;quick;modified (slow);;water;water;1;dry
+158;158;V_salva;salaya;05-03-2025;13:41:46;13.79082333;100.3249067;roaming eating?;under batiement;M;0.3;;1.5;mvt de mangeage qand j'approche mais pas de boufe au sol. fuit sous le batiment;35;;6;quick;modified (slow);;under_building;under_building;6;dry
+159;159;other;phutthamonthon;06-03-2025;08:08:50;13.77871167;100.31203;;;;;;;DEAD temple turtle skeleton;;;;;;;;;;dry
+160;160;V_salva;phutthamonthon;06-03-2025;08:18:33;13.77687333;100.312875;roam toward water;grass;M;4.1;;22.5;vu marchant vers l'eau, s'arrête pour obs, cours vers l'eau;29;;0;quick;regular(quick);left;water;water;0;dry
+161;161;V_salva;phutthamonthon;06-03-2025;08:27:20;13.77674333;100.313145;;bank grass;S;2.3;;2.2;vu par hasard fuite rapide a travers buisson dans eau puis emerge on concrete bank puis replonge quand j'approche pour mesure;29;;0;quick;regular(quick);right;bush;water;0;dry
+162;162;V_salva;phutthamonthon;06-03-2025;09:19:41;13.77576333;100.3125917;resting;bank leaf mond;L;3.2;;7.6;vu pdt fuite;31;;4;quick;regular(quick);;water;water;4;dry
+163;163;V_salva;phutthamonthon;06-03-2025;09:28:58;13.77544333;100.31236;;dead leaf;M;8.2;;4.2;vu par hasard fuite rapide sur 2m puis observe, je m'approche pour mesure initiale, puis rapide sur 2m vois que je dégage pas donc va dans l'eau;31;;0;quick;regular(quick);right;water;water;0;dry
+164;164;V_salva;phutthamonthon;06-03-2025;09:45:10;13.775185;100.31249;resting;bank dead leaf;M;2;;6.8;vu par hasard fuit pas dans l'eaux tt de suite (2 tps d'attente de d'obs);32;;0;slow;regular(quick);right;water;water;0;dry
+165;165;other;phutthamonthon;06-03-2025;10:04:51;13.77464833;100.312435;;;;;;;gros tokay dans cabanon toilettes;;;;;;;;;;dry
+166;166;V_salva;salaya;11-03-2025;06:15:31;13.79575667;100.3265433;;water;L;;;;immobile dans l'eau juste tête depasse;;;;;;;;;;dry
+167;167;V_salva;salaya;11-03-2025;06:17:53;13.79505333;100.3270267;foraging?;water;M;;;;nage acitveme yle long du bank;;;;;;;;;;dry
+168;168;V_salva;salaya;11-03-2025;06:22:08;13.79257667;100.3270383;foraging ?;water;M;;;;actif in water;;;;;;;;;;dry
+169;169;V_salva;salaya;11-03-2025;06:24:21;13.79167667;100.3271383;;water;M;;;;immobile on side bank in water;;;;;;;;;;dry
+170;170;V_salva;salaya;11-03-2025;06:31:48;13.78796833;100.3266483;foraging;water;L;;;;actif in water looking for stuff on the side of thebanl;;;;;;;;;;dry
+171;171;V_salva;salaya;11-03-2025;06:33:58;13.78805833;100.3257983;;water (sewer pipe);S;;;;SMALL HEAD IN SEWER PIPE. qui plus est côté Phutthamonthon donc supporte echange de pop;;;;;;;;;;dry
+172;172;V_salva;salaya;11-03-2025;06:42:46;13.78939;100.3253;;shallow canal water;L;1;;4.9;chilling in shallow water fuit lentement sous le pont. 1 voiture;28;;3;slow;modified (slow);right;under_building;under_building;4;dry
+173;173;V_salva;salaya;11-03-2025;06:49:03;13.78963667;100.3256067;foraging;water along bank;L;;;;swimminh along bank se stop quand j'approcje et pbservr puis reprend sa nage lentement;;;;;;;;;;dry
+174;174;V_salva;salaya;11-03-2025;06:58:07;13.789635;100.3253067;immobile;grass;L;3.9;;2.8;meme que 173. fuite lente in water apres avoir qoufflé un peu. queue méchemment rongée récemment. 1 moto;28;;4;slow;modified (slow);left;water;water;5;dry
+175;175;V_salva;salaya;11-03-2025;07:02:48;13.78966167;100.325215;swim;water;L;;;;;;;;;;;;;;dry
+176;176;V_salva;salaya;11-03-2025;07:03:33;13.78953;100.3252533;swim;water;L;;;;;;;;;;;;;;dry
+177;177;V_salva;salaya;11-03-2025;07:04:58;13.78970667;100.3252317;resting;shallow water bank;M;;;;immobile dans l'eau me long de la berge;;;;;;;;;;dry
+178;178;V_salva;salaya;11-03-2025;07:06:20;13.78970833;100.325005;foraging ?;water;L;;;;swimming in water peut etre deja croisé (queue loderement tronquée);;;;;;;;;;dry
+179;179;V_salva;salaya;11-03-2025;07:10:26;13.78976;100.3243233;resting;nude earth dead leaf;M;4;;0.7;chilling au bord mais sj temos a comprendre que je suis la pour lui mdr et fuit de maniere modérée;28;;0;slow;regular(quick);back;water;water;0;dry
+180;180;V_salva;salaya;11-03-2025;07:15:18;13.78968667;100.324125;;dead leaf bank;M;2.8;;2.4;m'avait déjà spotté et marchait déjà pour s'eloigner;28;;0;quick;modified (slow);right;water;water;0;dry
+181;181;V_salva;salaya;11-03-2025;07:24:54;13.78889833;100.323795;resting;bush;L;0;;2.7;resting in bush fuit sur quelque mètre hors de vue;29;;2;quick;modified (slow);right;bush;bush;2;dry
+182;182;V_salva;salaya;11-03-2025;07:34:00;13.7879;100.3228083;swim;water;M;;;;;;;;;;;;;;dry
+183;183;V_salva;salaya;11-03-2025;07:40:07;13.78780833;100.3191833;immobile;water;M;;;;juste tete qui depasse dans l'eau. plonge trkl quand j'approche à 10m;;;;;;;;;;dry
+184;184;V_salva;salaya;11-03-2025;07:48:41;13.78781333;100.3163033;roaming;grass;M;5;;4.2;vu resting on bank de loin, walking between water et bosquet pdt approche;29;;2;slow;modified (slow);left;water;water;2;dry
+185;185;V_salva;salaya;11-03-2025;08:02:14;13.79176333;100.316475;swim;water;M;;;;ptn il fait moche jpp;;;;;;;;;;dry
+186;186;V_salva;salaya;11-03-2025;08:10:38;13.79583167;100.3165533;resting;grass between reeds;L;6.2;;1.1;pooping ? ptn le metre a roulé dans l'eau jveux claquer. m'a laissé approché très près pour sa taille et le lieu j'ai cru qu'il allait essayer de m'indimider mais que dalle;30;;1;slow;modified (slow);right;water;water;1;dry
+187;187;V_salva;phutthamonthon;14-03-2025;09:52:33;13.77761333;100.319155;;;M;;;;queue tronqué sale, roam de loin;;;;;;;;;;dry
+188;188;V_salva;phutthamonthon;14-03-2025;10:00:25;13.77807167;100.318715;;;L;;;;remarqué bcp trop tard mdr;;;;;;;;;;dry
+189;189;other;phutthamonthon;14-03-2025;10:03:22;13.77889;100.3187017;;;;;;;t scripta;;;;;;;;;;dry
+190;190;V_salva;phutthamonthon;14-03-2025;10:09:52;13.77830667;100.31829;basking;concrete bank;L;0.3;;7.6;;32;;4;slow;modified (slow);front;water;water;4;dry
+191;191;other;phutthamonthon;14-03-2025;10:23:04;13.77907667;100.3183717;;;;;;;snail eating;;;;;;;;;;dry
+192;192;V_salva;phutthamonthon;14-03-2025;10:30:59;13.77796;100.3184283;resting;earth bank;M;1.1;;10.3;m'a vu arriver de looooooin et a eu un loooooon temps d'observatiob;33;;2;slow;modified (slow);right;water;water;2;dry
+193;193;other;phutthamonthon;14-03-2025;10:43:19;13.77560167;100.319275;;;;;;;t scripta;;;;;;;;;;dry
+194;194;other;phutthamonthon;14-03-2025;10:43:34;13.77559833;100.3192967;;;;;;;t scripta;;;;;;;;;;dry
+195;195;V_salva;phutthamonthon;14-03-2025;10:47:41;13.77564667;100.3190917;basking;concrete bank;S;0.3;;6.3;s to m, a considerer la flotte avant fuir le long du bank puis de plonger eventually;33;;0;slow;modified (slow);right;water;distance;0;dry
+196;196;V_salva;phutthamonthon;14-03-2025;11:12:46;13.77257;100.3206067;;;S;;;;tout petit vu trop tard mais dans l eau tout du long (petit interstice entre terre et beton donc peut etre pas trop danger);;;;;;;;;;dry
+197;197;V_salva;phutthamonthon;14-03-2025;11:23:24;13.77188167;100.3213283;resting;grass bank;M;4;;7;1 moto;34;;1;slow;modified (slow);right;water;water;2;dry
+198;198;V_salva;phutthamonthon;14-03-2025;11:29:28;13.77253167;100.322135;resting;dead leaf bank;S;0.5;;3.3;entendu fuir puis vu nager donc aller DANS L'EAU. 1 moto;34;;1;quick;regular(quick);;water;water;2;dry
+199;199;other;phutthamonthon;14-03-2025;11:41:07;13.771175;100.323685;;;;;;;t scripta au milieu de l'herbe en plan soleil mdr;;;;;;;;;;dry
+200;200;V_salva;phutthamonthon;14-03-2025;11:44:59;13.77076167;100.3248117;;;M;;;;vu trop tard;;;;;;;;;;dry
+201;201;other;phutthamonthon;14-03-2025;11:45:26;13.77080833;100.3248567;;;;;;;t scripta;;;;;;;;;;dry
+202;202;other;phutthamonthon;14-03-2025;11:45:38;13.77081167;100.3248783;;;;;;;t scripta;;;;;;;;;;dry
+203;203;V_salva;salaya;27-03-2025;12:13:45;13.79424167;100.3219083;sleeping;earth bank;M;0.2;;0;dors mais ouvre l'oeil quand j'approche ne fuit pas et whip ma jambe;35;;70;;modified (slow);right;water;;70;dry
+204;204;V_salva;salaya;27-03-2025;12:17:53;13.79425;100.3219283;;water;L;;;;;;;;;;;;;;dry
+205;205;V_salva;salaya;27-03-2025;12:25:35;13.79295167;100.3238067;;water;M;;;;;;;;;;;;;;dry
+206;206;V_salva;salaya;27-03-2025;12:31:29;13.79204667;100.3224367;;water;M;;;;;;;;;;;;;;dry
+207;207;V_salva;salaya;27-03-2025;12:57:53;13.79209;100.3208517;roaming around bank;grass bank;S;1.5;;2.6;tiny mini burst de fuite puis mouvement saccadée chelou pous s'eloigne moins vite go sur concrete bank puis traverse petit canal 2 fois pour s'éloigner 20car 6 moto;;;34;quick;modified (slow);right;water;distance;60;dry
+208;208;V_salva;salaya;27-03-2025;13:12:51;13.792545;100.3206833;;water;S;;;;;;;;;;;;;;dry
+209;209;V_salva;salaya;27-03-2025;13:17:33;13.79274667;100.3218117;waling along;grass bank;L;0.3;;1.35;15 voitures 7 motos;36;;48;quick;modified (slow);right;water;water;70;dry
+210;210;V_salva;salaya;27-03-2025;13:21:24;13.79263167;100.32167;look at me waiting;water;M;;;;like it is waiting for me to go to come out of water;;;;;;;;;;dry
+211;211;V_salva;salaya;27-03-2025;13:25:10;13.79330667;100.32197;basking;grass bank;L;1.4;;1.4;really slow flee sur pas loin je me suis arrêté à 1.40 par sécurité mais il a fallu plusoeuse secondes avant qu'il se leve et fasse demi tour leeeentement pour se coucher de dos 3m plus loin et mtn il montre sa queue comme pour whip si je m'approche. 3 moto. look sick : il a mwair normal partout sauf lenbassin où il est squeletique on voit la délimitation du bassin et des vertebres caudales;36;;34;slow;modified (slow);front;water;distance;37;dry
+212;212;V_salva;salaya;27-03-2025;13:41:43;13.79495833;100.3218833;basking;bank;S;1.5;;1;vu en passant très près il a fuit que quelque secondes après que je le repères donc fid =distance a laquelle j'etais quand je l'ai repere => somewhat tangential approch 4 voiture 4 moto;36;;25;quick;regular(quick);back;water;water;33;dry
+213;213;other;phutthamonthon;27-03-2025;15:17:48;13.78028167;100.325125;;;;;;;temple tortle;;;;;;;;;;dry
+214;214;other;phutthamonthon;27-03-2025;15:27:23;13.77794167;100.32726;;;;;;;t scripta;;;;;;;;;;dry
+215;215;other;phutthamonthon;27-03-2025;15:27:34;13.77794167;100.32726;;;;;;;t scripta;;;;;;;;;;dry
+216;216;other;phutthamonthon;27-03-2025;15:29:07;13.77788333;100.3278933;;;;;;;t scripta;;;;;;;;;;dry
+217;217;V_salva;phutthamonthon;27-03-2025;15:47:55;13.775595;100.3257167;;water;;;;;;;;;;;;;;;dry
+218;218;V_salva;phutthamonthon;27-03-2025;16:18:54;13.77239833;100.3207717;water;;M;;;;;;;;;;;;;;dry
+219;219;V_salva;phutthamonthon;27-03-2025;16:25:52;13.77381;100.318285;;water;;;;;;;;;;;;;;;dry
+220;220;V_salva;phutthamonthon;27-03-2025;16:41:05;13.77212833;100.317945;;eart bank;M;2.3;;0.9;il était de l'autre côté d'un arbre on s'est mutuellement fait peur mdr;34;;2;quick;regular(quick);right;water;water;2;dry
+221;221;V_salva;phutthamonthon;27-03-2025;16:52:57;13.77131333;100.32014;;bank;L;4.3;;7.5;vu pdt fuite;34;;1;quick;regular(quick);left;water;water;1;dry
+222;222;V_salva;salaya;28-03-2025;11:13:20;13.795955;100.3218317;basking;grass bank;M;1.4;;1.5;9 voitures 8 moto;34;;25;quick;modified (slow);front;water;water;42;dry
+223;223;V_salva;salaya;28-03-2025;11:17:44;13.79600333;100.321985;resting;bush bank shadow;M;0.2;;1;5 voiture 5 moto;34;;19;quick;regular(quick);right;water;water;29;dry
+224;224;V_salva;salaya;28-03-2025;11:21:00;13.7957001;100.3219207;;;M;;;;pas mesure car vu les autre fuir;;;;;;;;;;dry
+225;225;V_salva;salaya;28-03-2025;11:21:24;13.79551879;100.3219407;;;M;;;;pas mesure car vu les autre fuir;;;;;;;;;;dry
+226;226;V_salva;salaya;28-03-2025;12:03:15;13.79665833;100.31998;basking;grass bank;M;2.3;;3.3;10 voiturzs 10 motos et bcp de gens parce qu'il est 12 et que marché;35;;100;quick;modified (slow);right;water;water;120;dry
+227;227;V_salva;salaya;28-03-2025;12:28:24;13.79553745;100.3183813;;water;M;;;;;;;;;;;;;;dry
+228;228;V_salva;salaya;28/03/2025;12:45:39;13.79426333;100.3169617;;bank earth;M;;;;walking already so no measure;;;;;;;;;;dry
+1001;1001;V_salva;phutthamonthon;24/06/2025;10:06;13.78139506;100.3208342;swimming;water;S;;;;;34;;;;;;;;;rainy
+1002;1002;V_salva;phutthamonthon;24/06/2025;10:17;13.7816119;100.3191706;resting;bank;M;0.5;;3;;34;;5;quick;;;water;water;5;rainy
+1003;1003;V_salva;phutthamonthon;24/06/2025;10:21;13.78074509;100.3206641;swimming;water;M;;;;;34;;;;;;;;;rainy
+1004;1004;V_salva;phutthamonthon;24/06/2025;10:33;13.77975583;100.3197058;basking;bank;S;1;;2;;34;;1;quick;;;water;water;1;rainy
+1005;1005;V_salva;phutthamonthon;24/06/2025;10:50;13.77932729;100.3203879;resting;bank;L;1.5;;1;aggressive;34;;0;none;;;;;0;rainy
+1006;1006;V_salva;phutthamonthon;24/06/2025;11:11;13.77818633;100.3190588;roaming then resting;bank;M;2;;5;;34;;0;slow;;;water;water;0;rainy
+1007;1007;V_salva;phutthamonthon;24/06/2025;11:15;13.77782673;100.3186869;basking;bank;L;2;;1;aggressive;34;;2;none;;;;;2;rainy
+1008;1008;V_salva;phutthamonthon;24/06/2025;12:01;13.77671885;100.3179315;basking;bank;S;1;;3;;34;;1;quick;;;water;water;1;rainy
+1009;1009;V_salva;phutthamonthon;24/06/2025;12:14;13.7790806;100.3175008;swimming;water;M;;;;;34;;;;;;;;;rainy
+1010;1010;V_salva;phutthamonthon;24/06/2025;12:36;13.77931628;100.3173818;swimming;water;S;;;;;34;;;;;;;;;rainy
+1011;1011;V_salva;phutthamonthon;24/06/2025;12:46;13.77779044;100.3170218;basking;grass;L;2.5;;4;;34;;2;slow;;;building;building;2;rainy
+1012;1012;V_salva;phutthamonthon;24/06/2025;13:32;13.777106;100.316537;swimming;water;L;;;;;34;;;;;;;;;rainy
+1013;1013;V_salva;phutthamonthon;24/06/2025;13:48;13.77660552;100.3188372;resting;bank;L;1;;3;;34;;1;quick;;;water;water;1;rainy
+1014;1014;V_salva;salaya;27/06/2025;07:35;13.79251114;100.3230981;walking;building;M;;;;;32;;;;;;;;;rainy
+1015;1015;V_salva;salaya;27/06/2025;08:10;13.79088865;100.3239029;resting;bush;S;1;;2;;32;;12;quick;;;bush;bush;12;rainy
+1016;1016;V_salva;salaya;27/06/2025;08:18;13.79093275;100.3241067;resting;abandoned building;M;1;;3;;32;;23;quick;;;building;distance;23;rainy
+1017;1017;V_salva;salaya;27/06/2025;08:32;13.79005854;100.3236115;swimming;water;;;;;;32;;;;;;;;;rainy
+1018;1018;V_salva;salaya;27/06/2025;08:33;13.78990441;100.3236939;resting;island;;;;;;32;;;;;;;;;rainy
+1019;1019;V_salva;salaya;27/06/2025;08:42;13.78989627;100.3235273;resting;island;;;;;;32;;;;;;;;;rainy
+1020;1020;V_salva;salaya;27/06/2025;09:00;13.78981287;100.3239061;resting;bank;M;0.5;;3;;32;;2;quick;;;water;water;2;rainy
+1021;1021;V_salva;salaya;27/06/2025;09:07;13.79055923;100.324641;resting;bank;L;0.5;;1;aggressive;32;;5;none;;;;;5;rainy
+1022;1022;V_salva;salaya;27/06/2025;09:14;13.79121709;100.325024;resting;building;L;4;;1;;32;;13;slow;;;bush;distance;13;rainy
+1023;1023;V_salva;salaya;27/06/2025;09:14;13.79125315;100.3250427;resting;building;M;6;;1;;32;;35;quick;;;tree;distance;35;rainy
+1024;1024;V_salva;salaya;27/06/2025;09:15;13.79073903;100.324827;resting;building;L;0.5;;3;;32;;30;slow;;;building;distance;30;rainy
+1025;1025;V_salva;salaya;27/06/2025;09:24;13.79179593;100.3249717;resting;bank;S;0.5;;2;;32;;10;quick;;;water;water;10;rainy
+1026;1026;V_salva;phutthamonthon;14/07/2025;15:12;13.77625249;100.3222944;basking;grass;M;2;;4;;32;;29;quick;;;tree;distance;31;rainy
+1027;1027;V_salva;phutthamonthon;14/07/2025;15:38;13.77489062;100.321704;roaming;grass;S;;;;;34;;;;;;;;;rainy
+1028;1028;V_salva;phutthamonthon;14/07/2025;15:41;13.77378181;100.3211244;swimming;water;L;;;;;34;;;;;;;;;rainy
+1029;1029;V_salva;phutthamonthon;14/07/2025;15:59;13.77391375;100.3184337;walking;road;M;;;;;34;;;;;;;;;rainy
+1030;1030;V_salva;phutthamonthon;14/07/2025;16:03;13.77449576;100.3177895;resting;building;S;1;;2;;34;;0;quick;;;building;building;0;rainy
+1031;1031;V_salva;phutthamonthon;14/07/2025;16:11;13.77458153;100.3169669;resting;bank;L;0.5;;2;;34;;0;quick;;;tree;distance;0;rainy
+1032;1032;V_salva;phutthamonthon;14/07/2025;17:38;13.77503656;100.3180885;basking;bank;M;0.5;;4;;34;;0;quick;;;water;water;0;rainy
+1033;1033;V_salva;phutthamonthon;14/07/2025;17:44;13.77570546;100.3181015;walking then basking;grass;S;6;;3;;34;;1;slow;;;tree;distance;1;rainy
+1034;1034;V_salva;phutthamonthon;14/07/2025;17:52;13.77494622;100.3180788;resting;grass;M;3;;1;;34;;3;none;;;;;3;rainy
+1035;1035;V_salva;salaya;01/08/2025;16:44;13.79935388;100.3215179;swimming;water;M;;;;;34;;;;;;;;;rainy
+1036;1036;V_salva;salaya;01/08/2025;16:48;13.79935356;100.3232569;resting;bank;L;;;;on the other side of the water;34;;;;;;;;;rainy
+1037;1037;V_salva;salaya;01/08/2025;16:53;13.79911474;100.3239585;resting;bank;S;1;;3;;34;;0;slow;;;water;water;0;rainy
+1038;1038;V_salva;salaya;01/08/2025;17:21;13.79843681;100.3239455;resting;bank;M;0.5;;1;;34;;0;slow;;;bush;water;0;rainy
+1039;1039;V_salva;salaya;01/08/2025;17:29;13.79755117;100.3238942;resting;bank;S;0.5;;1;;34;;1;quick;;;tree;water;1;rainy
+1040;1040;V_salva;salaya;01/08/2025;17:29;13.7973059;100.3241148;resting;bank;M;3;;2;;34;;3;quick;;;bush;water;3;rainy
+1041;1041;V_salva;phutthamonthon;06/08/2025;14:23;13.77512223;100.3172843;resting;bush;S;0.5;;2;;34;;0;slow;;;water;tree;0;rainy
+1042;1042;V_salva;phutthamonthon;06/08/2025;14:38;13.77427606;100.3166137;resting;road;M;4;;2;;34;;2;quick;;;building;distance;2;rainy
+1043;1043;V_salva;phutthamonthon;06/08/2025;14:55;13.77426899;100.3162437;resting;grass;S;1;;5;;34;;0;quick;;;bush;distance;0;rainy
+1044;1044;V_salva;phutthamonthon;06/08/2025;15:03;13.77397177;100.3160386;basking;bank;L;0.5;;6;;34;;1;quick;;;bush;water;1;rainy
+1045;1045;V_salva;phutthamonthon;06/08/2025;15:18;13.77303356;100.3156726;resting;bank;S;1;;6;;34;;0;quick;;;water;bush;0;rainy
+1046;1046;V_salva;phutthamonthon;06/08/2025;15:33;13.77208098;100.3146129;swimming;water;M;;;;;34;;;;;;;;;rainy
+1047;1047;V_salva;phutthamonthon;06/08/2025;16:09;13.77082094;100.31357;basking;grass;L;10;;8;;34;;0;slow;;;tree;distance;0;rainy
+1048;1048;V_salva;phutthamonthon;06/08/2025;16:14;13.76884434;100.3129763;resting;grass;S;1;;6;;34;;0;slow;;;water;distance;0;rainy
+1049;1049;V_salva;phutthamonthon;06/08/2025;16:35;13.76906673;100.3153452;walking;road;M;;;;;34;;;;;;;;;rainy
+1050;1050;V_salva;phutthamonthon;06/08/2025;16:49;13.77029422;100.3157128;resting;bank;L;0.5;;3;;34;;0;quick;;;bush;water;0;rainy
+1051;1051;V_salva;phutthamonthon;06/08/2025;17:12;13.77139542;100.3177167;resting;bank;M;0.5;;4;;34;;0;slow;;;water;water;0;rainy
+1052;1052;V_salva;salaya;20/08/2025;08:05;13.79274454;100.3217212;crossing;road;M;;;;;32;;;;;;;;;rainy
+1053;1053;V_salva;salaya;20/08/2025;08:46;13.79225104;100.321034;resting;bank;M;1;;2;;32;;26;quick;;;water;water;26;rainy
+1054;1054;V_salva;salaya;20/08/2025;09:55;13.79269438;100.3209625;swimming;water;M;;;;;32;;;;;;;;;rainy
+1055;1055;V_salva;phutthamonthon;24/08/2025;07:36;13.7816217;100.3223986;resting;bush;S;0.5;;4;;33;;0;quick;;;bush;bush;0;rainy
+1056;1056;V_salva;phutthamonthon;24/08/2025;07:45;13.7801433;100.3216226;basking;bank;L;0.5;;3;;33;;0;quick;;;tree;water;0;rainy
+1057;1057;V_salva;phutthamonthon;24/08/2025;07:45;13.78007074;100.3216684;basking;bank;M;1;;2;;33;;0;quick;;;water;water;0;rainy
+1058;1058;V_salva;phutthamonthon;24/08/2025;08:53;13.77971699;100.3202051;basking;grass;S;8;;3;;33;;0;quick;;;water;distance;0;rainy
+1059;1059;V_salva;phutthamonthon;24/08/2025;08:21;13.7794088;100.3203606;basking;grass;M;1;;2;;33;;0;quick;;;water;water;0;rainy
+1060;1060;V_salva;phutthamonthon;24/08/2025;08:43;13.77905511;100.3205713;resting;bank;S;0.5;;4;;33;;0;slow;;;water;water;0;rainy
+1061;1061;V_salva;salaya;04/09/2025;10:35;13.78901242;100.3231431;resting;tree;L;1;;3;;33;;4;slow;;;tree;distance;4;rainy
+1062;1062;V_salva;salaya;04/09/2025;10:59;13.7885486;100.3236585;resting;tree;S;0.5;;6;;33;;6;slow;;;tree;bush;6;rainy
+1063;1063;V_salva;salaya;04/09/2025;11:19;13.78876692;100.3250841;resting;bareground;M;11;;4;;30;;11;quick;;;building;distance;11;rainy
+1064;1064;V_salva;salaya;04/09/2025;12:33;13.78977828;100.3252933;resting;bush;M;0.5;;3;;30;;32;quick;;;bush;water;32;rainy
+1065;1065;V_salva;salaya;04/09/2025;12:49;13.78959015;100.3266519;basking;grass;M;5;;10;;30;;0;quick;;;water;distance;0;rainy
+1066;1066;V_salva;phutthamonthon;05/09/2025;10:29;13.77749976;100.3189717;swimming;water;L;;;;;32;;;;;;;;;rainy
+1067;1067;V_salva;phutthamonthon;05/09/2025;10:42;13.77713728;100.3191362;resting;bush;M;1;;1;;32;;0;none;;;;;0;rainy
+1068;1068;V_salva;phutthamonthon;05/09/2025;10:54;13.77609305;100.3199997;walking then basking;building;L;0.5;;2;;32;;2;slow;;;building;distance;2;rainy
+1069;1069;V_salva;phutthamonthon;05/09/2025;11:27;13.77567105;100.3194609;resting;bank;S;2;;4;;32;;0;quick;;;water;distance;0;rainy
+1070;1070;V_salva;phutthamonthon;05/09/2025;11:58;13.77537299;100.319413;swimming;water;L;;;;;32;;;;;;;;;rainy
+1071;1071;V_salva;phutthamonthon;05/09/2025;12:33;13.77541963;100.3191451;basking;grass;S;1;;5;;32;;0;quick;;;water;water;0;rainy
+1072;1072;V_salva;phutthamonthon;05/09/2025;12:37;13.7752736;100.3194032;basking;bank;M;4;;2;;32;;0;quick;;;water;distance;0;rainy
+1073;1073;V_salva;phutthamonthon;05/09/2025;13:02;13.77516408;100.3195968;resting;bank;L;1;;1;;32;;0;slow;;;water;water;0;rainy
+1074;1074;V_salva;salaya;16/09/2025;15:08;13.79071513;100.3191847;basking;bank;M;2;;2;;31;;4;quick;;;water;water;4;rainy
+1075;1075;V_salva;salaya;16/09/2025;15:12;13.79052991;100.3200068;resting;tree;S;2;;5;;31;;2;quick;;;tree;distance;2;rainy
+1076;1076;V_salva;salaya;16/09/2025;15:43;13.79037003;100.3194787;swimming;water;L;;;;;31;;;;;;;;;rainy
+1077;1077;V_salva;salaya;16/09/2025;16:18;13.78880564;100.317879;basking;bank;L;0.5;;1;;31;;2;quick;;;water;water;2;rainy
+1078;1078;V_salva;salaya;16/09/2025;16:37;13.79125163;100.3169123;basking;bank;M;3;;1;aggressive;31;;0;none;;;;;0;rainy
+1079;1079;V_salva;salaya;16/09/2025;16:44;13.79247979;100.3171504;resting;bush;S;5;;5;;31;;1;quick;;;bush;distance;1;rainy
+1080;1080;V_salva;salaya;16/09/2025;16:48;13.79342882;100.3171835;resting;grass;S;0.5;;3;;31;;0;quick;;;tree;water;0;rainy
+1081;1081;V_salva;salaya;16/09/2025;16:55;13.79306465;100.3176624;resting;building;M;1;;4;;31;;0;quick;;;building;water;0;rainy
+1082;1082;V_salva;salaya;16/09/2025;17:33;13.79542353;100.3177682;resting;tree;S;0.5;;7;;31;;0;quick;;;tree;tree;0;rainy
+1083;1083;V_salva;salaya;16/09/2025;17:39;13.7957741;100.3181401;swimming;water;L;;;;;31;;;;;;;;;rainy
+1084;1084;V_salva;phutthamonthon;30/09/2025;12:05;13.77281331;100.3213502;swimming;water;S;;;;;33;;;;;;;;;rainy
+1085;1085;V_salva;phutthamonthon;30/09/2025;12:24;13.77225225;100.3231413;swimming;water;M;;;;;33;;;;;;;;;rainy
+1086;1086;V_salva;phutthamonthon;30/09/2025;12:33;13.77278236;100.3237454;resting;building;S;1;;8;;33;;0;quick;;;building;distance;0;rainy
+1087;1087;V_salva;phutthamonthon;30/09/2025;12:56;13.77237115;100.3245663;walking;road;M;;;;;33;;;;;;;;;rainy
+1088;1088;V_salva;phutthamonthon;30/09/2025;13:07;13.77183611;100.3248777;swimming;water;M;;;;;33;;;;;;;;;rainy
+1089;1089;V_salva;phutthamonthon;30/09/2025;13:11;13.77023361;100.3270051;basking;grass;L;4;;3;;33;;0;slow;;;water;distance;0;rainy
+1090;1090;V_salva;phutthamonthon;30/09/2025;13:28;13.77005461;100.3266712;resting;bush;M;2;;5;;33;;0;quick;;;bush;distance;0;rainy
+1091;1091;V_salva;phutthamonthon;30/09/2025;13:47;13.77097749;100.3248451;resting;bank;S;1;;3;;33;;0;slow;;;water;water;0;rainy
+1092;1092;V_salva;phutthamonthon;30/09/2025;13:48;13.76928309;100.3238922;resting;bank;M;0.5;;6;;33;;0;quick;;;water;water;0;rainy
+1093;1093;V_salva;phutthamonthon;30/09/2025;13:56;13.76901394;100.3218282;swimming;water;S;;;;;33;;;;;;;;;rainy
+1094;1094;V_salva;salaya;04/10/2025;10:15;13.79655896;100.3218074;swimming;water;M;;;;;31;;;;;;;;;rainy
+1095;1095;V_salva;salaya;04/10/2025;10:19;13.79631439;100.3218986;resting;tree;S;3;;2;;31;;15;quick;;;tree;distance;15;rainy
+1096;1096;V_salva;salaya;04/10/2025;10:29;13.79567937;100.3223112;roaming;concrete ground;M;;;;;31;;;;;;;;;rainy
+1097;1097;V_salva;salaya;04/10/2025;10:33;13.79541826;100.3221155;resting;tree;S;6;;1;;31;;0;slow;;;tree;bush;0;rainy
+1098;1098;V_salva;salaya;04/10/2025;10:48;13.79523931;100.3217723;swimming;water;S;;;;;31;;;;;;;;;rainy
+1099;1099;V_salva;salaya;04/10/2025;11:16;13.79584492;100.3217849;swimming;water;M;;;;;31;;;;;;;;;rainy
+1100;1100;V_salva;salaya;04/10/2025;11:32;13.79700216;100.3217637;resting;bush;S;1;;6;;31;;0;quick;;;bush;bush;0;rainy
+1101;1101;V_salva;salaya;04/10/2025;11:39;13.79695223;100.3226421;resting;grass;M;4;;2;;31;;0;slow;;;water;water;0;rainy
+1102;1102;V_salva;salaya;04/10/2025;11:53;13.79711515;100.322606;swimming;water;M;;;;;31;;;;;;;;;rainy
+1103;1103;V_salva;salaya;04/10/2025;12:10;13.79716535;100.3233556;swimming;water;M;;;;;31;;;;;;;;;rainy
+1104;1104;V_salva;salaya;04/10/2025;12:17;13.79795066;100.3235727;resting;bush;M;0.5;;5;;31;;0;quick;;;bush;bush;0;rainy
+1105;1105;V_salva;salaya;04/10/2025;12:53;13.7972376;100.3267229;resting;bank;M;1;;4;;31;;0;quick;;;tree;distance;0;rainy
+1106;1106;V_salva;phutthamonthon;07/10/2025;08:15;13.77789186;100.3267524;basking;grass;M;2;;4;;33;;0;quick;;;water;distance;0;rainy
+1107;1107;V_salva;phutthamonthon;07/10/2025;08:23;13.77755846;100.324873;resting;tree;S;0.5;;2;;33;;0;slow;;;tree;distance;0;rainy
+1108;1108;V_salva;phutthamonthon;07/10/2025;08:59;13.77920976;100.3271113;resting;bush;M;0.5;;4;;33;;1;slow;;;tree;distance;1;rainy
+1109;1109;V_salva;phutthamonthon;07/10/2025;09:03;13.78020302;100.3256463;resting;bank;M;0.5;;3;;33;;0;slow;;;water;water;0;rainy
+1110;1110;V_salva;phutthamonthon;07/10/2025;09:25;13.7828712;100.3270672;swimming;water;M;;;;;33;;;;;;;;;rainy
+1111;1111;V_salva;phutthamonthon;07/10/2025;09:36;13.78345152;100.3250634;dead;road;S;;;;old corpse, flattened;33;;;;;;;;;rainy
+1112;1112;V_salva;phutthamonthon;07/10/2025;09:46;13.78433932;100.3263911;resting;tree;M;0.5;;6;;33;;0;quick;;;tree;water;0;rainy
+1113;1113;V_salva;phutthamonthon;07/10/2025;09:46;13.78297899;100.3238398;resting;bush;M;1;;4;;33;;0;quick;;;bush;distance;0;rainy
+1114;1114;V_salva;salaya;10/10/2025;07:42;13.79418216;100.3250314;swimming;water;M;;;;;32;;;;;;;;;rainy
+1115;1115;V_salva;salaya;10/10/2025;07:49;13.79391797;100.3254092;swimming;water;S;;;;;32;;;;;;;;;rainy
+1116;1116;V_salva;salaya;10/10/2025;07:54;13.79342133;100.3253046;resting;building;L;0.5;;2;aggressive;32;;40;slow;;;building;distance;40;rainy
+1117;1117;V_salva;salaya;10/10/2025;08:05;13.79393995;100.326362;resting;tree;M;4;;2;;32;;12;quick;;;tree;water;12;rainy
+1118;1118;V_salva;salaya;10/10/2025;08:26;13.79229357;100.3265655;resting;tree;L;3;;3;;32;;4;slow;;;water;water;4;rainy
+1119;1119;V_salva;salaya;10/10/2025;08:37;13.79167098;100.3263492;resting;bush;M;5;;1;;32;;66;quick;;;bush;water;72;rainy
+1120;1120;V_salva;salaya;10/10/2025;09:16;13.79251408;100.320869;basking;grass;M;2;;1;;32;;32;none;;;;;33;rainy
+1121;1121;V_salva;salaya;10/10/2025;09:24;13.79300148;100.3210104;basking;grass;L;3;;1;;32;;89;none;;;;;92;rainy
+1122;1122;V_salva;salaya;10/10/2025;09:28;13.79389234;100.3217739;resting;bank;L;2;;2;;32;;34;slow;;;water;water;34;rainy
+1123;1123;V_salva;salaya;10/10/2025;09:47;13.79006262;100.3228531;basking;grass;M;4;;1;;32;;11;none;;;;;11;rainy
+1124;1124;V_salva;phutthamonthon;12/10/2025;08:36;13.78166881;100.3152955;swimming;water;M;;;;;32;;;;;;;;;rainy
+1125;1125;V_salva;phutthamonthon;12/10/2025;08:39;13.78236799;100.3147167;resting;tree;M;0.5;;2;;32;;0;quick;;;tree;distance;0;rainy
+1126;1126;V_salva;phutthamonthon;12/10/2025;08:49;13.78193146;100.3135118;resting;bank;L;1;;1;;32;;0;none;;;;;0;rainy
+1127;1127;V_salva;phutthamonthon;12/10/2025;08:52;13.78103025;100.3129888;resting;bush;M;2;;3;;32;;0;quick;;;bush;water;0;rainy
+1128;1128;V_salva;phutthamonthon;12/10/2025;09:14;13.780464;100.3123752;walking;grass;M;;;;;32;;;;;;;;;rainy
+1129;1129;V_salva;phutthamonthon;12/10/2025;09:37;13.77920939;100.3120075;resting;tree;M;0.5;;4;;32;;0;slow;;;tree;water;0;rainy
+1130;1130;V_salva;salaya;29/10/2025;11:12;13.79288833;100.3218793;resting;tree;L;2;;1;;32;;72;slow;;;tree;distance;72;rainy
+1131;1131;V_salva;salaya;29/10/2025;11:49;13.79362025;100.3219389;resting;bush;S;1;;3;;32;;43;slow;;;bush;water;44;rainy
+1132;1132;V_salva;salaya;29/10/2025;12:11;13.79391886;100.3218851;resting;tree;M;2;;1;;32;;52;none;;;;;52;rainy
+1133;1133;V_salva;salaya;29/10/2025;12:24;13.79428035;100.3219056;resting;tree;S;4;;3;;32;;40;quick;;;tree;distance;40;rainy
+1134;1134;V_salva;salaya;29/10/2025;12:39;13.7935761;100.3217444;walking then resting;building;M;1;;2;bridge;32;;59;quick;;;building;building;64;rainy
+1135;1135;V_salva;salaya;29/10/2025;15:52;13.79417227;100.321831;swimming;water;L;;;;;32;;;;;;;;;rainy
+1136;1136;V_salva;salaya;29/10/2025;16:03;13.79415484;100.3217107;resting;tree;S;2;;4;;32;;21;slow;;;tree;water;21;rainy
+1137;1137;V_salva;salaya;29/10/2025;16:47;13.79483277;100.3217237;resting;bush;M;0.5;;3;;32;;17;quick;;;bush;water;19;rainy
+1138;1138;V_salva;salaya;29/10/2025;17:11;13.79334996;100.3217709;resting;bank;M;1;;3;;32;;38;quick;;;tree;distance;38;rainy
+1139;1139;V_salva;salaya;29/10/2025;17:24;13.79302418;100.3218338;swimming;water;M;;;;;32;;;;;;;;;rainy
+1140;1140;V_salva;phutthamonthon;31/10/2025;14:48;13.7789056;100.3197936;resting;tree;L;0.5;;3;;31;;0;quick;;;tree;distance;0;rainy
+1141;1141;V_salva;phutthamonthon;31/10/2025;14:52;13.77966672;100.3194649;swimming;water;M;;;;;31;;;;;;;;;rainy
+1142;1142;V_salva;phutthamonthon;31/10/2025;15:20;13.78017652;100.3188018;swimming;water;M;;;;;31;;;;;;;;;rainy
+1143;1143;V_salva;phutthamonthon;31/10/2025;15:23;13.78033998;100.318664;resting;bank;S;4;;8;;31;;1;quick;;;water;distance;1;rainy
+1144;1144;V_salva;phutthamonthon;31/10/2025;15:46;13.78104602;100.3184922;resting;tree;M;1;;2;;31;;0;quick;;;tree;distance;0;rainy
+1145;1145;V_salva;phutthamonthon;31/10/2025;16:04;13.78199827;100.3179241;resting;grass;M;3;;7;;31;;0;quick;;;building;distance;0;rainy
+1146;1146;V_salva;phutthamonthon;31/10/2025;16:18;13.78198712;100.3166291;resting;grass;M;3;;1;;31;;1;none;;;;;1;rainy
+1147;1147;V_salva;phutthamonthon;31/10/2025;16:33;13.78154694;100.3161087;resting;tree;S;0.5;;3;;31;;0;quick;;;tree;distance;0;rainy
+1148;1148;V_salva;phutthamonthon;31/10/2025;17:07;13.78129314;100.3162368;swimming;water;M;;;;;31;;;;;;;;;rainy
