@@ -273,7 +273,23 @@ testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_monitor_dry
 summary(model_dfs_site) # seems quite okay I just don't know how to graph that. 
 
 
+p = ggplot(data = data_monitor_dry)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.31,
+              intercept = 7,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor (c = 0.31, p = 0.036)") 
+p
 ```
+
+
 ```{r  FID vs D_FR_SHELTER : preliminary correlation : SALAYA }
 
 ######## PRELIMINARY CORRELATION ANALYSES #############
@@ -367,6 +383,21 @@ testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_dry_salaya$
 #### c) Results ####
 summary(model_dfs_site_s) # seems quite okay I just don't know how to graph that. 
 
+#Plot the data and correlation slope 
+p = ggplot(data = data_dry_salaya)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.35,
+              intercept = 2.7,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN salaya (c = 0.35, p = 0.03)") 
+p
 
 ```
 
@@ -463,5 +494,19 @@ testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_dry_phuttha
 #### c) Results ####
 summary(model_dfs_site_p) # seems quite okay I just don't know how to graph that. 
 
-
+#Plot the data and correlation slope 
+p = ggplot(data = data_dry_phuttha)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.21,
+              intercept = 7.2,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.21, p = 0.49)") 
+p
 ```
