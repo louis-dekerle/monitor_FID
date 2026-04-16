@@ -229,7 +229,7 @@ p = p + theme(text = element_text(size = 15))
 p = p+ geom_histogram(colour = "black", fill = "white", data = data_monitor_dry, aes(model_dfs_site.res), bins = 12)
 p # OK 
 
-shapiro.test(model_dfs_site.res) # not OK
+shapiro.test(model_dfs_site.res) # not OK 
 
 # homoskedasticity
 bptest(model_dfs_site) #OK 
@@ -297,6 +297,79 @@ p = p + geom_abline(mapping = NULL,
         ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN SALAYA (c = 0.3, p = 0.03)") 
 p
 ```
+```{r FID vs D_FR_SHELTER : linear model : SALAYA}
+
+####a) Model ####
+
+model_dfs_site_s <- lm(FIDi ~ d_fr_refug , data=data_dry_salaya)
+
+
+####b) Conditions of validity ###### 
+model_dfs_site_s.res <- residuals(model_dfs_site_s)
+
+# independance of residuals 
+dwtest(model_dfs_site_s) # OK 
+
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(model_dfs_site_s) # strong outliers that may need removable 
+
+# normality of the residuals 
+p = ggplot()
+p = p+ylab ("Frequency")
+p = p + xlab ("Pearson residuals")
+p = p + theme (panel.background = element_blank())
+p = p + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p = p + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p = p + theme(text = element_text(size = 15))
+p = p+ geom_histogram(colour = "black", fill = "white", data = data_dry_salaya, aes(model_dfs_site_s.res), bins = 12)
+p # OK 
+
+shapiro.test(model_dfs_site_s.res) # not OK 
+
+# homoskedasticity
+bptest(model_dfs_site_s) #OK 
+
+# DHARMA test for autocorrelation  
+
+# SPATIAL AUTOCORRELATION TEST ON THE RESIDUALS 
+
+res_dharmareg_inter = simulateResiduals(model_dfs_site_s)
+
+testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_salaya$long, y = data_dry_salaya$lat) # okay 
+
+# TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
+
+### on the scale of field days ###
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = data_dry_salaya$date)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_day, time = unique(data_dry_salaya$date)) # okay
+
+### on an hour scale ###
+
+# CHECK IF THE FORMAT PARAMETER IS THE SAME AS IN THE COLUMNS  
+
+data_dry_salaya$hour <- as.POSIXct(paste(data_dry_salaya$date, data_dry_salaya$time), format="%Y-%m-%d %H") #if doesn't work try data_dry_salaya$hour <- as.POSIXct(paste(data_dry_salaya$date, data_dry_salaya$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
+
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = data_dry_salaya$hour)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_dry_salaya$hour)) # okay 
+
+#### c) Results ####
+summary(model_dfs_site_s) # seems quite okay I just don't know how to graph that. 
+
+
+```
+
 ```{r  FID vs D_FR_SHELTER : preliminary correlation : PHUTTHAMONTHON }
 
 ######## PRELIMINARY CORRELATION ANALYSES #############
@@ -319,4 +392,76 @@ p = p + geom_abline(mapping = NULL,
         ylab("FID (m)") +
         ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.11, p = 0.48)") 
 p
+```
+```{r FID vs D_FR_SHELTER : linear model : phuttha}
+
+####a) Model ####
+
+model_dfs_site_p <- lm(FIDi ~ d_fr_refug , data=data_dry_phuttha)
+
+
+####b) Conditions of validity ###### 
+model_dfs_site_p.res <- residuals(model_dfs_site_p)
+
+# independance of residuals 
+dwtest(model_dfs_site_p) # OK 
+
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(model_dfs_site_p) # strong outliers that may need removable 
+
+# normality of the residuals 
+p = ggplot()
+p = p+ylab ("Frequency")
+p = p + xlab ("Pearson residuals")
+p = p + theme (panel.background = element_blank())
+p = p + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p = p + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p = p + theme(text = element_text(size = 15))
+p = p+ geom_histogram(colour = "black", fill = "white", data = data_dry_phuttha, aes(model_dfs_site_p.res), bins = 12)
+p # OK 
+
+shapiro.test(model_dfs_site_p.res) # OK 
+
+# homoskedasticity
+bptest(model_dfs_site_p) #OK 
+
+# DHARMA test for autocorrelation  
+
+# SPATIAL AUTOCORRELATION TEST ON THE RESIDUALS 
+
+res_dharmareg_inter = simulateResiduals(model_dfs_site_p)
+
+testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_phuttha$long, y = data_dry_phuttha$lat) # okay 
+
+# TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
+
+### on the scale of field days ###
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = data_dry_phuttha$date)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_day, time = unique(data_dry_phuttha$date)) # okay
+
+### on an hour scale ###
+
+# CHECK IF THE FORMAT PARAMETER IS THE SAME AS IN THE COLUMNS  
+
+data_dry_phuttha$hour <- as.POSIXct(paste(data_dry_phuttha$date, data_dry_phuttha$time), format="%Y-%m-%d %H") #if doesn't work try data_dry_phuttha$hour <- as.POSIXct(paste(data_dry_phuttha$date, data_dry_phuttha$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
+
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = data_dry_phuttha$hour)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_dry_phuttha$hour)) # okay 
+
+#### c) Results ####
+summary(model_dfs_site_p) # seems quite okay I just don't know how to graph that. 
+
+
 ```
