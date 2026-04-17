@@ -23,7 +23,7 @@ library(lubridate) # dates
 library(ggplot2)# graphs 
 library(lmtest)# dwtest
 library (DHARMa)# test autocorrelation
-
+library (report)# cite packages
 ```
 
 ```{r setup the data}
