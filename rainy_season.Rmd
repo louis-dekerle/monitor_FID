@@ -92,7 +92,15 @@ ggplot(data_monitor_rain, aes(x=site)) +
 ###### preliminary kruskal test and plot######
 kruskal.test(data_monitor_rain$FIDi~as.factor(data_monitor_rain$site), data=data_monitor_rain)
 
-boxplot(data_monitor_rain$FIDi~data_monitor_rain$site, xlab = "Sites", ylab = "FID (m)")
+p = ggplot(data = data_monitor_rain)+
+    geom_boxplot(mapping = aes(x = site, y = FIDi))
+p = p + labs(x = "Site", 
+    y = "FID (m)",
+    title ="Rainy season",
+    phutthamonthon = "Phutthamonthon") +
+    scale_x_discrete(labels=c("phutthamonthon" = "Phutthamonthon", 
+                              "salaya" = "Salaya"))
+p
 
 ```
 

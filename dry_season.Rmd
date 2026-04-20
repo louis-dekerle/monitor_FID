@@ -101,7 +101,17 @@ ggplot(data_monitor_dry, aes(x=site)) +
 ###### preliminary kruskal test and plot######
 kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$site), data=data_monitor_dry)
 
-boxplot(data_monitor_dry$FIDi~data_monitor_dry$site, xlab = "Sites", ylab = "FID (m)")
+
+p = ggplot(data = data_monitor_dry)+
+    geom_boxplot(mapping = aes(x = site, y = FIDi))
+p = p + labs(x = "Site", 
+    y = "FID (m)",
+    title ="Dry season",
+    phutthamonthon = "Phutthamonthon") +
+    scale_x_discrete(labels=c("phutthamonthon" = "Phutthamonthon", 
+                              "salaya" = "Salaya"))
+p
+
 
 ```
 
@@ -123,6 +133,8 @@ ggplot(data_monitor_dry, aes(x=size)) +
 kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$size), data=data_monitor_dry) # nope
 
 boxplot(data_monitor_dry$FIDi~data_monitor_dry$size, xlab = "Size", ylab = "FID (m)") # nope 
+
+
 
 
 ```
