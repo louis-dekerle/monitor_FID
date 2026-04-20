@@ -106,8 +106,7 @@ p = ggplot(data = data_monitor_dry)+
     geom_boxplot(mapping = aes(x = site, y = FIDi))
 p = p + labs(x = "Site", 
     y = "FID (m)",
-    title ="Dry season",
-    phutthamonthon = "Phutthamonthon") +
+    title ="Dry season") +
     scale_x_discrete(labels=c("phutthamonthon" = "Phutthamonthon", 
                               "salaya" = "Salaya"))
 p
@@ -132,7 +131,14 @@ ggplot(data_monitor_dry, aes(x=size)) +
 ###### preliminary kruskal test and plot######
 kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$size), data=data_monitor_dry) # nope
 
-boxplot(data_monitor_dry$FIDi~data_monitor_dry$size, xlab = "Size", ylab = "FID (m)") # nope 
+# plot
+p = ggplot(data = data_monitor_dry)+
+    geom_boxplot(mapping = aes(x = size, y = FIDi))
+p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
+    y = "FID (m)",
+    title ="Dry season: both sites")
+    
+p
 
 
 
@@ -158,6 +164,14 @@ kruskal.test(data_dry_salaya$FIDi~as.factor(data_dry_salaya$size), data=data_dry
 
 boxplot(data_dry_salaya$FIDi~data_dry_salaya$size, xlab = "Size", ylab = "FID (m)") # nope 
 
+p = ggplot(data = data_dry_salaya)+
+    geom_boxplot(mapping = aes(x = size, y = FIDi))
+p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
+    y = "FID (m)",
+    title ="Dry season: Salaya")
+    
+p
+
 ```
 
 ```{r FID vs SIZE : PHUTTHAMONTHON }
@@ -178,6 +192,14 @@ ggplot(data_dry_phuttha, aes(x=size)) +
 kruskal.test(data_dry_phuttha$FIDi~as.factor(data_dry_phuttha$size), data=data_dry_phuttha) # nope
 
 boxplot(data_dry_phuttha$FIDi~data_dry_phuttha$size, xlab = "Size", ylab = "FID (m)") # nope 
+
+p = ggplot(data = data_dry_phuttha)+
+    geom_boxplot(mapping = aes(x = size, y = FIDi))
+p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
+    y = "FID (m)",
+    title ="Dry season: Phutthamonthon")
+    
+p
 
 ```
 
