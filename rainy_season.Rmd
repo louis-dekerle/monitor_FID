@@ -24,6 +24,7 @@ library(ggplot2)# graphs
 library(lmtest)# dwtest
 library (DHARMa)# test autocorrelation
 library (report)# cite packages
+library (FSA)# Dunn's test
 ```
 
 ```{r setup the data}
@@ -122,6 +123,10 @@ ggplot(data_monitor_rain, aes(x=size)) +
 ###### preliminary kruskal test and plot######
 kruskal.test(data_monitor_rain$FIDi~as.factor(data_monitor_rain$size), data=data_monitor_rain) # yup
 
+dunnTest(FIDi ~ size,
+         data=data_monitor_rain,
+         method="bonferroni")
+
 boxplot(data_monitor_rain$FIDi~data_monitor_rain$size, xlab = "Size", ylab = "FID (m)") 
 
 
@@ -144,6 +149,10 @@ ggplot(data_rain_salaya, aes(x=size)) +
 
 ###### preliminary kruskal test and plot######
 kruskal.test(data_rain_salaya$FIDi~as.factor(data_rain_salaya$size), data=data_rain_salaya) # yup
+
+dunnTest(FIDi ~ size,
+         data=data_rain_salaya,
+         method="bonferroni")
 
 boxplot(data_rain_salaya$FIDi~data_rain_salaya$size, xlab = "Size", ylab = "FID (m)") 
 ```
