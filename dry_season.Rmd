@@ -310,7 +310,7 @@ p = p + geom_abline(mapping = NULL,
               inherit.aes = FALSE) +
         xlab("Distance from closest shelter (m)") +
         ylab("FID (m)") +
-        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor (c = 0.31, p = 0.036)") 
+        ggtitle("Dry season: both sites") 
 p
 ```
 
@@ -415,13 +415,13 @@ p = p + geom_abline(mapping = NULL,
               data = NULL,
               stat = "identity",
               slope = 0.35,
-              intercept = 2.7,
+              intercept = 2.8,
               na.rm = FALSE,
               show.legend = NA,
               inherit.aes = FALSE) +
         xlab("Distance from closest shelter (m)") +
         ylab("FID (m)") +
-        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN salaya (c = 0.35, p = 0.03)") 
+        ggtitle("Dry season: Salaya") 
 p
 
 ```
@@ -533,6 +533,6 @@ p = p + geom_abline(mapping = NULL,
               inherit.aes = FALSE) +
         xlab("Distance from closest shelter (m)") +
         ylab("FID (m)") +
-        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.21, p = 0.49)") 
+        ggtitle("Dry season: Phutthamonthon") 
 p
 ```

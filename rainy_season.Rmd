@@ -298,14 +298,14 @@ p = ggplot(data = data_monitor_rain)+
 p = p + geom_abline(mapping = NULL,
               data = NULL,
               stat = "identity",
-              slope = 0.06,
+              slope = 0.08,
               intercept = 3.2,
               na.rm = FALSE,
               show.legend = NA,
               inherit.aes = FALSE) +
         xlab("Distance from closest shelter (m)") +
         ylab("FID (m)") +
-        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor during the RAINY SEASON (c = 0.06, p = 0.13)") 
+        ggtitle("Rainy season: both sites") 
 p
 
 ```
@@ -416,10 +416,12 @@ p = p + geom_abline(mapping = NULL,
               inherit.aes = FALSE) +
         xlab("Distance from closest shelter (m)") +
         ylab("FID (m)") +
-        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN SALAYA (c = 0.02, p = 0.9)") 
+        ggtitle("Rainy season: Salaya") 
 p
 
 ```
+
+
 ```{r  FID vs D_FR_SHELTER : preliminary correlation : PHUTTHAMONTHON }
 
 ######## PRELIMINARY CORRELATION ANALYSES #############
@@ -527,6 +529,6 @@ p = p + geom_abline(mapping = NULL,
               inherit.aes = FALSE) +
         xlab("Distance from closest shelter (m)") +
         ylab("FID (m)") +
-        ggtitle("Effect of the distance to the closest shelter on the FID of the \nSoutheast Asian water monitor IN PHUTTHAMONTHON (c = 0.18, p = 0.21)") 
+        ggtitle("Rainy season: Phutthamonthon") 
 p
 ```
