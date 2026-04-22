@@ -376,7 +376,7 @@ bptest(model_dfs_site_s) #OK
 
 res_dharmareg_inter = simulateResiduals(model_dfs_site_s)
 
-testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_salaya$long, y = data_dry_salaya$lat) # barely okay 
+testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_salaya$long, y = data_dry_salaya$lat) # not  okay 
 
 # TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
 

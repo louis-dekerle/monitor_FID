@@ -473,7 +473,7 @@ p = p + theme(text = element_text(size = 15))
 p = p+ geom_histogram(colour = "black", fill = "white", data = data_rain_phuttha, aes(model_dfs_site_s.res), bins = 12)
 p # ok
 
-shapiro.test(model_dfs_site_s.res) # not OK 
+shapiro.test(model_dfs_site_s.res) #  OK 
 
 # homoskedasticity
 bptest(model_dfs_site_s) #OK 
