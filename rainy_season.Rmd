@@ -80,8 +80,12 @@ data_rain_phuttha =  data_monitor_rain[(data_monitor_rain$site=="phutthamonthon"
 
 
 ##### mean and median FID for salaya and phutthamonthon ##### 
-summary(data_monitor_rain[(data_monitor_rain$site== "salaya" ) ,]) #mean FID 2.625  15/04
-summary(data_monitor_rain[(data_monitor_rain$site== "phutthamonthon" ) ,]) #mean FID 3.375 15/04
+summary(data_monitor_rain[(data_monitor_rain$site== "salaya" ) ,]$FIDi) #mean FID 2.625  15/04
+sd(data_monitor_rain[(data_monitor_rain$site== "salaya" ) ,]$FIDi)
+
+summary(data_monitor_rain[(data_monitor_rain$site== "phutthamonthon" ) ,]$FIDi) #mean FID 3.375 15/04
+sd(data_monitor_rain[(data_monitor_rain$site== "phutthamonthon" ) ,]$FIDi) 
+
 
 #### n° of obs per site #######
 

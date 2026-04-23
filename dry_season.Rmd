@@ -88,9 +88,11 @@ data_dry_phuttha =  data_monitor_dry[(data_monitor_dry$site=="phutthamonthon" ) 
 
 
 ##### mean and median FID for salaya and phutthamonthon ##### 
-summary(data_monitor_dry[(data_monitor_dry$site== "salaya" ) ,]) #mean FID 3.667  15/04
-summary(data_monitor_dry[(data_monitor_dry$site== "phutthamonthon" ) ,]) #mean FID 7.622 15/04
+summary(data_monitor_dry[(data_monitor_dry$site== "salaya" ) ,]$FIDi) #mean FID 3.667  15/04
+sd(data_monitor_dry[(data_monitor_dry$site== "salaya" ) ,]$FIDi)
 
+summary(data_monitor_dry[(data_monitor_dry$site== "phutthamonthon" ) ,]$FIDi) #mean FID 7.622 15/04
+sd(data_monitor_dry[(data_monitor_dry$site== "phutthamonthon" ) ,]$FIDi)
 #### n° of obs per site #######
 
 table(data_monitor_dry$site) # almost balanced 
