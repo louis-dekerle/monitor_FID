@@ -27,10 +27,10 @@ library (report)# cite packages
 
 ```{r setup the data}
 
-# setting working directory 
+# setting working directory #change with the path were the data are 
 setwd("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID")
 
-# charging dataset 
+# charging dataset #change with the path were the data are 
 data_monitor_dry <- read.csv("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID/DATA/pro/data_obs8.csv", header= T, sep = ";")
 #View(data_monitor_dry)
 
