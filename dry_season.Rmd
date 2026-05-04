@@ -538,3 +538,188 @@ p = p + geom_abline(mapping = NULL,
         ggtitle("Dry season: Phutthamonthon") 
 p
 ```
+
+```{r ln() transformation}
+
+# we ln() transform to account for skewed data
+ln_monitor_dry = data_monitor_dry
+ln_monitor_dry$FIDi =  log1p(ln_monitor_dry$FIDi) # transforms with natural logarithm after adding 1 to every measure to keep absence as 0. 
+ln_monitor_dry$d_fr_refug =  log1p(ln_monitor_dry$d_fr_refug)
+View(ln_monitor_dry)
+
+
+```
+
+```{r ln() linear model both}
+
+####a) Model ####
+
+model_dfs_site_ln <- lm(FIDi ~ d_fr_refug + site, data=ln_monitor_dry)
+
+
+####b) Conditions of validity ###### 
+model_dfs_site_ln.res <- residuals(model_dfs_site_ln)
+
+# independance of residuals 
+dwtest(model_dfs_site_ln) # OK 
+
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(model_dfs_site_ln) # strong outliers that may need removable 
+
+# normality of the residuals 
+p = ggplot()
+p = p+ylab ("Frequency")
+p = p + xlab ("Pearson residuals")
+p = p + theme (panel.background = element_blank())
+p = p + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p = p + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p = p + theme(text = element_text(size = 15))
+p = p+ geom_histogram(colour = "black", fill = "white", data = ln_monitor_dry, aes(model_dfs_site_ln.res), bins = 12)
+p # OK 
+
+shapiro.test(model_dfs_site_ln.res) # OK 
+
+# homoskedasticity
+bptest(model_dfs_site_ln) #OK 
+
+# DHARMA test for autocorrelation  
+
+# SPATIAL AUTOCORRELATION TEST ON THE RESIDUALS 
+
+res_dharmareg_inter = simulateResiduals(model_dfs_site_ln)
+
+testSpatialAutocorrelation(res_dharmareg_inter, x =  ln_monitor_dry$long, y = ln_monitor_dry$lat) # okay 
+
+# TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
+
+### on the scale of field days ###
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = ln_monitor_dry$date)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_day, time = unique(ln_monitor_dry$date)) # okay
+
+### on an hour scale ###
+
+# CHECK IF THE FORMAT PARAMETER IS THE SAME AS IN THE COLUMNS  
+
+ln_monitor_dry$hour <- as.POSIXct(paste(ln_monitor_dry$date, ln_monitor_dry$time), format="%Y-%m-%d %H") #if doesn't work try ln_monitor_dry$hour <- as.POSIXct(paste(ln_monitor_dry$date, ln_monitor_dry$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
+
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = ln_monitor_dry$hour)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(ln_monitor_dry$hour)) # okay 
+
+#### c) Results ####
+summary(model_dfs_site_ln) # seems quite okay I just don't know how to graph that. 
+
+
+p = ggplot(data = ln_monitor_dry)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.24,
+              intercept = 1.78,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("ln(Distance from closest shelter) (m)") +
+        ylab("ln(FID) (m)") +
+        ggtitle("Dry season: both sites") 
+p
+```
+
+```{r ln FID vs D_FR_SHELTER : SALAYA}
+
+####a) Model ####
+
+model_dfs_site_s <- lm(FIDi ~ d_fr_refug , data=data_dry_salaya)
+
+
+####b) Conditions of validity ###### 
+model_dfs_site_s.res <- residuals(model_dfs_site_s)
+
+# independance of residuals 
+dwtest(model_dfs_site_s) # OK 
+
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(model_dfs_site_s) # strong outliers that may need removable 
+
+# normality of the residuals 
+p = ggplot()
+p = p+ylab ("Frequency")
+p = p + xlab ("Pearson residuals")
+p = p + theme (panel.background = element_blank())
+p = p + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p = p + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p = p + theme(text = element_text(size = 15))
+p = p+ geom_histogram(colour = "black", fill = "white", data = data_dry_salaya, aes(model_dfs_site_s.res), bins = 12)
+p # OK 
+
+shapiro.test(model_dfs_site_s.res) # not OK 
+
+# homoskedasticity
+bptest(model_dfs_site_s) #OK 
+
+# DHARMA test for autocorrelation  
+
+# SPATIAL AUTOCORRELATION TEST ON THE RESIDUALS 
+
+res_dharmareg_inter = simulateResiduals(model_dfs_site_s)
+
+testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_salaya$long, y = data_dry_salaya$lat) # not  okay 
+
+# TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
+
+### on the scale of field days ###
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = data_dry_salaya$date)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_day, time = unique(data_dry_salaya$date)) # okay
+
+### on an hour scale ###
+
+# CHECK IF THE FORMAT PARAMETER IS THE SAME AS IN THE COLUMNS  
+
+data_dry_salaya$hour <- as.POSIXct(paste(data_dry_salaya$date, data_dry_salaya$time), format="%Y-%m-%d %H") #if doesn't work try data_dry_salaya$hour <- as.POSIXct(paste(data_dry_salaya$date, data_dry_salaya$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
+
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = data_dry_salaya$hour)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_dry_salaya$hour)) # okay 
+
+#### c) Results ####
+summary(model_dfs_site_s) # seems quite okay I just don't know how to graph that. 
+
+#Plot the data and correlation slope 
+p = ggplot(data = data_dry_salaya)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + geom_abline(mapping = NULL,
+              data = NULL,
+              stat = "identity",
+              slope = 0.35,
+              intercept = 2.8,
+              na.rm = FALSE,
+              show.legend = NA,
+              inherit.aes = FALSE) +
+        xlab("Distance from closest shelter (m)") +
+        ylab("FID (m)") +
+        ggtitle("Dry season: Salaya") 
+p
+```
