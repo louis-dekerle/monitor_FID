@@ -547,6 +547,10 @@ ln_monitor_dry$FIDi =  log1p(ln_monitor_dry$FIDi) # transforms with natural loga
 ln_monitor_dry$d_fr_refug =  log1p(ln_monitor_dry$d_fr_refug)
 View(ln_monitor_dry)
 
+# we recreate de salaya and phutthamonthon datasets
+ln_dry_salaya =  ln_monitor_dry[(ln_monitor_dry$site=="salaya" ) ,]
+ln_dry_phuttha =  ln_monitor_dry[(ln_monitor_dry$site=="phutthamonthon" ) ,]
+
 
 ```
 
@@ -564,7 +568,7 @@ model_dfs_site_ln.res <- residuals(model_dfs_site_ln)
 dwtest(model_dfs_site_ln) # OK 
 
 par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
-plot(model_dfs_site_ln) # strong outliers that may need removable 
+plot(model_dfs_site_ln) 
 
 # normality of the residuals 
 p = ggplot()
@@ -637,21 +641,21 @@ p = p + geom_abline(mapping = NULL,
 p
 ```
 
-```{r ln FID vs D_FR_SHELTER : SALAYA}
+```{r ln() linear model Salaya}
 
 ####a) Model ####
 
-model_dfs_site_s <- lm(FIDi ~ d_fr_refug , data=data_dry_salaya)
+model_dfs_ln_s <- lm(FIDi ~ d_fr_refug , data=ln_dry_salaya)
 
 
 ####b) Conditions of validity ###### 
-model_dfs_site_s.res <- residuals(model_dfs_site_s)
+model_dfs_ln_s.res <- residuals(model_dfs_ln_s)
 
 # independance of residuals 
-dwtest(model_dfs_site_s) # OK 
+dwtest(model_dfs_ln_s) # not OK 
 
 par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
-plot(model_dfs_site_s) # strong outliers that may need removable 
+plot(model_dfs_ln_s) # 
 
 # normality of the residuals 
 p = ggplot()
@@ -661,21 +665,21 @@ p = p + theme (panel.background = element_blank())
 p = p + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
 p = p + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
 p = p + theme(text = element_text(size = 15))
-p = p+ geom_histogram(colour = "black", fill = "white", data = data_dry_salaya, aes(model_dfs_site_s.res), bins = 12)
-p # OK 
+p = p+ geom_histogram(colour = "black", fill = "white", data = ln_dry_salaya, aes(model_dfs_ln_s.res), bins = 12)
+p #  OK 
 
-shapiro.test(model_dfs_site_s.res) # not OK 
+shapiro.test(model_dfs_ln_s.res) # OK 
 
 # homoskedasticity
-bptest(model_dfs_site_s) #OK 
+bptest(model_dfs_ln_s) #OK 
 
 # DHARMA test for autocorrelation  
 
 # SPATIAL AUTOCORRELATION TEST ON THE RESIDUALS 
 
-res_dharmareg_inter = simulateResiduals(model_dfs_site_s)
+res_dharmareg_inter = simulateResiduals(model_dfs_ln_s)
 
-testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_salaya$long, y = data_dry_salaya$lat) # not  okay 
+testSpatialAutocorrelation(res_dharmareg_inter, x =  ln_dry_salaya$long, y = ln_dry_salaya$lat) # okay 
 
 # TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
 
@@ -683,43 +687,116 @@ testSpatialAutocorrelation(res_dharmareg_inter, x =  data_dry_salaya$long, y = d
 
 # recalculate residuals to account for repetitive dates (aggregate by time)
 
-res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = data_dry_salaya$date)
+res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = ln_dry_salaya$date)
 
 # Test temporal autocorrelation 
 
-testTemporalAutocorrelation(res_grouped_reg_day, time = unique(data_dry_salaya$date)) # okay
+testTemporalAutocorrelation(res_grouped_reg_day, time = unique(ln_dry_salaya$date)) # okay
 
 ### on an hour scale ###
 
 # CHECK IF THE FORMAT PARAMETER IS THE SAME AS IN THE COLUMNS  
 
-data_dry_salaya$hour <- as.POSIXct(paste(data_dry_salaya$date, data_dry_salaya$time), format="%Y-%m-%d %H") #if doesn't work try data_dry_salaya$hour <- as.POSIXct(paste(data_dry_salaya$date, data_dry_salaya$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
+ln_dry_salaya$hour <- as.POSIXct(paste(ln_dry_salaya$date, ln_dry_salaya$time), format="%Y-%m-%d %H") #if doesn't work try ln_dry_salaya$hour <- as.POSIXct(paste(ln_dry_salaya$date, ln_dry_salaya$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
 
 
 # recalculate residuals to account for repetitive dates (aggregate by time)
 
-res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = data_dry_salaya$hour)
+res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = ln_dry_salaya$hour)
 
 # Test temporal autocorrelation 
 
-testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(data_dry_salaya$hour)) # okay 
+testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(ln_dry_salaya$hour)) # okay 
 
 #### c) Results ####
-summary(model_dfs_site_s) # seems quite okay I just don't know how to graph that. 
+summary(model_dfs_ln_s) # seems quite okay I just don't know how to graph that. 
 
 #Plot the data and correlation slope 
-p = ggplot(data = data_dry_salaya)+
+p = ggplot(data = ln_dry_salaya)+
     geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
-p = p + geom_abline(mapping = NULL,
-              data = NULL,
-              stat = "identity",
-              slope = 0.35,
-              intercept = 2.8,
-              na.rm = FALSE,
-              show.legend = NA,
-              inherit.aes = FALSE) +
-        xlab("Distance from closest shelter (m)") +
-        ylab("FID (m)") +
-        ggtitle("Dry season: Salaya") 
+p = p + 
+        xlab("ln(Distance from closest shelter) (m)") +
+        ylab("ln(FID) (m)") +
+        ggtitle("Dry season: Phuttha") 
+p
+```
+
+```{r ln() linear model Phuttha}
+
+####a) Model ####
+
+model_dfs_ln_p <- lm(FIDi ~ d_fr_refug , data=ln_dry_phuttha)
+
+
+####b) Conditions of validity ###### 
+model_dfs_ln_p.res <- residuals(model_dfs_ln_p)
+
+# independance of residuals 
+dwtest(model_dfs_ln_p) # OK 
+
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
+plot(model_dfs_ln_p) # Q-Q plot desastrous + funnel shape on third graph
+
+# normality of the residuals 
+p = ggplot()
+p = p+ylab ("Frequency")
+p = p + xlab ("Pearson residuals")
+p = p + theme (panel.background = element_blank())
+p = p + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p = p + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p = p + theme(text = element_text(size = 15))
+p = p+ geom_histogram(colour = "black", fill = "white", data = ln_dry_phuttha, aes(model_dfs_ln_p.res), bins = 12)
+p # not OK 
+
+shapiro.test(model_dfs_ln_p.res) # not OK 
+
+# homoskedasticity
+bptest(model_dfs_ln_p) #OK 
+
+# DHARMA test for autocorrelation  
+
+# SPATIAL AUTOCORRELATION TEST ON THE RESIDUALS 
+
+res_dharmareg_inter = simulateResiduals(model_dfs_ln_p)
+
+testSpatialAutocorrelation(res_dharmareg_inter, x =  ln_dry_phuttha$long, y = ln_dry_phuttha$lat) # okay 
+
+# TEMPORAL AUTOCORRELATION TEST ON THE RESIDUALS
+
+### on the scale of field days ###
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_day <- recalculateResiduals(res_dharmareg_inter, group = ln_dry_phuttha$date)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_day, time = unique(ln_dry_phuttha$date)) # okay
+
+### on an hour scale ###
+
+# CHECK IF THE FORMAT PARAMETER IS THE SAME AS IN THE COLUMNS  
+
+ln_dry_phuttha$hour <- as.POSIXct(paste(ln_dry_phuttha$date, ln_dry_phuttha$time), format="%Y-%m-%d %H") #if doesn't work try ln_dry_phuttha$hour <- as.POSIXct(paste(ln_dry_phuttha$date, ln_dry_phuttha$time), format="%Y-%m-%d %H:%M:%S") and then remove the minutes and the seconds 
+
+
+# recalculate residuals to account for repetitive dates (aggregate by time)
+
+res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = ln_dry_phuttha$hour)
+
+# Test temporal autocorrelation 
+
+testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(ln_dry_phuttha$hour)) # okay 
+
+#### c) Results ####
+summary(model_dfs_ln_p) # seems quite okay I just don't know how to graph that. 
+
+#Plot the data and correlation slope 
+p = ggplot(data = ln_dry_phuttha)+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+p = p + 
+        xlab("ln(Distance from closest shelter) (m)") +
+        ylab("ln(FID) (m)") +
+        ggtitle("Dry season: Phuttha") 
 p
 ```
