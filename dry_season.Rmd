@@ -626,7 +626,8 @@ summary(model_dfs_site_ln) # seems quite okay I just don't know how to graph tha
 
 
 p = ggplot(data = ln_monitor_dry)+
-    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))+
+    geom_smooth(mapping = aes(x = d_fr_refug, y = FIDi), method = "lm", level = 0.95)
 p = p + geom_abline(mapping = NULL,
               data = NULL,
               stat = "identity",
@@ -638,6 +639,7 @@ p = p + geom_abline(mapping = NULL,
         xlab("ln(Distance from closest shelter) (m)") +
         ylab("ln(FID) (m)") +
         ggtitle("Dry season: both sites") 
+
 p
 ```
 
