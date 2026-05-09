@@ -2,7 +2,9 @@
 title: "dry_season"
 author: "DEKERLE_Louis"
 date: "2026-04-14"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
