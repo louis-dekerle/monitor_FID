@@ -618,7 +618,7 @@ res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = ln_mon
 testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(ln_monitor_rain$hour)) # okay 
 
 #### c) Results ####
-summary(model_dfs_site_ln) # seems quite okay I just don't know how to graph that. 
+summary(model_dfs_site_ln) 
 
 
 p = ggplot(data = ln_monitor_rain)+
@@ -708,7 +708,7 @@ p = ggplot(data = ln_rain_salaya)+
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") +
         ylab("ln(FID) (m)") +
-        ggtitle("Rainy season: Phuttha") 
+        ggtitle("Rainy season: Salaya") 
 p
 ```
 
