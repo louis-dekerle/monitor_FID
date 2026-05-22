@@ -97,8 +97,11 @@ ggplot(data_monitor_rain, aes(x=site)) +
 ###### preliminary kruskal test and plot######
 kruskal.test(data_monitor_rain$FIDi~as.factor(data_monitor_rain$site), data=data_monitor_rain)
 
+
 p = ggplot(data = data_monitor_rain)+
-    geom_boxplot(mapping = aes(x = site, y = FIDi))
+    geom_boxplot(mapping = aes(x = site, y = FIDi, color = site))+
+    scale_color_brewer(palette="Dark2")+
+    theme(legend.position="none")
 p = p + labs(x = "Site", 
     y = "FID (m)",
     title ="Rainy season",
@@ -147,8 +150,11 @@ p
 
 ##### mean FID for salaya ##### 
 summary(data_rain_salaya[(data_rain_salaya$size== "S" ) ,]) #mean FID 3.533
+sd(data_rain_salaya[(data_rain_salaya$size== "S" ) ,]$FID) # sd = 1.9
 summary(data_rain_salaya[(data_rain_salaya$size== "M" ) ,]) #mean FID 2.478
+sd(data_rain_salaya[(data_rain_salaya$size== "M" ) ,]$FID) # sd = 2.2
 summary(data_rain_salaya[(data_rain_salaya$size== "L" ) ,]) #mean FID 1.60
+sd(data_rain_salaya[(data_rain_salaya$size== "L" ) ,]$FID) # sd = 1.2
 
 #### n° of obs per size #######
 
@@ -165,7 +171,7 @@ dunnTest(FIDi ~ size,
          method="bonferroni")
 
 p = ggplot(data = data_rain_salaya)+
-    geom_boxplot(mapping = aes(x = size, y = FIDi))
+    geom_boxplot(mapping = aes(x = size, y = FIDi), color = "#d95f02")
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
     y = "FID (m)",
     title ="Rainy season: Salaya")
@@ -192,7 +198,7 @@ ggplot(data_rain_phuttha, aes(x=size)) +
 kruskal.test(data_rain_phuttha$FIDi~as.factor(data_rain_phuttha$size), data=data_rain_phuttha) # nope
 
 p = ggplot(data = data_rain_phuttha)+
-    geom_boxplot(mapping = aes(x = size, y = FIDi))
+    geom_boxplot(mapping = aes(x = size, y = FIDi), color = "#1b9e77")
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
     y = "FID (m)",
     title ="Rainy season: Phutthamonthon")
@@ -704,7 +710,7 @@ summary(model_dfs_ln_s) # seems quite okay I just don't know how to graph that.
 
 #Plot the data and correlation slope 
 p = ggplot(data = ln_rain_salaya)+
-    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi), color = "#d95f02" )
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") +
         ylab("ln(FID) (m)") +
@@ -785,7 +791,7 @@ summary(model_dfs_ln_p) # seems quite okay I just don't know how to graph that.
 
 #Plot the data and correlation slope 
 p = ggplot(data = ln_rain_phuttha)+
-    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi), color = "#1b9e77")
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") +
         ylab("ln(FID) (m)") +

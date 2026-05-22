@@ -85,6 +85,13 @@ data_dry_phuttha =  data_monitor_dry[(data_monitor_dry$site=="phutthamonthon" ) 
 
 ```
 
+```{r FID vs season}
+
+
+
+```
+
+
 ```{r FID vs SITE}
 
 
@@ -107,7 +114,9 @@ kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$site), data=data_m
 
 
 p = ggplot(data = data_monitor_dry)+
-    geom_boxplot(mapping = aes(x = site, y = FIDi))
+    geom_boxplot(mapping = aes(x = site, y = FIDi, color = site))+ 
+    scale_color_brewer(palette="Dark2")+
+    theme(legend.position="none")
 p = p + labs(x = "Site", 
     y = "FID (m)",
     title ="Dry season") +
@@ -137,7 +146,9 @@ kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$size), data=data_m
 
 # plot
 p = ggplot(data = data_monitor_dry)+
-    geom_boxplot(mapping = aes(x = size, y = FIDi))
+    geom_boxplot(mapping = aes(x = size, y = FIDi, color = site))+ 
+    scale_color_brewer(palette="Dark2")+
+    theme(legend.position="none")
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
     y = "FID (m)",
     title ="Dry season: both sites")
@@ -169,7 +180,7 @@ kruskal.test(data_dry_salaya$FIDi~as.factor(data_dry_salaya$size), data=data_dry
 boxplot(data_dry_salaya$FIDi~data_dry_salaya$size, xlab = "Size", ylab = "FID (m)") # nope 
 
 p = ggplot(data = data_dry_salaya)+
-    geom_boxplot(mapping = aes(x = size, y = FIDi))
+    geom_boxplot(mapping = aes(x = size, y = FIDi), color = "#d95f02")
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
     y = "FID (m)",
     title ="Dry season: Salaya")
@@ -198,7 +209,7 @@ kruskal.test(data_dry_phuttha$FIDi~as.factor(data_dry_phuttha$size), data=data_d
 boxplot(data_dry_phuttha$FIDi~data_dry_phuttha$size, xlab = "Size", ylab = "FID (m)") # nope 
 
 p = ggplot(data = data_dry_phuttha)+
-    geom_boxplot(mapping = aes(x = size, y = FIDi))
+    geom_boxplot(mapping = aes(x = size, y = FIDi), color = "#1b9e77")
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
     y = "FID (m)",
     title ="Dry season: Phutthamonthon")
@@ -709,7 +720,7 @@ summary(model_dfs_ln_s) # seems quite okay I just don't know how to graph that.
 
 #Plot the data and correlation slope 
 p = ggplot(data = ln_dry_salaya)+
-    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))+
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi), color = "#d95f02" )+
     geom_smooth(mapping = aes(x = d_fr_refug, y = FIDi), method = "lm", level = 0.95)
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") +
@@ -786,14 +797,14 @@ res_grouped_reg_hour <- recalculateResiduals(res_dharmareg_inter, group = ln_dry
 testTemporalAutocorrelation(res_grouped_reg_hour, time = unique(ln_dry_phuttha$hour)) # okay 
 
 #### c) Results ####
-summary(model_dfs_ln_p) # seems quite okay I just don't know how to graph that. 
+summary(model_dfs_ln_p)  
 
 #Plot the data and correlation slope 
 p = ggplot(data = ln_dry_phuttha)+
-    geom_point(mapping = aes(x = d_fr_refug, y = FIDi))
+    geom_point(mapping = aes(x = d_fr_refug, y = FIDi), color = "#1b9e77")
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") +
         ylab("ln(FID) (m)") +
-        ggtitle("Dry season: Phuttha") 
+        ggtitle("Dry season: Phutthamonthon") 
 p
 ```
