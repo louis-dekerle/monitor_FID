@@ -1,0 +1,87 @@
+---
+title: "seasons_comparison"
+author: "DEKERLE_Louis"
+date: "2026-05-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries}
+
+library(plyr) # round by 0.5
+library(ggplot2)# graphs 
+
+```
+
+
+```{r preparing data}
+
+# setting working directory #change with the path were the data are 
+setwd("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID")
+
+# charging dataset #change with the path were the data are 
+data_monitor <- read.csv("C:/Users/LENOVO/Desktop/stage mahidol/stat/project/monitor_FID/DATA/pro/data_all.csv", header= T, sep = ";")
+View(data_monitor)
+
+###### EXCLUDE OBS OTHER THAN V_SALVA ######
+data_monitor = data_monitor[(data_monitor$sp=="V_salva" ) ,]
+#View(data_monitor)
+
+###### EXCLUDE OBS WITHOUT FID  ###### 
+data_monitor = data_monitor[!is.na(data_monitor$FIDi),]
+#View(data_monitor)
+
+###### EXCLUDE OBS WITHOUT SIZE  ###### 
+data_monitor = data_monitor[!is.na(data_monitor$size),]
+#View(data_monitor)
+
+###### EXCLUDE OBS WITHOUT DISTANCE TO SHELTER  ###### 
+data_monitor = data_monitor[!is.na(data_monitor$d_fr_refug),]
+#View(data_monitor)
+
+##### ROUND FID and D_FR_SHERLTER FOR DRY SEASON #####
+
+#round to 1 to be coherent with rainy season analyses 
+data_monitor[(data_monitor$season=="dry" ) ,]$FIDi = round(data_monitor[(data_monitor$season=="dry" ) ,]$FIDi) # 0.5 is rounded down 
+
+View(data_monitor)
+
+```
+
+```{r FID vs SEASON}
+
+##### mean and median FID for dry and rainy season ##### 
+summary(data_monitor[(data_monitor$season== "dry" ) ,]$FIDi) #mean FID 5.5
+sd(data_monitor[(data_monitor$season== "dry" ) ,]$FIDi) # sd 4.5
+
+summary(data_monitor[(data_monitor$season== "rainy" ) ,]$FIDi) #mean FID 3.1
+sd(data_monitor[(data_monitor$season== "rainy" ) ,]$FIDi) # sd 1.9
+
+#### n° of obs per season #######
+
+table(data_monitor$season) # almost balanced 
+
+ggplot(data_monitor, aes(x=season)) + 
+  geom_bar()
+
+###### preliminary kruskal test and plot######
+kruskal.test(data_monitor$FIDi~as.factor(data_monitor$season), data=data_monitor) #P = 0.0001
+
+# set the colors 
+season.colors <- c(dry = "#008837", rainy = "#7b3294")
+p = ggplot(data = data_monitor)+
+    geom_boxplot(mapping = aes(x = season, y = FIDi, color = season))+
+    scale_color_manual(values = season.colors)+
+    theme(legend.position="none")
+p = p + labs(x = "Season", 
+    y = "FID (m)",
+    title ="") +
+    scale_x_discrete(labels=c("dry" = "Dry", 
+                              "rainy" = "Rainy"))
+p
+
+```
+

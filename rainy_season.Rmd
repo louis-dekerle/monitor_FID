@@ -9,11 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-```{r Suppress graph, echo = FALSE}
-dev.off() 
-```
-
 ```{r Import libraries, echo = FALSE}
 
 ##### LIBRARIES #####
@@ -204,6 +199,19 @@ p = p + labs(x = "Size (L = Large, M = Medium, S = Small)",
     title ="Rainy season: Phutthamonthon")
     
 p
+
+```
+
+```{r Closest VS chosen shelter}
+# remove observations without closest or chosen shelter
+data_shelter_rain = data_monitor_rain[(data_monitor_rain$closest_ref_type!="" ) ,]
+#View(data_shelter_dry)
+
+data_shelter_rain = data_shelter_rain[(data_shelter_rain$gone_ref_type!="" ) ,]
+#View(data_shelter_dry)
+
+table = table(data_shelter_rain$closest_ref_type, data_shelter_rain$gone_ref_type)
+addmargins(table)
 
 ```
 

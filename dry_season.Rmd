@@ -11,9 +11,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r Suppress graph, echo = FALSE}
-dev.off() 
-```
 
 ```{r Import libraries, echo = FALSE}
 
@@ -85,12 +82,6 @@ data_dry_phuttha =  data_monitor_dry[(data_monitor_dry$site=="phutthamonthon" ) 
 
 ```
 
-```{r FID vs season}
-
-
-
-```
-
 
 ```{r FID vs SITE}
 
@@ -102,6 +93,7 @@ sd(data_monitor_dry[(data_monitor_dry$site== "salaya" ) ,]$FIDi)
 
 summary(data_monitor_dry[(data_monitor_dry$site== "phutthamonthon" ) ,]$FIDi) #mean FID 7.622 15/04
 sd(data_monitor_dry[(data_monitor_dry$site== "phutthamonthon" ) ,]$FIDi)
+
 #### n° of obs per site #######
 
 table(data_monitor_dry$site) # almost balanced 
@@ -217,6 +209,20 @@ p = p + labs(x = "Size (L = Large, M = Medium, S = Small)",
 p
 
 ```
+```{r Closest VS chosen shelter}
+# remove observations without closest or chosen shelter
+data_shelter_dry = data_monitor_dry[(data_monitor_dry$closest_ref_type!="" ) ,]
+#View(data_shelter_dry)
+
+data_shelter_dry = data_shelter_dry[(data_shelter_dry$gone_ref_type!="" ) ,]
+#View(data_shelter_dry)
+
+table = table(data_shelter_dry$closest_ref_type, data_shelter_dry$gone_ref_type)
+addmargins(table)
+
+```
+
+
 
 ```{r  FID vs D_FR_SHELTER : preliminary correlation }
 
