@@ -16,7 +16,6 @@ knitr::opts_chunk$set(echo = TRUE)
 library(plyr) # round by 0.5
 library(lubridate) # dates 
 library(ggplot2)# graphs 
-library(lmtest)# dwtest
 library (DHARMa)# test autocorrelation
 library (FSA)# Dunn's test
 ```
@@ -204,9 +203,6 @@ model_dfs_ln_s <- lm(FIDi ~ d_fr_refug , data=ln_rain_salaya)
 ####b) Conditions of validity ###### 
 model_dfs_ln_s.res <- residuals(model_dfs_ln_s)
 
-# independance of residuals 
-dwtest(model_dfs_ln_s) # OK 
-
 par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
 plot(model_dfs_ln_s) # rather ok 
 
@@ -284,9 +280,6 @@ model_dfs_ln_p <- lm(FIDi ~ d_fr_refug , data=ln_rain_phuttha)
 
 ####b) Conditions of validity ###### 
 model_dfs_ln_p.res <- residuals(model_dfs_ln_p)
-
-# independance of residuals 
-dwtest(model_dfs_ln_p) # OK 
 
 par(mfrow = c(2, 2), oma = c(0, 0, 2, 0))
 plot(model_dfs_ln_p) # funellish to the right in the first graph + weird Q-Q plot
