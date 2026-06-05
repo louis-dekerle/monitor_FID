@@ -100,7 +100,7 @@ kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$site), data=data_m
 p = ggplot(data = data_monitor_dry)+ # dataset
     geom_boxplot(mapping = aes(x = site, y = FIDi, color = site))+ # variable + color by season
     scale_color_brewer(palette="Dark2")+ # colorblind friendly palette
-    theme(legend.position="none", axis.text=element_text(size=14), axis.title=element_text(size=16)) # remove legend
+    theme(legend.position="none", axis.text=element_text(size=16), axis.title=element_text(size=18)) # remove legend
 p = p + labs(x = "Site", # x axis title
     y = "FID (m)", # y axis title 
     title ="Dry season") + #graph title

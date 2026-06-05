@@ -90,7 +90,7 @@ kruskal.test(data_monitor_rain$FIDi~as.factor(data_monitor_rain$site), data=data
 p = ggplot(data = data_monitor_rain)+ #dataset
     geom_boxplot(mapping = aes(x = site, y = FIDi, color = site))+ #variables and color by site
     scale_color_brewer(palette="Dark2")+ #colorblind friendly palette 
-    theme(legend.position="none", axis.text=element_text(size=14), axis.title=element_text(size=16)) #remove the legend 
+    theme(legend.position="none", axis.text=element_text(size=16), axis.title=element_text(size=18)) #remove the legend 
 p = p + labs(x = "Site", # x axis name 
     y = "FID (m)", #y axis name
     title ="Rainy season")+ #graph title
