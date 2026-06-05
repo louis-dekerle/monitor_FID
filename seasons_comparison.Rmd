@@ -78,7 +78,7 @@ season.colors <- c(dry = "#008837", rainy = "#7b3294") # set the colors
 p = ggplot(data = data_monitor)+ # data
     geom_boxplot(mapping = aes(x = season, y = FIDi, color = season))+ # boxplot, variables and color by season
     scale_color_manual(values = season.colors)+ # add the colors 
-    theme(legend.position="none") # remove the legend
+    theme(legend.position="none", axis.text=element_text(size=14), axis.title=element_text(size=16)) # remove the legend
 p = p + labs(x = "Season", # x axis name
     y = "FID (m)", # y axis name 
     title ="") + # no title

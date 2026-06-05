@@ -90,12 +90,12 @@ kruskal.test(data_monitor_rain$FIDi~as.factor(data_monitor_rain$site), data=data
 p = ggplot(data = data_monitor_rain)+ #dataset
     geom_boxplot(mapping = aes(x = site, y = FIDi, color = site))+ #variables and color by site
     scale_color_brewer(palette="Dark2")+ #colorblind friendly palette 
-    theme(legend.position="none") #remove the legend 
+    theme(legend.position="none", axis.text=element_text(size=14), axis.title=element_text(size=16)) #remove the legend 
 p = p + labs(x = "Site", # x axis name 
     y = "FID (m)", #y axis name
     title ="Rainy season")+ #graph title
     scale_x_discrete(labels=c("phutthamonthon" = "Phutthamonthon", 
-                              "salaya" = "Salaya"))
+                              "salaya" = "Mahidol"))
 p
 
 ```
@@ -143,7 +143,8 @@ p = ggplot(data = data_rain_salaya)+
     geom_boxplot(mapping = aes(x = size, y = FIDi), color = "#d95f02")
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", 
     y = "FID (m)",
-    title ="Rainy season: Salaya")
+    title ="Rainy season: Mahidol")+ #graph title
+    theme(axis.text=element_text(size = 16), axis.title=element_text(size = 18))
     
 p 
 ```
@@ -187,7 +188,8 @@ p = ggplot(data = data_rain_phuttha)+ # dataset
     geom_boxplot(mapping = aes(x = size, y = FIDi), color = "#1b9e77")# variables and site color
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)",  # x axis name 
     y = "FID (m)", #y axis name 
-    title ="Rainy season: Phutthamonthon") # graph title 
+    title ="Rainy season: Phutthamonthon")+ #graph title
+    theme(axis.text=element_text(size = 16), axis.title=element_text(size = 18)) # graph title 
     
 p
 
@@ -304,7 +306,8 @@ p = ggplot(data = ln_rain_salaya)+ # dataset
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") + #x axis name
         ylab("ln(FID) (m)") + #y axis name
-        ggtitle("Rainy season: Salaya") # graph title 
+        ggtitle("Rainy season: Mahidol") + #graph title
+        theme(axis.text=element_text(size = 16), axis.title=element_text(size = 18))
 p
 ```
 
@@ -392,7 +395,8 @@ p = ggplot(data = ln_rain_phuttha)+ # dataset
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") + # x axis title  
         ylab("ln(FID) (m)") + #y axis title 
-        ggtitle("Rainy season: Phutthamonthon") # graph title 
+        ggtitle("Rainy season: Phutthamonthon")+ #graph title
+        theme(axis.text=element_text(size = 16), axis.title=element_text(size = 18)) # graph title 
 p
 ```
 

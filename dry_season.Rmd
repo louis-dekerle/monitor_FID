@@ -100,12 +100,12 @@ kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$site), data=data_m
 p = ggplot(data = data_monitor_dry)+ # dataset
     geom_boxplot(mapping = aes(x = site, y = FIDi, color = site))+ # variable + color by season
     scale_color_brewer(palette="Dark2")+ # colorblind friendly palette
-    theme(legend.position="none") # remove legend
+    theme(legend.position="none", axis.text=element_text(size=14), axis.title=element_text(size=16)) # remove legend
 p = p + labs(x = "Site", # x axis title
     y = "FID (m)", # y axis title 
     title ="Dry season") + #graph title
     scale_x_discrete(labels=c("phutthamonthon" = "Phutthamonthon", # put caps at the beginning of site names
-                              "salaya" = "Salaya"))
+                              "salaya" = "Mahidol"))
 p
 
 ```
@@ -148,7 +148,8 @@ p = ggplot(data = data_dry_salaya)+ #dataset
     geom_boxplot(mapping = aes(x = size, y = FIDi), color = "#d95f02") # variables and color by site
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", # x axis title 
     y = "FID (m)", # y axis title 
-    title ="Dry season: Salaya") #graph title
+    title ="Dry season: Mahidol")+ #graph title
+    theme(axis.text=element_text(size = 16), axis.title=element_text(size = 18))
     
 p
 
@@ -192,8 +193,8 @@ p = ggplot(data = data_dry_phuttha)+ #dataset
     geom_boxplot(mapping = aes(x = size, y = FIDi), color = "#1b9e77") # variables and site color
 p = p + labs(x = "Size (L = Large, M = Medium, S = Small)", # x axis title 
     y = "FID (m)", # y axis title
-    title ="Dry season: Phutthamonthon") # graph title 
-    
+    title ="Dry season: Phutthamonthon")+ #graph title
+    theme(axis.text=element_text(size = 16), axis.title=element_text(size = 18)) 
 p
 
 ```
@@ -311,7 +312,8 @@ p = ggplot(data = ln_dry_salaya)+ # dataset
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") +
         ylab("ln(FID) (m)") +
-        ggtitle("Dry season: Salaya") 
+        ggtitle("Dry season: Mahidol") + #graph title
+        theme(axis.text=element_text(size = 16), axis.title=element_text(size = 18))
 p
 ```
 
@@ -396,6 +398,7 @@ p = ggplot(data = ln_dry_phuttha)+ # dataset
 p = p + 
         xlab("ln(Distance from closest shelter) (m)") +# x axis title 
         ylab("ln(FID) (m)") + # y axis title 
-        ggtitle("Dry season: Phutthamonthon") # graph title
+        ggtitle("Dry season: Phutthamonthon")+ #graph title
+        theme(axis.text=element_text(size = 16), axis.title=element_text(size = 18))
 p
 ```
