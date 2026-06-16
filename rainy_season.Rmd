@@ -83,7 +83,11 @@ ggplot(data_monitor_rain, aes(x=site)) + # graph
 kruskal.test(data_monitor_rain$FIDi~as.factor(data_monitor_rain$site), data=data_monitor_rain)
 
 ```
+```{r FID vs SITE: Mann-Whitney-Wilcoxon}
 
+wilcox.test(data_rain_salaya$FIDi, data_rain_phuttha$FIDi)
+
+```
 
 ```{r FID vs SITE: Plot}
 

@@ -94,6 +94,12 @@ ggplot(data_monitor_dry, aes(x=site)) + # graph
 kruskal.test(data_monitor_dry$FIDi~as.factor(data_monitor_dry$site), data=data_monitor_dry)
 
 ```
+```{r FID vs SITE: Mann-Whitney-Wilcoxon}
+
+wilcox.test(data_dry_salaya$FIDi, data_dry_phuttha$FIDi)
+
+```
+
 
 ```{r FID vs SITE: Plot}
 
