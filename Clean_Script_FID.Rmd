@@ -1,0 +1,1330 @@
+---
+title: "Clean_Script_FID"
+author: "DEKERLE_Louis"
+date: "2026-11-04"
+output: html_document
+---
+
+CHARGING THE LIBRARIES: 
+
+```{r libraries}
+
+library(tidyverse) 
+library(ggpubr)    
+library(multcomp) 
+library(car)
+library(emmeans)
+
+```
+
+PREPARING THE DATASETS:  
+
+```{r data}
+
+#### MAIN DATASETS
+
+# data on nearest and chosen shelter types
+stack = read.csv("DATA/pro/stack.csv", sep = ";", header = TRUE)
+
+# data on FID, size, distance from shelter
+FID_vsm_data = read.csv("DATA/pro/FID_vsm_data.csv", sep = ";", header = TRUE)
+
+# data on size and chosen shelter type
+refuge_df = read.csv("DATA/pro/refuge_df.csv", sep = ";", header = TRUE)
+
+# data on human population density
+people_df = read.csv("DATA/pro/people.csv", sep = ";", header = TRUE)
+
+#### TRANSFORMING FID AND DISTANCE FROM NEAREST SHELTER DATA TO LN(X + 1)
+
+FID_vsm_data$logFID <- log(FID_vsm_data$FIDi + 1)
+FID_vsm_data$logDist <- log(FID_vsm_data$d_fr_refug + 1)
+
+
+#### SUBSETS OF FID_vsm_data FOR EACH COUPLE SITE-SEASON
+
+# High disturbance - dry season 
+slydry <- FID_vsm_data %>% 
+  filter(season == 'dry') %>% 
+  filter(site == 'Salaya')
+
+# High disturbance - wet season 
+slywet <- FID_vsm_data %>% 
+  filter(season == 'wet') %>% 
+  filter(site == 'Salaya')
+
+# Low disturbance - dry season 
+ptmdry <- FID_vsm_data %>% 
+  filter(season == 'dry') %>% 
+  filter(site == 'Phutthamonthon')
+
+# Low disturbance - wet season 
+ptmwet <- FID_vsm_data %>% 
+  filter(season == 'wet') %>% 
+  filter(site == 'Phutthamonthon')
+```
+
+MAIN MANUSCRIPT:
+
+### Methods 
+
+##### Estimation of human population density 
+
+```{r human population density }
+
+# High disturbance - dry season 
+slydryppl <- people_df %>% 
+  filter(site == 'salaya')%>% 
+  filter(season == 'dry')
+
+mean(slydryppl$people_1min) # 23.7
+min(slydryppl$people_1min) # 0 
+max(slydryppl$people_1min) # 150
+sd(slydryppl$people_1min) # 34.8
+median(slydryppl$people_1min) # 9 
+
+# High disturbance - wet season 
+slywetppl <- people_df %>% 
+  filter(site == 'salaya')%>% 
+  filter(season == 'rainy')
+
+mean(slywetppl$people_1min) # 18.1
+min(slywetppl$people_1min) # 0
+max(slywetppl$people_1min) # 89
+sd(slywetppl$people_1min) # 22.1
+median(slywetppl$people_1min) # 11 
+
+# Low disturbance - dry season 
+ptmdryppl <- people_df %>% 
+  filter(site == 'phutthamonthon')%>% 
+  filter(season == 'dry')
+
+mean(ptmdryppl$people_1min) # 2.3
+min(ptmdryppl$people_1min) # 0 
+max(ptmdryppl$people_1min) # 10
+sd(ptmdryppl$people_1min) # 2.8
+median(ptmdryppl$people_1min) # 2 
+
+# Low disturbance - wet season 
+ptmwetppl <- people_df %>% 
+  filter(site == 'phutthamonthon')%>% 
+  filter(season == 'rainy')
+
+mean(ptmwetppl$people_1min) # 1
+min(ptmwetppl$people_1min) # 0 
+max(ptmwetppl$people_1min) # 29 
+sd(ptmwetppl$people_1min) # 3.9
+median(ptmwetppl$people_1min) # 0 
+
+```
+
+### Results 
+
+##### Comparisons of FID between sites and seasons
+
+Basic descriptors
+```{r min max mean median sd for each site-season}
+
+# High disturbance campus  - dry season 
+min(slydry$logFID) # 0
+max(slydry$logFID) # 3
+mean(slydry$logFID) # 1.3
+sd(slydry$logFID) # 0.7
+median(slydry$logFID) # 1.3
+
+# High disturbance campus  - wet season 
+min(slywet$logFID) # 0.4
+max(slywet$logFID) # 2.5
+mean(slywet$logFID) # 1
+sd(slywet$logFID) # 0.6
+median(slywet$logFID) # 0.7
+
+# Low disturbance park  - dry season 
+min(ptmdry$logFID) # 0
+max(ptmdry$logFID) # 3.2
+mean(ptmdry$logFID) # 2
+sd(ptmdry$logFID) # 0.6
+median(ptmdry$logFID) # 2.1
+
+# Low disturbance park  - wet season 
+min(ptmwet$logFID) # 0.4
+max(ptmwet$logFID) # 2.4
+mean(ptmwet$logFID) # 0.8
+sd(ptmwet$logFID) # 0.5
+median(ptmwet$logFID) # 0.7
+
+```
+
+Table 2: Statistical summary of the general linear model for Flight Initiation Distance (FID; ln-transformed) as a response variable, site (i.e., high disturbance and low disturbance) and season (dry and wet) as a categorical predictor variables, and the interaction term between site and season
+```{r Table 2: FID VS site * season}
+
+mod_fid <- lm(logFID ~ site*season, data = FID_vsm_data)
+summary(mod_fid)
+
+Anova(mod_fid, type = 3)
+
+emm <- emmeans(mod_fid, ~ site * season)
+
+pairs(emm, adjust = "tukey")
+
+emmeans(mod_fid, pairwise ~ site | season,
+        adjust = "tukey")
+
+par(mfrow = c(2,2))
+plot(mod_fid)
+
+```
+Figure 3: Box-and-whisker plot showing ln-transformed FID across sites — high disturbance (orange) and low disturbance (green) — and seasons — wet vs. dry
+```{r fig 3: FID vs sites and seasons}
+
+fig_3 = ggplot() +
+  geom_boxplot(data= FID_vsm_data, aes(x = season, y = logFID, fill = site), 
+               width = 0.7, linewidth = 0.7, outlier.size = 2) +
+  labs(x = "Season", y = "ln(Flight Initiation Distance + 1) (m)", 
+       fill = "Site" ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = 17),
+    axis.text = element_text(size = 16),
+    legend.title = element_text(size = 17),
+    legend.text = element_text(size = 16)
+  )  +
+  scale_fill_brewer(palette = 'Set2', labels = c("\nLow disturbance \n(Park)\n", "\nHigh disturbance \n(Campus)\n"))+
+  scale_x_discrete(label = c("Dry", "Wet")) 
+
+fig_3
+
+```
+
+##### Effects of size classes on FID
+
+Table 3 Statistical summary of the general linear models for Flight Initiation Distance (FID; ln-transformed) as a function of size class (i.e., small, medium, and large), fitted separately for each site–season combination
+
+```{r Table 3: models FID vs size for each couple site-season}
+
+# High disturbance - dry season 
+mod_size_slydry <- lm(logFID ~ size, data = slydry)
+summary(mod_size_slydry)
+
+# High disturbance - wet season 
+mod_size_slywet <- lm(logFID ~ size, data = slywet)
+summary(mod_size_slywet)
+
+# Low disturbance - dry season 
+mod_size_ptmdry <- lm(logFID ~ size, data = ptmdry)
+summary(mod_size_ptmdry)
+
+# Low disturbance - wet season 
+mod_size_ptmwet <- lm(logFID ~ size, data = ptmwet)
+summary(mod_size_ptmwet)
+
+emm_size_slydry <- emmeans(mod_size_slydry, ~ size)
+emm_size_slywet <- emmeans(mod_size_slywet, ~ size)
+emm_size_ptmdry <- emmeans(mod_size_ptmdry, ~ size)
+emm_size_ptmwet <- emmeans(mod_size_ptmwet, ~ size)
+
+pairs(emm_size_slydry, adjust = "tukey")
+pairs(emm_size_ptmwet, adjust = "tukey")
+pairs(emm_size_ptmdry, adjust = "tukey")
+pairs(emm_size_ptmwet, adjust = "tukey")
+
+```
+
+Fig. 4 Box-and-whisker plot of ln-transformed Flight Initiation Distance (FID) compared across size classes (small, medium and large). Data are grouped by site (high disturbance and low disturbance) and season (dry and wet)
+
+```{r fig 4: FID vs size for each couple site-season}
+
+FID_vsm_data$size <- factor(
+  FID_vsm_data$size,
+  levels = c("S", "M", "L")
+)
+
+labels_dist = c("Low disturbance", "High disturbance")
+names(labels_dist) <- c("Phutthamonthon", "Salaya")
+
+labels_seas = c("Dry", "Wet")
+names(labels_seas) <- c("dry", "wet")
+
+fig_4 = ggplot() +
+  geom_boxplot(data= FID_vsm_data, aes(x = size, y = logFID, fill = size), 
+               width = 0.7, linewidth = 1, outlier.size = 2) +
+  facet_grid(season ~ site, labeller = labeller(.cols =  labels_dist, .rows = labels_seas)) +
+  labs(
+    x = "Site",
+    y = "ln(Flight Initiation Distance + 1) (m)",
+    fill = "Size"
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = 11),
+    axis.text = element_text(size = 10),
+    legend.title = element_text(size = 11),
+    legend.text = element_text(size = 10), 
+    strip.text = element_text(size = 10)
+  ) +
+  theme(legend.position = 'bottom') +
+  scale_fill_brewer(palette = 'OrRd',
+                    labels = c("Small", "Medium", "Large"))
+fig_4
+```
+
+##### Effects of the nearest shelter on FID
+
+Fisher’s Exact Tests: effect of size class on shelter selection
+```{r size vs shelter behavior for each size and site-season couple}
+
+# High disturbance - dry season 
+salaya_dry <- refuge_df %>% 
+  filter(site == 'Mahidol') %>% 
+  filter(season == 'dry')
+
+tab <- xtabs(C ~ size + type, data = salaya_dry)
+chisq.test(tab)
+fisher.test(tab)
+
+# High disturbance - wet season 
+salaya_wet <- refuge_df %>% 
+  filter(site == 'Mahidol') %>% 
+  filter(season == 'wet')
+
+tab <- xtabs(C ~ size + type, data = salaya_wet)
+chisq.test(tab)
+fisher.test(tab)
+
+
+# Low disturbance - dry season 
+Phutthamonthon_dry <- refuge_df %>% 
+  filter(site == 'Phutthamonthon') %>% 
+  filter(season == 'dry')
+
+tab <- xtabs(C ~ size + type, data = Phutthamonthon_dry)
+chisq.test(tab)
+fisher.test(tab)
+
+# Low disturbance - wet season 
+Phutthamonthon_wet <- refuge_df %>% 
+  filter(site == 'Phutthamonthon') %>% 
+  filter(season == 'wet')
+
+tab <- xtabs(C ~ size + type, data = Phutthamonthon_wet)
+chisq.test(tab)
+fisher.test(tab)
+
+```
+
+Fig. 5 Summary of refuge selection by water monitors. a) Stacked bar chart showing the frequency of the nearest available refuge type by site and season; b) Stacked bar chart showing the frequency of the actual refuge type used during escape; and c) Proportional stacked bar chart illustrating the percentage of escape responses across size classes, faceted by site and season. Colours represent refuge categories
+```{r Fig 5: Shelter use }
+
+####  Fig 5.a and 5.b 
+stack_N <- stack %>%
+  filter(type != "distance")
+
+labels_dist = c("Park", "Campus")
+names(labels_dist) <- c("PTM", "MU")
+
+N <- ggplot(transform(stack,
+      site=factor(site,levels=c("PTM","MU"))), aes(x = season, y = N, fill = type)) +
+  geom_bar(stat = "identity", colour = 'black') +
+  facet_wrap( ~ site, labeller = labeller(.cols =  labels_dist)) +
+  labs(
+    x = "Season",
+    y = "Number of observations",
+    fill = "Refuge type"
+  ) +
+  theme_bw() + 
+  scale_fill_brewer(palette = 'BrBG', labels=c('Building', 'Bush', 'Distance', 'Tree', 'Water'))+
+  scale_x_discrete(label = c("Dry", "Wet"))
+
+C <- ggplot(transform(stack,
+      site=factor(site,levels=c("PTM","MU"))), aes(x = season, y = C, fill = type)) +
+  geom_bar(stat = "identity", colour = 'black') +
+  facet_wrap(~ site, labeller = labeller(.cols =  labels_dist)) +
+  labs(
+    x = "Season",
+    y = "Number of observations",
+    fill = "Refuge type"
+  ) +
+  theme_bw() + 
+  scale_fill_brewer(palette = 'BrBG', labels=c('Building', 'Bush', 'Distance', 'Tree', 'Water'))+
+  scale_x_discrete(label = c("Dry", "Wet"))
+
+ggarrange(N, C, labels = 'auto')
+
+### Fig 5.C 
+refuge_df$size <- factor(
+  refuge_df$size,
+  levels = c("S", "M", "L")
+)
+
+labels_dist = c("Low disturbance (Park)", "High disturbance (Campus)")
+names(labels_dist) <- c("Phutthamonthon", "Mahidol")
+
+labels_seas = c("Dry", "Wet")
+names(labels_seas) <- c("dry", "wet")
+
+refuge_size <- ggplot(transform(refuge_df,
+      site=factor(site,levels=c("Phutthamonthon","Mahidol"))),
+       aes(x = size,
+           y = C,
+           fill = type)) +
+  geom_col(position = "fill", colour = 'black') +
+  facet_grid(season ~ site, labeller = labeller(.cols =  labels_dist, .rows = labels_seas)) +
+  scale_fill_brewer(palette = "BrBG", labels=c('Building', 'Bush', 'Distance', 'Tree', 'Water')) +
+  scale_y_continuous(
+    labels = scales::percent_format()
+  ) +
+  labs(
+    x = "Size class",
+    y = "Proportion of escape responses",
+    fill = "Refuge type"
+  ) +
+  theme_bw() +
+  theme(
+    legend.position = "right"
+  )
+refuge_size
+
+### Full figure
+NC = ggarrange(N, C, labels = 'auto', legend = "none")
+
+refuge_size = ggarrange(refuge_size, labels = 'c')
+
+fig_5 = ggarrange(NC, refuge_size, nrow = 2)
+
+fig_5
+
+```
+
+Table 4 Statistical summary of the general linear models for Flight Initiation Distance (FID; ln-transformed) as a function of distance to the nearest shelter (ln-transformed), fitted separately for each site–season combination. Significant effect was shown in bold
+```{r Tab 4: models FID vs distance to shelter for each couple site-season}
+
+# High disturbance - dry season 
+mod_dist_slydry <- lm(logFID ~ logDist, data = slydry)
+summary(mod_dist_slydry)
+
+# High disturbance - wet season 
+mod_dist_slywet <- lm(logFID ~ logDist, data = slywet)
+summary(mod_dist_slywet)
+
+# Low disturbance - dry season 
+mod_dist_ptmdry <- lm(logFID ~ logDist, data = ptmdry)
+summary(mod_dist_ptmdry)
+
+# Low disturbance - wet season 
+mod_dist_ptmwet <- lm(logFID ~ logDist, data = ptmwet)
+summary(mod_dist_ptmwet)
+
+```
+
+Fig. 6 Relationships between Flight Initiation Distance (FID; ln-transformed) and Distance to the nearest shelter (ln-transformed) by site—i.e., high disturbance (orange) and low disturbance (green)—and season (dry and wet). Fitted line indicates predicted value and shading represents 95% confidence interval of the general linear model presented in Table 4
+```{r Fig 6: FID vs Distance to shelter for each couple site season}
+
+# High disturbance - dry season 
+plot_slydry <- ggplot(data = slydry, aes(x = logDist, y = logFID))+
+  theme_bw() +
+  geom_smooth(method = "lm", colour = 'grey6', fill = 'grey', alpha = 0.4) +
+  geom_point(alpha = 0.5, shape = 21, size = 2, fill = '#FC8D62') +
+  labs(title = "High disturbance – Dry season",
+       x = NULL, 
+       y = NULL) +
+  theme(plot.title = element_text(size = 10))
+
+plot_slydry
+
+# High disturbance - wet season 
+plot_slywet <- ggplot(data = slywet, aes(x = logDist, y = logFID))+
+  theme_bw() +
+  geom_point(alpha = 0.5, shape = 21, size = 2, fill = '#FC8D62') +
+  labs(title = "High disturbance – Wet season",
+       x = NULL, 
+       y = NULL)  +
+  theme(plot.title = element_text(size = 10)) 
+plot_slywet
+
+# Low disturbance - dry season 
+plot_ptmwet <- ggplot(data = ptmwet, aes(x = logDist, y = logFID))+
+  theme_bw() +
+  geom_point(alpha = 0.5, shape = 21, size = 2, fill = '#66C2A5') +
+  labs(title = "Low disturbance – Wet season",
+       x = NULL, 
+       y = NULL) +
+  theme(plot.title = element_text(size = 10)) 
+plot_ptmwet
+
+# Low disturbance - wet season 
+plot_ptmdry <- ggplot(data = ptmdry, aes(x = logDist, y = logFID))+
+  theme_bw() +
+  geom_point(alpha = 0.5, shape = 21, size = 2, fill = '#66C2A5') +
+  labs(title = "Low disturbance – Dry season",
+       x = NULL, 
+       y = NULL) +
+  theme(plot.title = element_text(size = 10))
+plot_ptmdry
+
+fig <- ggarrange(plot_ptmdry, plot_slydry, plot_ptmwet, plot_slywet, 
+                 ncol = 2, nrow = 2,
+                 labels = 'auto')
+  
+fig_6 = annotate_figure(
+  fig,
+  top = text_grob("", size = 1),
+  left = text_grob("ln(Flight Initiation Distance + 1) (m)", rot = 90),
+  bottom = text_grob("ln(Distance to nearest shelter + 1) (m)")
+)
+
+fig_6
+
+```
+
+
+### ONLINE MATERIALS:
+
+Online Resource 1: Distribution of the Pearson residuals of the general linear model for Flight Initiation Distance (FID) as a response variable, site (i.e., Mahidol and Phutthamonthon) and season (dry and wet) as a categorical predictor variables, and the interaction term between site and season. Left panel represents the distribution of the residuals when using the raw data for FID in the model, right panel represents said distribution when natural log-transforming the data. 
+```{r Online Resource 1: histogram residuals: FID vs site * season}
+
+##### raw data
+
+# model
+mod_fid_raw <- lm(FIDi ~ site*season, data = FID_vsm_data)
+
+# residuals
+mod_fid_raw.res <- residuals(mod_fid_raw)
+
+# plot
+p_mod_fid_raw = ggplot()
+p_mod_fid_raw = p_mod_fid_raw + ylab ("Frequency")
+p_mod_fid_raw = p_mod_fid_raw + xlab ("Pearson residuals")
+p_mod_fid_raw = p_mod_fid_raw + theme (panel.background = element_blank())
+p_mod_fid_raw = p_mod_fid_raw + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p_mod_fid_raw = p_mod_fid_raw + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p_mod_fid_raw = p_mod_fid_raw + theme(text = element_text(size = 15))
+p_mod_fid_raw = p_mod_fid_raw + geom_histogram(colour = "black", fill = "white", data = FID_vsm_data, aes(mod_fid_raw.res), bins = 12) 
+p_mod_fid_raw = p_mod_fid_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+
+p_mod_fid_raw  
+
+##### with natural log + 1 transformation
+# residuals
+mod_fid.res <- residuals(mod_fid)
+
+# plot
+p_mod_fid = ggplot()
+p_mod_fid = p_mod_fid +ylab ("Frequency")
+p_mod_fid = p_mod_fid + xlab ("Pearson residuals")
+p_mod_fid = p_mod_fid + theme (panel.background = element_blank())
+p_mod_fid = p_mod_fid + theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+p_mod_fid = p_mod_fid + theme(strip.background = element_rect(fill="white", color ="white", linewidth = 1))
+p_mod_fid = p_mod_fid + theme(text = element_text(size = 15))
+p_mod_fid = p_mod_fid + geom_histogram(colour = "black", fill = "white", data = FID_vsm_data, aes(mod_fid.res), bins = 12)
+p_mod_fid  
+p_mod_fid = p_mod_fid +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+
+OR1_res_site = ggarrange(p_mod_fid_raw, p_mod_fid)
+
+OR1_res_site = annotate_figure(
+  OR1_res_site,
+  top = text_grob("", size = 1),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+OR1_res_site
+```
+
+Online Resource 2 Distribution of the Pearson residuals of the general linear models for Flight Initiation Distance (FID) as a function of size class (i.e., small, medium, and large), fitted separately for each site–season combination. Left column represents the distribution of the residuals when using the raw data for FID in the model, right column represents said distribution when natural log-transforming the data. 
+
+/!\/!\ SAVE THE FINAL PICTURE FOR BETTER VISUALISATION /!\/!\
+```{r Online Resource 2: histogram residuals: FID * size}
+
+########## # Low disturbance - dry season  
+
+##### raw data
+
+# model
+mod_size_ptmdry_raw <- lm(FIDi ~ size, data = ptmdry)
+
+# residuals
+mod_size_ptmdry_raw.res <- residuals(mod_size_ptmdry_raw)
+
+# plot
+pdry_raw = ggplot()
+pdry_raw= pdry_raw+ ylab ("Frequency")
+pdry_raw= pdry_raw+ xlab ("Pearson residuals")
+pdry_raw = pdry_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+pdry_raw= pdry_raw+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+pdry_raw= pdry_raw+ theme (panel.background = element_blank())
+pdry_raw= pdry_raw+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+pdry_raw= pdry_raw+ theme(strip.background = element_rect(fill="#66C2A5", color ="#66C2A5", linewidth = 1))
+pdry_raw= pdry_raw+ geom_histogram(colour = "black", fill = "#66C2A5", data = ptmdry, aes(mod_size_ptmdry_raw.res), bins = 12)
+pdry_raw 
+
+
+##### with natural log + 1 transformation
+# residuals
+mod_size_ptmdry.res <- residuals(mod_size_ptmdry)
+
+# plot
+pdry = ggplot()
+pdry= pdry+ ylab ("Frequency")
+pdry= pdry+ xlab ("Pearson residuals")
+pdry= pdry+ theme (panel.background = element_blank())
+pdry= pdry+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+pdry= pdry+ theme(strip.background = element_rect(fill="#66C2A5", color ="#66C2A5", linewidth = 1))
+pdry = pdry +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+pdry= pdry+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+pdry= pdry+ geom_histogram(colour = "black", fill = "#66C2A5", data = ptmdry, aes(mod_size_ptmdry.res), bins = 12)
+pdry 
+
+pdry_merged = ggarrange(pdry_raw, pdry)
+pdry_merged = annotate_figure(
+  pdry_merged,
+  top = text_grob("Low disturbance - Dry season", size = 20),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+
+
+########## # Low disturbance - wet season 
+
+##### raw data
+
+# model
+mod_size_ptmwet_raw <- lm(FIDi ~ size, data = ptmwet)
+
+# residuals
+mod_size_ptmwet_raw.res <- residuals(mod_size_ptmwet_raw)
+
+# plot
+pwet_raw = ggplot()
+pwet_raw= pwet_raw+ ylab ("Frequency")
+pwet_raw= pwet_raw+ xlab ("Pearson residuals")
+pwet_raw= pwet_raw+ theme (panel.background = element_blank())
+pwet_raw= pwet_raw+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+pwet_raw= pwet_raw+ theme(strip.background = element_rect(fill="#66C2A5", color ="#66C2A5", linewidth = 1))
+pwet_raw = pwet_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+pwet_raw= pwet_raw+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+pwet_raw= pwet_raw+ geom_histogram(colour = "black", fill = "#66C2A5", data = ptmwet, aes(mod_size_ptmwet_raw.res), bins = 12)
+pwet_raw 
+
+##### with natural log + 1 transformation
+# residuals
+mod_size_ptmwet.res <- residuals(mod_size_ptmwet)
+
+# plot
+pwet = ggplot()
+pwet= pwet+ ylab ("Frequency")
+pwet= pwet+ xlab ("Pearson residuals")
+pwet= pwet+ theme (panel.background = element_blank())
+pwet= pwet+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+pwet= pwet+ theme(strip.background = element_rect(fill="#66C2A5", color ="#66C2A5", linewidth = 1))
+pwet = pwet +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+pwet= pwet+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+pwet= pwet+ geom_histogram(colour = "black", fill = "#66C2A5", data = ptmwet, aes(mod_size_ptmwet.res), bins = 12)
+
+
+pwet_merged = ggarrange(pwet_raw, pwet)
+pwet_merged = annotate_figure(
+  pwet_merged,
+  top = text_grob("Low disturbance - Wet season", size = 20),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+
+########## # High disturbance - dry season 
+
+##### raw data
+
+# model
+mod_size_slydry_raw <- lm(FIDi ~ size, data = slydry)
+
+# residuals
+mod_size_slydry_raw.res <- residuals(mod_size_slydry_raw)
+
+# plot
+sdry_raw = ggplot()
+sdry_raw= sdry_raw+ ylab ("Frequency")
+sdry_raw= sdry_raw+ xlab ("Pearson residuals")
+sdry_raw= sdry_raw+ theme (panel.background = element_blank())
+sdry_raw= sdry_raw+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+sdry_raw= sdry_raw+ theme(strip.background = element_rect(fill="#FC8D62", color ="#FC8D62", linewidth = 1))
+sdry_raw = sdry_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+sdry_raw= sdry_raw+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+sdry_raw= sdry_raw+ geom_histogram(colour = "black", fill = "#FC8D62", data = slydry, aes(mod_size_slydry_raw.res), bins = 12)
+sdry_raw 
+
+
+##### with natural log + 1 transformation
+
+# residuals
+mod_size_slydry.res <- residuals(mod_size_slydry)
+
+# plot
+sdry = ggplot()
+sdry= sdry+ ylab ("Frequency")
+sdry= sdry+ xlab ("Pearson residuals")
+sdry= sdry+ theme (panel.background = element_blank())
+sdry= sdry+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+sdry= sdry+ theme(strip.background = element_rect(fill="#FC8D62", color ="#FC8D62", linewidth = 1))
+sdry = sdry +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+sdry= sdry+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+sdry= sdry+ geom_histogram(colour = "black", fill = "#FC8D62", data = slydry, aes(mod_size_slydry.res), bins = 12)
+
+sdry_merged = ggarrange(sdry_raw, sdry)
+sdry_merged = annotate_figure(
+  sdry_merged,
+  top = text_grob("High disturbance - Dry season", size = 20),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+
+########## # High disturbance - wet season 
+
+##### raw data
+
+# model
+mod_size_slywet_raw <- lm(FIDi ~ size, data = slywet)
+
+# residuals
+mod_size_slywet_raw.res <- residuals(mod_size_slywet_raw)
+
+# plot
+swet_raw = ggplot()
+swet_raw= swet_raw+ ylab ("Frequency")
+swet_raw= swet_raw+ xlab ("Pearson residuals")
+swet_raw= swet_raw+ theme (panel.background = element_blank())
+swet_raw= swet_raw+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+swet_raw= swet_raw+ theme(strip.background = element_rect(fill="#FC8D62", color ="#FC8D62", linewidth = 1))
+swet_raw = swet_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+swet_raw= swet_raw+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+swet_raw= swet_raw+ geom_histogram(colour = "black", fill = "#FC8D62", data = slywet, aes(mod_size_slywet_raw.res), bins = 12)
+
+swet_raw 
+
+##### with natural log + 1 transformation
+
+# residuals
+mod_size_slywet.res <- residuals(mod_size_slywet)
+
+# plot
+swet = ggplot()
+swet= swet+ ylab ("Frequency")
+swet= swet+ xlab ("Pearson residuals")
+swet= swet+ theme (panel.background = element_blank())
+swet= swet+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+swet= swet+ theme(strip.background = element_rect(fill="#FC8D62", color ="#FC8D62", linewidth = 1))
+swet = swet +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+swet= swet+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+swet= swet+ geom_histogram(colour = "black", fill = "#FC8D62", data = slywet, aes(mod_size_slywet.res), bins = 12)
+
+swet_merged = ggarrange(swet_raw, swet)
+swet_merged = annotate_figure(
+  swet_merged,
+  top = text_grob("High disturbance - Wet season", size = 20),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+swet
+
+OR2_res_size = ggarrange(pdry_merged, sdry_merged, pwet_merged, swet_merged, ncol = 1, nrow = 4)
+OR2_res_size
+```
+Online Resource 3: Distribution of the Pearson residuals of the general linear models for Flight Initiation Distance (FID) as a function of distance to the nearest shelter, fitted separately for each site–season combination. Left column represents the distribution of the residuals when using the raw data for FID and distance to the nearest shelter in the model, right column represents said distribution when natural log-transforming the data. 
+
+/!\/!\ SAVE THE FINAL PICTURE FOR BETTER VISUALISATION /!\/!\
+```{r Online Resource 3: histogram residuals: FID * distance from shelter}
+
+########## # Low disturbance - dry season 
+
+##### raw data
+
+# model
+mod_dist_ptmdry_raw <- lm(FIDi ~ d_fr_refug, data = ptmdry)
+
+# residuals
+mod_dist_ptmdry_raw.res <- residuals(mod_dist_ptmdry_raw)
+
+# plot
+dist_pdry_raw = ggplot()
+dist_pdry_raw= dist_pdry_raw+ ylab ("Frequency")
+dist_pdry_raw= dist_pdry_raw+ xlab ("Pearson residuals")
+dist_pdry_raw = dist_pdry_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+dist_pdry_raw= dist_pdry_raw+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+dist_pdry_raw= dist_pdry_raw+ theme (panel.background = element_blank())
+dist_pdry_raw= dist_pdry_raw+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+dist_pdry_raw= dist_pdry_raw+ theme(strip.background = element_rect(fill="#66C2A5", color ="#66C2A5", linewidth = 1))
+dist_pdry_raw= dist_pdry_raw+ geom_histogram(colour = "black", fill = "#66C2A5", data = ptmdry, aes(mod_dist_ptmdry_raw.res), bins = 12)
+dist_pdry_raw 
+
+##### with natural log + 1 transformation
+# residuals
+mod_dist_ptmdry.res <- residuals(mod_dist_ptmdry)
+
+# plot
+dist_pdry = ggplot()
+dist_pdry= dist_pdry+ ylab ("Frequency")
+dist_pdry= dist_pdry+ xlab ("Pearson residuals")
+dist_pdry= dist_pdry+ theme (panel.background = element_blank())
+dist_pdry= dist_pdry+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+dist_pdry= dist_pdry+ theme(strip.background = element_rect(fill="#66C2A5", color ="#66C2A5", linewidth = 1))
+dist_pdry = dist_pdry +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+dist_pdry= dist_pdry+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+dist_pdry= dist_pdry+ geom_histogram(colour = "black", fill = "#66C2A5", data = ptmdry, aes(mod_dist_ptmdry.res), bins = 12)
+dist_pdry 
+
+dist_pdry_merged = ggarrange(dist_pdry_raw, dist_pdry)
+dist_pdry_merged = annotate_figure(
+  dist_pdry_merged,
+  top = text_grob("Low disturbance - Dry season", size = 20),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+
+########## # Low disturbance - wet season 
+
+##### raw data
+
+# model
+mod_dist_ptmwet_raw <- lm(FIDi ~ d_fr_refug, data = ptmwet)
+
+# residuals
+mod_dist_ptmwet_raw.res <- residuals(mod_dist_ptmwet_raw)
+
+# plot
+dist_pwet_raw = ggplot()
+dist_pwet_raw= dist_pwet_raw+ ylab ("Frequency")
+dist_pwet_raw= dist_pwet_raw+ xlab ("Pearson residuals")
+dist_pwet_raw = dist_pwet_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+dist_pwet_raw= dist_pwet_raw+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+dist_pwet_raw= dist_pwet_raw+ theme (panel.background = element_blank())
+dist_pwet_raw= dist_pwet_raw+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+dist_pwet_raw= dist_pwet_raw+ theme(strip.background = element_rect(fill="#66C2A5", color ="#66C2A5", linewidth = 1))
+dist_pwet_raw= dist_pwet_raw+ geom_histogram(colour = "black", fill = "#66C2A5", data = ptmwet, aes(mod_dist_ptmwet_raw.res), bins = 12)
+dist_pwet_raw 
+
+##### with natural log + 1 transformation
+# residuals
+mod_dist_ptmwet.res <- residuals(mod_dist_ptmwet)
+
+# plot
+dist_pwet = ggplot()
+dist_pwet= dist_pwet+ ylab ("Frequency")
+dist_pwet= dist_pwet+ xlab ("Pearson residuals")
+dist_pwet= dist_pwet+ theme (panel.background = element_blank())
+dist_pwet= dist_pwet+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+dist_pwet= dist_pwet+ theme(strip.background = element_rect(fill="#66C2A5", color ="#66C2A5", linewidth = 1))
+dist_pwet = dist_pwet +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+dist_pwet= dist_pwet+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+dist_pwet= dist_pwet+ geom_histogram(colour = "black", fill = "#66C2A5", data = ptmwet, aes(mod_dist_ptmwet.res), bins = 12)
+dist_pwet 
+
+dist_pwet_merged = ggarrange(dist_pwet_raw, dist_pwet)
+dist_pwet_merged = annotate_figure(
+  dist_pwet_merged,
+  top = text_grob("Low disturbance - Wet season", size = 20),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+dist_pwet_merged
+
+########## # High disturbance - dry season 
+
+##### raw data
+
+# model
+mod_dist_slydry_raw <- lm(FIDi ~ d_fr_refug, data = slydry)
+
+# residuals
+mod_dist_slydry_raw.res <- residuals(mod_dist_slydry_raw)
+
+# plot
+dist_sdry_raw = ggplot()
+dist_sdry_raw= dist_sdry_raw+ ylab ("Frequency")
+dist_sdry_raw= dist_sdry_raw+ xlab ("Pearson residuals")
+dist_sdry_raw = dist_sdry_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+dist_sdry_raw= dist_sdry_raw+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+dist_sdry_raw= dist_sdry_raw+ theme (panel.background = element_blank())
+dist_sdry_raw= dist_sdry_raw+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+dist_sdry_raw= dist_sdry_raw+ theme(strip.background = element_rect(fill="#FC8D62", color ="#FC8D62", linewidth = 1))
+dist_sdry_raw= dist_sdry_raw+ geom_histogram(colour = "black", fill = "#FC8D62", data = slydry, aes(mod_dist_slydry_raw.res), bins = 12)
+dist_sdry_raw 
+
+##### with natural log + 1 transformation
+# residuals
+mod_dist_slydry.res <- residuals(mod_dist_slydry)
+
+# plot
+dist_sdry = ggplot()
+dist_sdry= dist_sdry+ ylab ("Frequency")
+dist_sdry= dist_sdry+ xlab ("Pearson residuals")
+dist_sdry= dist_sdry+ theme (panel.background = element_blank())
+dist_sdry= dist_sdry+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+dist_sdry= dist_sdry+ theme(strip.background = element_rect(fill="#FC8D62", color ="#FC8D62", linewidth = 1))
+dist_sdry = dist_sdry +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+dist_sdry= dist_sdry+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+dist_sdry= dist_sdry+ geom_histogram(colour = "black", fill = "#FC8D62", data = slydry, aes(mod_dist_slydry.res), bins = 12)
+dist_sdry 
+
+dist_sdry_merged = ggarrange(dist_sdry_raw, dist_sdry)
+dist_sdry_merged = annotate_figure(
+  dist_sdry_merged,
+  top = text_grob("High disturbance - Dry season", size = 20),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+
+
+
+########## # High disturbance - wet season 
+
+##### raw data
+
+# model
+mod_dist_slywet_raw <- lm(FIDi ~ d_fr_refug, data = slywet)
+
+# residuals
+mod_dist_slywet_raw.res <- residuals(mod_dist_slywet_raw)
+
+# plot
+dist_swet_raw = ggplot()
+dist_swet_raw= dist_swet_raw+ ylab ("Frequency")
+dist_swet_raw= dist_swet_raw+ xlab ("Pearson residuals")
+dist_swet_raw = dist_swet_raw +   labs(title = "Raw data", x = NULL, y = NULL)
+dist_swet_raw= dist_swet_raw+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+dist_swet_raw= dist_swet_raw+ theme (panel.background = element_blank())
+dist_swet_raw= dist_swet_raw+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+dist_swet_raw= dist_swet_raw+ theme(strip.background = element_rect(fill="#FC8D62", color ="#FC8D62", linewidth = 1))
+dist_swet_raw= dist_swet_raw+ geom_histogram(colour = "black", fill = "#FC8D62", data = slywet, aes(mod_dist_slywet_raw.res), bins = 12)
+dist_swet_raw 
+
+##### with natural log + 1 transformation
+# residuals
+mod_dist_slywet.res <- residuals(mod_dist_slywet)
+
+# plot
+dist_swet = ggplot()
+dist_swet= dist_swet+ ylab ("Frequency")
+dist_swet= dist_swet+ xlab ("Pearson residuals")
+dist_swet= dist_swet+ theme (panel.background = element_blank())
+dist_swet= dist_swet+ theme (panel.border = element_rect(fill = NA, colour = "black", linewidth = 1))
+dist_swet= dist_swet+ theme(strip.background = element_rect(fill="#FC8D62", color ="#FC8D62", linewidth = 1))
+dist_swet = dist_swet +   labs(title = "Ln-transformed data", x = NULL, y = NULL)
+dist_swet= dist_swet+ theme(text = element_text(size = 15), plot.title=element_text(size = 10))
+dist_swet= dist_swet+ geom_histogram(colour = "black", fill = "#FC8D62", data = slywet, aes(mod_dist_slywet.res), bins = 12)
+dist_swet 
+
+dist_swet_merged = ggarrange(dist_swet_raw, dist_swet)
+dist_swet_merged = annotate_figure(
+  dist_swet_merged,
+  top = text_grob("High disturbance - Wet season", size = 20),
+  left = text_grob("Frequency", rot = 90),
+  bottom = text_grob("Pearson residuals")
+)
+
+
+OR3_res_dist = ggarrange(dist_pdry_merged, dist_sdry_merged, dist_pwet_merged, dist_swet_merged, ncol = 1, nrow = 4)
+OR3_res_dist
+```
+Online Resource 4 Box-and-whisker plot showing FID across sites—high disturbance (orange) and low disturbance (green)—and seasons—wet vs. dry
+```{r Online Resource 4: FID vs sites and seasons (RAW DATA)}
+
+OR4_raw_season = ggplot() +
+  geom_boxplot(data= FID_vsm_data, aes(x = season, y = FIDi, fill = site), 
+               width = 0.7, linewidth = 0.7, outlier.size = 2) +
+  labs(x = "Season", y = "Flight Initiation Distance (m)", 
+       fill = "Site" ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = 17),
+    axis.text = element_text(size = 16),
+    legend.title = element_text(size = 17),
+    legend.text = element_text(size = 16)
+  )  +
+  scale_fill_brewer(palette = 'Set2', labels = c("\nLow disturbance \n(Park)\n", "\nHigh disturbance \n(Campus)\n"))+
+  scale_x_discrete(label = c("Dry", "Wet")) 
+
+OR4_raw_season
+```
+
+Online Resource 5 Box-and-whisker plot of the Flight Initiation Distance (FID) compared across size classes (small, medium and large). Data are grouped by site (high disturbance and low disturbance) and season (dry and wet)
+```{r Online Resource 5: FID vs size for each couple site-season (data RAW)}
+
+FID_vsm_data$size <- factor(
+  FID_vsm_data$size,
+  levels = c("S", "M", "L")
+)
+
+labels_dist = c("Low disturbance", "High disturbance")
+names(labels_dist) <- c("Phutthamonthon", "Salaya")
+
+labels_seas = c("Dry", "Wet")
+names(labels_seas) <- c("dry", "wet")
+
+OR5_raw_size = ggplot() +
+  geom_boxplot(data= FID_vsm_data, aes(x = size, y = FIDi, fill = size), 
+               width = 0.7, linewidth = 1, outlier.size = 2) +
+  facet_grid(season ~ site, labeller = labeller(.cols =  labels_dist, .rows = labels_seas)) +
+  labs(
+    x = "Site",
+    y = "Flight Initiation Distance (m)",
+    fill = "Size"
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = 11),
+    axis.text = element_text(size = 10),
+    legend.title = element_text(size = 11),
+    legend.text = element_text(size = 10), 
+    strip.text = element_text(size = 10)
+  ) +
+  theme(legend.position = 'bottom') +
+  scale_fill_brewer(palette = 'OrRd',
+                    labels = c("Small", "Medium", "Large"))
+
+
+OR5_raw_size
+```
+
+Online Resource 6 Relationships between Flight Initiation Distance (FID) and Distance to the nearest shelter by site—i.e., high disturbance (orange) and low disturbance (green)—and season (dry and wet) 
+```{r Online Resource 6: FID vs Distance to shelter for each couple site season (RAW DATA)}
+
+# High disturbance - dry season 
+plot_slydry_raw <- ggplot(data = slydry, aes(x = d_fr_refug, y = FIDi))+
+  theme_bw() +
+  geom_point(alpha = 0.5, shape = 21, size = 2, fill = '#FC8D62') +
+  labs(title = "High disturbance – Dry season",
+       x = NULL, 
+       y = NULL) +
+  theme(plot.title = element_text(size = 10))
+
+plot_slydry_raw
+
+# High disturbance - wet season 
+plot_slywet_raw <- ggplot(data = slywet, aes(x = d_fr_refug, y = FIDi))+
+  theme_bw() +
+  geom_point(alpha = 0.5, shape = 21, size = 2, fill = '#FC8D62') +
+  labs(title = "High disturbance – Wet season",
+       x = NULL, 
+       y = NULL)  +
+  theme(plot.title = element_text(size = 10)) 
+plot_slywet_raw
+
+# Low disturbance - wet season 
+plot_ptmwet_raw <- ggplot(data = ptmwet, aes(x = d_fr_refug, y = FIDi))+
+  theme_bw() +
+  geom_point(alpha = 0.5, shape = 21, size = 2, fill = '#66C2A5') +
+  labs(title = "Low disturbance – Wet season",
+       x = NULL, 
+       y = NULL) +
+  theme(plot.title = element_text(size = 10)) 
+plot_ptmwet_raw
+
+# Low disturbance - dry season 
+plot_ptmdry_raw <- ggplot(data = ptmdry, aes(x = d_fr_refug, y = FIDi))+
+  theme_bw() +
+  geom_point(alpha = 0.5, shape = 21, size = 2, fill = '#66C2A5') +
+  labs(title = "Low disturbance – Dry season",
+       x = NULL, 
+       y = NULL) +
+  theme(plot.title = element_text(size = 10))
+plot_ptmdry_raw
+
+fig_raw <- ggarrange(plot_ptmdry_raw, plot_slydry_raw, plot_ptmwet_raw, plot_slywet_raw, 
+                 ncol = 2, nrow = 2,
+                 labels = 'auto')
+  
+OR6_raw_dist = annotate_figure(
+  fig_raw,
+  top = text_grob("", size = 1),
+  left = text_grob("Flight Initiation Distance (m)", rot = 90),
+  bottom = text_grob("Distance to nearest shelter (m)")
+)
+
+OR6_raw_dist
+```
+
+
+##### Save  the figures
+
+```{r SAVE fig 3: FID vs sites and seasons}
+
+fig_3 = ggplot() +
+  geom_boxplot(data= FID_vsm_data, aes(x = season, y = logFID, fill = site), 
+               width = 0.7, linewidth = 0.7, outlier.size = 2) +
+  labs(x = "Season", y = "ln(Flight Initiation Distance + 1) (m)", 
+       fill = "Site" ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = 34),
+    axis.text = element_text(size = 32),
+    legend.title = element_text(size = 34),
+    legend.text = element_text(size = 32)
+  )  +
+  scale_fill_brewer(palette = 'Set2', labels = c("\nLow disturbance \n(Park)\n", "\nHigh disturbance \n(Campus)\n"))+
+  scale_x_discrete(label = c("Dry", "Wet")) 
+
+ggsave(
+  "fig_3.png",
+  plot = fig_3,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 351 ,
+  height = 288,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
+```{r SAVE fig 4: FID vs size for each couple site-season}
+
+FID_vsm_data$size <- factor(
+  FID_vsm_data$size,
+  levels = c("S", "M", "L")
+)
+
+labels_dist = c("Low disturbance", "High disturbance")
+names(labels_dist) <- c("Phutthamonthon", "Salaya")
+
+labels_seas = c("Dry", "Wet")
+names(labels_seas) <- c("dry", "wet")
+
+fig_4 = ggplot() +
+  geom_boxplot(data= FID_vsm_data, aes(x = size, y = logFID, fill = size), 
+               width = 0.7, linewidth = 1, outlier.size = 4) +
+  facet_grid(season ~ site, labeller = labeller(.cols =  labels_dist, .rows = labels_seas)) +
+  labs(
+    x = "Site",
+    y = "ln(Flight Initiation Distance + 1) (m)",
+    fill = "Size"
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = 22),
+    axis.text = element_text(size = 20),
+    legend.title = element_text(size = 22),
+    legend.text = element_text(size = 20), 
+    strip.text = element_text(size = 20)
+  ) +
+  theme(legend.position = 'bottom') +
+  scale_fill_brewer(palette = 'OrRd',
+                    labels = c("Small", "Medium", "Large"))
+
+
+ggsave(
+  "fig_4.png",
+  plot = fig_4,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 351 ,
+  height = 288,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+```
+
+```{r SAVE Fig 5: Shelter use }
+
+ggsave(
+  "fig_5.png",
+  plot = fig_5,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 174 ,
+  height = 234,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
+```{r SAVE Fig 6: FID vs Distance to shelter for each couple site season}
+
+ggsave(
+  "fig_6.png",
+  plot = fig_6,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 159 ,
+  height = 102,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
+```{r SAVE Online Resource 1: histogram residuals: FID vs site * season}
+
+ggsave(
+  "Online_Resource_1.png",
+  plot = OR1_res_site,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 174 ,
+  height = 174,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
+```{r SAVE Online Resource 2: histogram residuals: FID * size}
+
+ggsave(
+  "Online_Resource_2.png",
+  plot = OR2_res_size,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 174 ,
+  height = 234,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
+```{r SAVE Online Resource 3: histogram residuals: FID * distance from shelter}
+
+ggsave(
+  "Online_Resource_3.png",
+  plot = OR3_res_dist,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 174 ,
+  height = 234,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
+```{r SAVE Online Resource 4: FID vs sites and seasons (RAW DATA)}
+
+OR4_raw_season = ggplot() +
+  geom_boxplot(data= FID_vsm_data, aes(x = season, y = FIDi, fill = site), 
+               width = 0.7, linewidth = 0.7, outlier.size = 2) +
+  labs(x = "Season", y = "Flight Initiation Distance (m)", 
+       fill = "Site" ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = 34),
+    axis.text = element_text(size = 32),
+    legend.title = element_text(size = 34),
+    legend.text = element_text(size = 32)
+  )  +
+  scale_fill_brewer(palette = 'Set2', labels = c("\nLow disturbance \n(Park)\n", "\nHigh disturbance \n(Campus)\n"))+
+  scale_x_discrete(label = c("Dry", "Wet"))
+
+ggsave(
+  "Online_res_4.png",
+  plot = OR4_raw_season,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 351 ,
+  height = 288,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
+```{r SAVE Online Resource 5: FID vs size for each couple site-season (data RAW)}
+
+FID_vsm_data$size <- factor(
+  FID_vsm_data$size,
+  levels = c("S", "M", "L")
+)
+
+labels_dist = c("Low disturbance", "High disturbance")
+names(labels_dist) <- c("Phutthamonthon", "Salaya")
+
+labels_seas = c("Dry", "Wet")
+names(labels_seas) <- c("dry", "wet")
+
+OR5_raw_size = ggplot() +
+  geom_boxplot(data= FID_vsm_data, aes(x = size, y = FIDi, fill = size), 
+               width = 0.7, linewidth = 1, outlier.size = 2) +
+  facet_grid(season ~ site, labeller = labeller(.cols =  labels_dist, .rows = labels_seas)) +
+  labs(
+    x = "Site",
+    y = "Flight Initiation Distance (m)",
+    fill = "Size"
+  ) +
+  theme_bw() +
+  theme(
+    axis.title = element_text(size = 22),
+    axis.text = element_text(size = 20),
+    legend.title = element_text(size = 22),
+    legend.text = element_text(size = 20), 
+    strip.text = element_text(size = 20)
+  ) +
+  theme(legend.position = 'bottom') +
+  scale_fill_brewer(palette = 'OrRd',
+                    labels = c("Small", "Medium", "Large"))
+
+ggsave(
+  "Online_res_5.png",
+  plot = OR5_raw_size,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 351 ,
+  height = 288,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
+```{r SAVE Online Resource 6: FID vs Distance to shelter for each couple site season (RAW DATA)}
+
+ggsave(
+  "Online_res_6.png",
+  plot = OR6_raw_dist,
+  device = NULL,
+  path = "C:/Users/LENOVO/Desktop",
+  scale = 1,
+  width = 174 ,
+  height = 234,
+  units = c("mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  bg = NULL,
+  create.dir = FALSE
+)
+
+```
+
