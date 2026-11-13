@@ -1,0 +1,21 @@
+site ;season;type;N;C
+PTM;wet;building;6;2
+PTM;wet;bush;7;2
+PTM;wet;tree;13;1
+PTM;wet;water;24;21
+PTM;wet;distance;0;24
+MU;wet;building;6;1
+MU;wet;bush;11;5
+MU;wet;tree;15;1
+MU;wet;water;10;20
+MU;wet;distance;0;15
+PTM;dry;building;2;0
+PTM;dry;bush;1;2
+PTM;dry;tree;0;0
+PTM;dry;water;24;18
+PTM;dry;distance;0;9
+MU;dry;building;2;2
+MU;dry;bush;3;4
+MU;dry;tree;0;0
+MU;dry;water;34;27
+MU;dry;distance;0;5
